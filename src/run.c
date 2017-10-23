@@ -1,5 +1,8 @@
 #include "run.h"
 
+void bonjour{
+    printf("coucou");
+}
 uint random_number(uint upper) // Donne un nombre aléatoire en 0 et upper
 {
     return (rand() % upper);
