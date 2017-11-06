@@ -56,10 +56,9 @@ void init_position(VEHICULE *v) //initialise la position de la voiture v en fonc
     }
 }
 
-void run(uint nb_lin, uint nb_col, char board[nb_lin][nb_col],
-    int trafic_mode, int panne_mode, int exit_panne) //Routine du programme
+void run(uint nb_lin, uint nb_col, char board[nb_lin][nb_col], int trafic_mode, int panne_mode, int exit_panne) //Routine du programme
 {
-    VEHICULE_LIST l = NULL; //Liste des véhicules
+    VEHICULE_LIST l = NULL; //liste des véhicules
 
     while(1)
     {
@@ -76,6 +75,8 @@ void run(uint nb_lin, uint nb_col, char board[nb_lin][nb_col],
         l = remove_out(l); //Enlève les voitures qui sont sorties
     }
 }
+
+
 
 void move_vehicule(VEHICULE *v, uint nb_lin, uint nb_col, char board[nb_lin][nb_col]) //Fait bouger les voitures sur les 16 lignes droites
 {
@@ -332,185 +333,6 @@ void move_vehicule(VEHICULE *v, uint nb_lin, uint nb_col, char board[nb_lin][nb_
     }
 }
 
-//Fait tourner les voitures autour du RP
-void turn_around(VEHICULE *v, uint nb_lin, uint nb_col, char board[nb_lin][nb_col])
-{
-    //Anneau extérieur
-    if(v->pos_j == 50 && v->pos_i >= 25 && v->pos_i < 49) //Ouest
-    {
-        if(v->to == OUEST)
-        {
-            if((v->vitesse == 2 && v->pos_i == 36) || (v->vitesse == 1 && v->pos_i == 34)) //
-            {
-                if(board[v->pos_i][v->pos_j - 2] == EMPTY) // Exit ring test
-                {
-                    v->pos_j -= 2;
-                    v->sur_rp = !v->sur_rp;
-                    return;
-                }
-                else
-                    return;
-            }
-        }
-
-        if(board[v->pos_i + 1][v->pos_j] == EMPTY)
-        {
-            v->pos_i++;
-            return;
-        }
-    }
-    else if(v->pos_i == 49 && v->pos_j >= 50 && v->pos_j < 94) //Sud
-    {
-        if(v->to == SUD)
-        {
-            if((v->vitesse == 2 && v->pos_j == 70) || (v->vitesse == 1 && v->pos_j == 66))
-            {
-                if(board[v->pos_i + 1][v->pos_j] == EMPTY) // Exit ring test
-                {
-                    v->pos_i++;
-                    v->sur_rp = !v->sur_rp;
-                    return;
-                }
-                else
-                    return;
-            }
-        }
-
-        if(board[v->pos_i][v->pos_j + 2] == EMPTY)
-        {
-            v->pos_j += 2;
-            return;
-        }
-    }
-    else if(v->pos_j == 94 && v->pos_i <= 49 && v->pos_i > 25) //Est
-    {
-        if(v->to == EST)
-        {
-            if((v->vitesse == 2 && v->pos_i == 38) || (v->vitesse == 1 && v->pos_i == 40))
-            {
-                if(board[v->pos_i][v->pos_j + 2] == EMPTY) // Exit ring test
-                {
-                    v->pos_j += 2;
-                    v->sur_rp = !v->sur_rp;
-                    return;
-                }
-                else
-                    return;
-            }
-        }
-
-        if(board[v->pos_i - 1][v->pos_j] == EMPTY)
-        {
-            v->pos_i--;
-            return;
-        }
-    }
-    else if(v->pos_i == 25 && v->pos_j <= 94 && v->pos_j > 50) //Nord
-    {
-        if(v->to == NORD)
-        {
-            if((v->vitesse == 2 && v->pos_j == 74) || (v->vitesse == 1 && v->pos_j == 78))
-            {
-                if(board[v->pos_i - 1][v->pos_j] == EMPTY) // Exit ring test
-                {
-                    v->pos_i--;
-                    v->sur_rp = !v->sur_rp;
-                    return;
-                }
-                else
-                    return;
-            }
-        }
-
-        if(board[v->pos_i][v->pos_j - 2] == EMPTY)
-        {
-            v->pos_j -= 2;
-            return;
-        }
-    }
-
-    //Anneau intérieur
-    if(v->pos_j == 54 && v->pos_i >= 27 && v->pos_i < 47) //Ouest
-    {
-        if(v->to == OUEST)
-        {
-            if((v->vitesse == 2 && v->pos_i == 36) || (v->vitesse == 1 && v->pos_i == 34))
-            {
-                if(board[v->pos_i][v->pos_j - 2] == EMPTY) //On teste si on peut sortir
-                {
-                    v->pos_j -= 2;
-                    v->sur_rp = !v->sur_rp;
-                    return;
-                }
-                else
-                    return;
-            }
-        }
-
-        if(board[v->pos_i + 1][v->pos_j] == EMPTY)
-            v->pos_i++;
-    }
-    else if(v->pos_i == 47 && v->pos_j >= 54 && v->pos_j < 90) //Sud
-    {
-        if(v->to == SUD)
-        {
-            if((v->vitesse == 2 && v->pos_j == 70) || (v->vitesse == 1 && v->pos_j == 66))
-            {
-                if(board[v->pos_i + 1][v->pos_j] == EMPTY) //On teste si on peut sortir
-                {
-                    v->pos_i++;
-                    v->sur_rp = !v->sur_rp;
-                    return;
-                }
-                else
-                    return;
-            }
-        }
-
-        if(board[v->pos_i][v->pos_j + 2] == EMPTY)
-            v->pos_j += 2;
-    }
-    else if(v->pos_j == 90 && v->pos_i <= 47 && v->pos_i > 27) //Est
-    {
-        if(v->to == EST)
-        {
-            if((v->vitesse == 2 && v->pos_i == 38) || (v->vitesse == 1 && v->pos_i == 40))
-            {
-                if(board[v->pos_i][v->pos_j + 2] == EMPTY) //On teste si on peut sortir
-                {
-                    v->pos_j += 2;
-                    v->sur_rp = !v->sur_rp;
-                    return;
-                }
-                else
-                    return;
-            }
-        }
-
-        if(board[v->pos_i - 1][v->pos_j] == EMPTY)
-            v->pos_i--;
-    }
-    else if(v->pos_i == 27 && v->pos_j <= 90 && v->pos_j > 54) //Nord
-    {
-        if(v->to == NORD)
-        {
-            if((v->vitesse == 2 && v->pos_j == 74) || (v->vitesse == 1 && v->pos_j == 78))
-            {
-                if(board[v->pos_i - 1][v->pos_j] == EMPTY) //On teste si on peut sortir
-                {
-                    v->pos_i--;
-                    v->sur_rp = !v->sur_rp;
-                    return;
-                }
-                else
-                    return;
-            }
-        }
-
-        if(board[v->pos_i][v->pos_j - 2] == EMPTY)
-            v->pos_j -= 2;
-    }
-}
 
 //Fait bouger les voitures, gère les pannes
 void update_board(VEHICULE_LIST l, uint nb_lin, uint nb_col,

@@ -27,14 +27,14 @@ void affichage_map()
             else if (caractere_actuel == 'w') 
             {
             	couleur("46");
-				printf(" ");
-				couleur("0");
+			printf(" ");
+			couleur("0");
             }
             else if (caractere_actuel == 'q') 
             {
             	couleur("4");
-				printf(" ");
-				couleur("0");
+			printf(" ");
+			couleur("0");
             }
             else 
             {
