@@ -9,10 +9,8 @@
 #define NBCOL 175
 
 
-
-
 int main() 
 {
-	affichage_map();
-	return 0;
+  affichage_map();
+  return 0;
 }

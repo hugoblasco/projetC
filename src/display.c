@@ -1,51 +1,53 @@
+#include "../headers/couleur.h"
+
 void affichage_map() 
 {
-	FILE * fichier = NULL;
-	int caractere_actuel = 0;
-	fichier = fopen("./plan.txt", "r");
-	if (fichier != NULL) 
-	{
-		do
+  FILE * fichier = NULL;
+  int caractere_actuel = 0;
+  fichier = fopen("./plan.txt", "r");
+  if (fichier != NULL) 
+    {
+      do
         {
-            caractere_actuel = fgetc(fichier); // On lit le caractère
-            if (caractere_actuel == 'T') 
+	  caractere_actuel = fgetc(fichier); // On lit le caractère
+	  if (caractere_actuel == 'T') 
             {
-            	printf("🌴");
+	      printf("🌴");
             }
-            else if (caractere_actuel == 'B')
+	  else if (caractere_actuel == 'B')
             {
-            	printf("📪");
+	      printf("📪");
             }
-            else if (caractere_actuel == 'e') 
+	  else if (caractere_actuel == 'e') 
             {
-            	printf("🛒");
+	      printf("🛒");
+	    }
+	  else if (caractere_actuel == 'p') 
+            {
+	      printf("📡");
             }
-            else if (caractere_actuel == 'p') 
+	  else if (caractere_actuel == 'w') 
             {
-            	printf("📡");
+	      couleur("46");
+	      printf(" ");
+	      couleur("0");
             }
-            else if (caractere_actuel == 'w') 
+	  else if (caractere_actuel == 'q') 
             {
-            	couleur("46");
-			printf(" ");
-			couleur("0");
+	      couleur("4");
+	      printf(" ");
+	      couleur("0");
             }
-            else if (caractere_actuel == 'q') 
+	  else 
             {
-            	couleur("4");
-			printf(" ");
-			couleur("0");
-            }
-            else 
-            {
-            	printf("%c", caractere_actuel); // On l'affiche
+	      printf("%c", caractere_actuel); // On l'affiche
             }
         } while (caractere_actuel != EOF); // On continue tant que fgetc n'a pas retourné EOF (fin de fichier)
-        printf("\033[60,10H🚘\n");
-		fclose(fichier); // On ferme le fichier qui a été ouvert
-	}
-	else {
-		printf("erreur d'ouverture du fichier");
-	}
+      printf("\033[60,10H🚘\n");
+      fclose(fichier); // On ferme le fichier qui a été ouvert
+    }
+  else {
+    printf("erreur d'ouverture du fichier");
+  }
 	
 }
