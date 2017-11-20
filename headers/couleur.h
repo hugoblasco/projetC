@@ -1,3 +1,7 @@
+/** 
+* Pour modifier la couleur d'un caractère ascii
+*/
+
 #ifndef COULEUR_H
 #define COULEUR_H
 

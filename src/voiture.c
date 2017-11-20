@@ -1,3 +1,9 @@
+/** 
+* Gestion des véhicules
+* une liste doublement chainée qui contient tous les véhicules (méthode ajoutliste, retirerliste...)
+*/
+
+
 /*VEHICULE_LIST append(VEHICULE_LIST l, VEHICULE *v)
 // methode pour ajouter une voiture à la liste chainée l
 {

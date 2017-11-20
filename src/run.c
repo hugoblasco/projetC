@@ -1,3 +1,8 @@
+/** 
+* Fonctions de déplacements des voitures et gestion des événements
+*/
+
+
 #include "../headers/couleur.h"
 #include "../headers/voiture.h"
 

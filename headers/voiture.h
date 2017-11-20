@@ -1,3 +1,8 @@
+/** 
+* Classe voiture avec tous ses attributs
+*/
+
+
 #ifndef VOITURE_H
 #define VOITURE_H
 

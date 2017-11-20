@@ -1,4 +1,79 @@
+/** 
+* Toutes les fonctions d'affichage (menu de lancement, map)
+*/
+
 #include "../headers/couleur.h"
+
+void menu() 
+{
+  boolean run = true;
+  char lettre = '';
+  printf("                                                                       ");
+  printf("_______________________________________________________________________");
+  printf("_______________________________________________________________________");
+  printf("                                                                       ");
+  printf("   _______ __           _____ _                 __      __             ");
+  printf("  / ____(_) /___  __   / ___/(_)___ ___  __  __/ /___ _/ /_____  _____ ");
+  printf(" / /   / / __/ / / /   \__ \/ / __ `__ \/ / / / / __ `/ __/ __ \/ ___/ ");
+  printf("/ /___/ / /_/ /_/ /   ___/ / / / / / / / /_/ / / /_/ / /_/ /_/ / /     ");
+  printf("\____/_/\__/\__, /   /____/_/_/ /_/ /_/\__,_/_/\__,_/\__/\____/_/      ");
+  printf("           /____/                                                      ");
+  printf("                                                                       ");
+  printf("_______________________________________________________________________");
+  printf("_______________________________________________________________________");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *      ");
+  printf("      *                                                         *      ");
+  printf("      *                                                         *      ");
+  printf("      *     Bienvenue sur notre plateforme de simulation !!     *      ");
+  printf("      *                                                         *      ");
+  printf("      *                 Choisissez votre mode :                 *      ");
+  printf("      *                                                         *      ");
+  printf("      *                      > [f] Fluide                       *      ");
+  printf("      *                      > [d] Danger                       *      ");
+  printf("      *                                                         *      ");
+  printf("      *                      > [q] Quitter                      *      ");
+  printf("      *                                                         *      ");
+  printf("      *                                                         *      ");
+  printf("      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *      ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+  printf("                                                                       ");
+
+  /*scanf("%c",lettre);
+  while (run) 
+  {
+    switch (lettre)
+    {
+      case 'q':
+        run = false;
+        break;
+      case 'f':
+        //mode fluide
+        break;
+      case 'd':
+        //mode danger
+        break;
+  */
+
+}
 
 void affichage_map() 
 {

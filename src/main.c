@@ -1,3 +1,8 @@
+/** 
+* Point d'entré du programme
+*/
+
+
 //printf("\033[]60,10H🚘\n");
 #include <stdio.h>
 #include <stdlib.h>
