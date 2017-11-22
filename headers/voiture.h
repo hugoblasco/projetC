@@ -7,12 +7,15 @@
 #define VOITURE_H
 
 #include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
+#include <unistd.h>
 
 typedef struct voiture
 {
   int id; /* identifiant unique à chaucune des voiture*/
-  char direction; /* N (NORD), S (SUD), E (EST), O (OUEST) */
   char from; /* N (NORD), S (SUD), E (EST), O (OUEST) */
+  char direction; /* N (NORD), S (SUD), E (EST), O (OUEST) */
   int posx; /* position courante x de la voiture */
   int posy; /* position courante y de la voiture */
   int vitesse; /* vitesse de la voiture : 1 (normale), 2 (rapide) */
@@ -27,11 +30,19 @@ typedef struct v_list
   struct v_list* nxt;
 } v_list;
 
+int random_number (int);
+
 v_list* append (v_list*, voiture*);
 
-v_list* remove (v_list*, voiture*);
+v_list* remove_v (v_list*, voiture*);
 
 int length (v_list*);
+
+voiture* create_voiture ();
+
+char set_voiture (int);
+
+void init_position (voiture*);
 
 
 #endif
