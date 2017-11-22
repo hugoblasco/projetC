@@ -47,9 +47,9 @@ void run(int nb_lin, int nb_col, char board[nb_lin][nb_col],
     {
       /*if(! random_number(trafic_mode))
 	{
-	  voiture *v = spawn_vehicule(); //Création d'un véhicule
-	  l = append(l, v); //Ajout de v dans la liste
-	  }*/
+	voiture *v = spawn_vehicule(); //Création d'un véhicule
+	l = append(l, v); //Ajout de v dans la liste
+	}*/
 
       system("cls");  //Nettoie le terminal
       update_board(l, nb_lin, nb_col, board, panne_mode, exit_panne); //Fait bouger les voitures
