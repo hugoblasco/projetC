@@ -1,8 +1,7 @@
 /** 
 * Toutes les fonctions d'affichage (menu de lancement, map)
 */
-
-#include "../headers/couleur.h"
+#include "../headers/display.h"
 
 void menu() 
 {
@@ -78,13 +77,14 @@ void menu()
     }
 }
 
-void affichage_map() 
+void affichage_map(v_list* l) 
 {
   /*
    * Fonction d'affichage de la map
    */
   
   FILE* fd = NULL;
+  int x = 0; int y = 0;
   int caractere_actuel = 0;
   fd = fopen("./plan.txt", "r");
   if (fd == NULL)
@@ -96,30 +96,30 @@ void affichage_map()
     {
       do
         {
-	  caractere_actuel = fgetc(fd); // On lit le caractère
-	  if (caractere_actuel == 'T') 
+	  caractere_actuel = fgetc(fd); /* On lit le caractère */
+	  if (caractere_actuel == 'T') /* Arbre */
             {
 	      printf("🌴");
             }
-	  else if (caractere_actuel == 'B')
+	  else if (caractere_actuel == 'B') /* Boite aux lettes */
             {
 	      printf("📪");
             }
-	  else if (caractere_actuel == 'e') 
+	  else if (caractere_actuel == 'e') /* Caddy */
             {
 	      printf("🛒");
 	    }
-	  else if (caractere_actuel == 'p') 
+	    else if (caractere_actuel == 'p') /* Parabole */
             {
 	      printf("📡");
             }
-	  else if (caractere_actuel == 'w') 
+	    else if (caractere_actuel == 'w') /* Eau */
             {
 	      couleur("46");
 	      printf(" ");
 	      couleur("0");
             }
-	  else if (caractere_actuel == 'q') 
+	  else if (caractere_actuel == 'q')
             {
 	      couleur("4");
 	      printf(" ");
@@ -129,8 +129,18 @@ void affichage_map()
             {
 	      printf("%c", caractere_actuel); // On l'affiche
             }
+	  /* AFFICHAGE DES VOITURES */
+	  if (check_pos(l, x, y) != NULL)
+	    {
+	      afficher_v();
+	    } 
+	  x++;
+	  if (x >= 175)
+	    {
+	      x = 0;
+	      y++;
+	    }
         } while (caractere_actuel != EOF); // On continue tant que fgetc n'a pas retourné EOF (fin de fichier)
-      printf("\033[60,10H🚘\n");
       fclose(fd); // On ferme le fichier qui a été ouvert
     }	
 }

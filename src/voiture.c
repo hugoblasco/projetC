@@ -7,6 +7,25 @@
 
 static int id = 0;
 
+voiture* check_pos (v_list* l, int x, int y)
+{
+  if (l == NULL)
+    return NULL;
+  
+  v_list* tmp = l;
+
+  do
+    {
+      if (tmp->value->posx == x && tmp->value->posy == y)
+        break;
+      else
+	tmp = tmp->nxt;
+    }
+  while (tmp->nxt != NULL);
+
+  return tmp->value;
+}
+
 int random_number(int upper)
 {
   /*
@@ -31,7 +50,7 @@ v_list* append (v_list* l, voiture* v)
       v_list *tmp = l;
       while (tmp->nxt != NULL)
 	tmp = tmp->nxt;
-      
+
       tmp->nxt->value = v;
     }
   
@@ -74,6 +93,11 @@ v_list* remove_v (v_list* l, voiture* v)
 	}
     }
   return l;
+}
+
+void afficher_v ()
+{
+  printf("🚘");
 }
 
 int length (v_list* l)

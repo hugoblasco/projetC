@@ -30,11 +30,15 @@ typedef struct v_list
   struct v_list* nxt;
 } v_list;
 
+voiture* check_pos (v_list*, int, int);
+
 int random_number (int);
 
 v_list* append (v_list*, voiture*);
 
 v_list* remove_v (v_list*, voiture*);
+
+void afficher_v ();
 
 int length (v_list*);
 
