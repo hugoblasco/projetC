@@ -84,6 +84,12 @@ void run(uint nb_lin, uint nb_col, char board[nb_lin][nb_col], int trafic_mode, 
     }
 }
 
+void move_vehicule(voiture *v) {
+	//tester si un vehicule n'est pas bloqué sur la case devant
+	//tester si la voiture est au niveau d'un feu, si c'est le cas, regarder si le feu est rouge ou vert
+	//tester si la voiture atteint un carrefour
+}
+
 void up(voiture *v) {
 	if(v->posy > 0) {
 		v->posy = v->posy-1;
