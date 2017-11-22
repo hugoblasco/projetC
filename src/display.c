@@ -6,85 +6,97 @@
 
 void menu() 
 {
-  boolean run = true;
-  char lettre = '';
-  printf("                                                                       ");
-  printf("_______________________________________________________________________");
-  printf("_______________________________________________________________________");
-  printf("                                                                       ");
-  printf("   _______ __           _____ _                 __      __             ");
-  printf("  / ____(_) /___  __   / ___/(_)___ ___  __  __/ /___ _/ /_____  _____ ");
-  printf(" / /   / / __/ / / /   \__ \/ / __ `__ \/ / / / / __ `/ __/ __ \/ ___/ ");
-  printf("/ /___/ / /_/ /_/ /   ___/ / / / / / / / /_/ / / /_/ / /_/ /_/ / /     ");
-  printf("\____/_/\__/\__, /   /____/_/_/ /_/ /_/\__,_/_/\__,_/\__/\____/_/      ");
-  printf("           /____/                                                      ");
-  printf("                                                                       ");
-  printf("_______________________________________________________________________");
-  printf("_______________________________________________________________________");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *      ");
-  printf("      *                                                         *      ");
-  printf("      *                                                         *      ");
-  printf("      *     Bienvenue sur notre plateforme de simulation !!     *      ");
-  printf("      *                                                         *      ");
-  printf("      *                 Choisissez votre mode :                 *      ");
-  printf("      *                                                         *      ");
-  printf("      *                      > [f] Fluide                       *      ");
-  printf("      *                      > [d] Danger                       *      ");
-  printf("      *                                                         *      ");
-  printf("      *                      > [q] Quitter                      *      ");
-  printf("      *                                                         *      ");
-  printf("      *                                                         *      ");
-  printf("      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *      ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
-  printf("                                                                       ");
+  /* 
+   * Fonction d'affichage du menu et de sélection du mode de jeu.
+   */
+  
+  char buffer; //buffer pour récupérer l'entrée du joueur.
+  
+  printf("                                                                       \n");
+  printf("_______________________________________________________________________\n");
+  printf("_______________________________________________________________________\n");
+  printf("                                                                       \n");
+  printf("   _______ __           _____ _                 __      __             \n");
+  printf("  / ____(_) /___  __   / ___/(_)___ ___  __  __/ /___ _/ /_____  _____ \n");
+  printf(" / /   / / __/ / / /   \__ \/ / __ `__ \/ / / / / __ `/ __/ __ \/ ___/ \n");
+  printf("/ /___/ / /_/ /_/ /   ___/ / / / / / / / /_/ / / /_/ / /_/ /_/ / /     \n");
+  printf("\____/_/\__/\__, /   /____/_/_/ /_/ /_/\__,_/_/\__,_/\__/\____/_/      \n");
+  printf("           /____/                                                      \n");
+  printf("                                                                       \n");
+  printf("_______________________________________________________________________\n");
+  printf("_______________________________________________________________________\n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *      \n");
+  printf("      *                                                         *      \n");
+  printf("      *                                                         *      \n");
+  printf("      *     Bienvenue sur notre plateforme de simulation !!     *      \n");
+  printf("      *                                                         *      \n");
+  printf("      *                 Choisissez votre mode :                 *      \n");
+  printf("      *                                                         *      \n");
+  printf("      *                      > [f] Fluide                       *      \n");
+  printf("      *                      > [d] Danger                       *      \n");
+  printf("      *                                                         *      \n");
+  printf("      *                      > [q] Quitter                      *      \n");
+  printf("      *                                                         *      \n");
+  printf("      *                                                         *      \n");
+  printf("      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *      \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
+  printf("                                                                       \n");
 
-  /*scanf("%c",lettre);
-  while (run) 
-  {
-    switch (lettre)
+  scanf ("%c\n", &buffer);
+  switch (buffer)
     {
-      case 'q':
-        run = false;
-        break;
-      case 'f':
-        //mode fluide
-        break;
-      case 'd':
-        //mode danger
-        break;
-  */
-
+    case 'q':
+      break;
+    case 'f': //mode fluide
+      //LANCER FONCTION MODE FLUIDE
+      break;
+    case 'd': //mode danger
+      //LANCER FONCTION MODE DANGER
+      break;
+    default:
+      printf ("Entrée invalide\n");
+      menu ();
+    }
 }
 
 void affichage_map() 
 {
-  FILE * fichier = NULL;
+  /*
+   * Fonction d'affichage de la map
+   */
+  
+  FILE* fd = NULL;
   int caractere_actuel = 0;
-  fichier = fopen("./plan.txt", "r");
-  if (fichier != NULL) 
+  fd = fopen("./plan.txt", "r");
+  if (fd == NULL)
+    {
+      perror (" Error : ");
+      exit (-1);
+    }
+  else
     {
       do
         {
-	  caractere_actuel = fgetc(fichier); // On lit le caractère
+	  caractere_actuel = fgetc(fd); // On lit le caractère
 	  if (caractere_actuel == 'T') 
             {
 	      printf("🌴");
@@ -119,10 +131,6 @@ void affichage_map()
             }
         } while (caractere_actuel != EOF); // On continue tant que fgetc n'a pas retourné EOF (fin de fichier)
       printf("\033[60,10H🚘\n");
-      fclose(fichier); // On ferme le fichier qui a été ouvert
-    }
-  else {
-    printf("erreur d'ouverture du fichier");
-  }
-	
+      fclose(fd); // On ferme le fichier qui a été ouvert
+    }	
 }
