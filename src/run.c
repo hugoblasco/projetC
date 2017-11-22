@@ -40,27 +40,27 @@ char set_voiture(uint n) //donne une direction en fonction de n
   return l[n];
 }
 
-void init_position(VEHICULE *v) //initialise la position de la voiture v en fonction de v->from
+void init_position(voiture *v) //initialise la position de la voiture v en fonction de v->from
 {
   if(v->from == NORD)
     {
-      v->posx = 0;
-      v->posy = 130;
+      v->posx = 130;
+      v->posy = 1;
     }
   else if(v->from == EST)
     {
-      v->posx = 13;
-      v->posy = 175;
+      v->posx = 175;
+      v->posy = 14;
     }
   else if(v->from == SUD)
     {
-k      v->posx = 15;
-      v->posy = 0;
+k      v->posx = 1;
+      v->posy = 15;
     }
   else if(v->from == OUEST)
     {
-      v->posx = 61;
-      v->posy = 10;
+      v->posx = 10;
+      v->posy = 61;
     }
 }
 
@@ -76,7 +76,7 @@ void run(uint nb_lin, uint nb_col, char board[nb_lin][nb_col], int trafic_mode, 
 	  l = append(l, v); //Ajout de v dans la liste
 	}
 
-      clrscr(); //Nettoye le terminal
+      clrscr(); //Nettoie le terminal
       update_board(l, nb_lin, nb_col, board, panne_mode, exit_panne); //Fait bouger les voitures
       show_board(nb_lin, nb_col, board); //Affiche le rond-point
       usleep(DELAY); //Délai avant de boucler de nouveau
@@ -84,262 +84,30 @@ void run(uint nb_lin, uint nb_col, char board[nb_lin][nb_col], int trafic_mode, 
     }
 }
 
-
-
-void move_vehicule(VEHICULE *v, uint nb_lin, uint nb_col, char board[nb_lin][nb_col]) //Fait bouger les voitures sur les 16 lignes droites
-{
-  unsigned char d = (v->from == NORD || v->from == SUD) ? v->vitesse : v->vitesse * 2;
-
-  if(v->from == OUEST && (v->pos_i == 38 || v->pos_i == 40))
-    {
-      if(v->vitesse == 2)
-	{
-	  if(v->pos_j + d > 50)
-	    {
-	      if(v->pos_j + d - 6 > 50)
-		return;
-	      else
-		d -= 2;
-	    }
-
-	  if(board[v->pos_i][v->pos_j + d] == EMPTY
-	     && board[v->pos_i][v->pos_j + d - 2] == EMPTY)
-	    {
-	      v->pos_j += d;
-	    }
-	  else if(board[v->pos_i][v->pos_j + d] != EMPTY
-		  && board[v->pos_i][v->pos_j + d - 2] == EMPTY)
-	    {
-	      v->pos_j += (d - 2);
-	    }
-
-	  if(v->pos_j == 54)
-	    {
-	      v->sur_rp = true;
-	      return;
-	    }
+void up(voiture *v) {
+	if(v->posy > 0) {
+		v->posy = v->posy-1;
 	}
-
-      if(v->vitesse == 1 && v->pos_j + d <= 50)
-	{
-	  if(board[v->pos_i][v->pos_j + d] == EMPTY)
-	    {
-	      v->pos_j += d;
-
-	      if(v->pos_j == 50)
-		{
-		  v->sur_rp = true;
-		  return;
-		}
-	    }
-	}
-    }
-  else if(v->from == SUD && (v->pos_j == 74 || v->pos_j == 78))
-    {
-      if(v->vitesse == 2)
-	{
-	  if(v->pos_i - d < 49)
-	    {
-	      if(v->pos_i - d + 3 < 49)
-		return;
-	      else
-		d -= 1;
-	    }
-
-	  if (board[v->pos_i - d][v->pos_j] == EMPTY
-	      && board[v->pos_i - d + 1][v->pos_j] == EMPTY)
-	    {
-	      v->pos_i -= d;
-	    }
-	  else if (board[v->pos_i - d][v->pos_j] != EMPTY
-		   && board[v->pos_i - d + 1][v->pos_j] == EMPTY)
-	    {
-	      v->pos_i -= (d - 1);
-	    }
-
-	  if(v->pos_i == 47)
-	    {
-	      v->sur_rp = true;
-	      return;
-	    }
-	}
-
-      if(v->vitesse == 1 && v->pos_i - d >= 49)
-	{
-	  if (board[v->pos_i - d][v->pos_j] == EMPTY)
-	    {
-	      v->pos_i -= d;
-
-	      if(v->pos_i == 49)
-		{
-		  v->sur_rp = true;
-		  return;
-		}
-	    }
-	}
-    }
-  else if(v->from == EST && (v->pos_i == 34 || v->pos_i == 36))
-    {
-      if(v->vitesse == 2)
-	{
-	  if(v->pos_j - d < 94)
-	    {
-	      if(v->pos_j - d + 6 < 94)
-		return;
-	      else
-		d -= 2;
-	    }
-
-	  if (board[v->pos_i][v->pos_j - d] == EMPTY
-	      && board[v->pos_i][v->pos_j - d + 2] == EMPTY)
-	    {
-	      v->pos_j -= d;
-	    }
-	  else if (board[v->pos_i][v->pos_j - d] != EMPTY
-		   && board[v->pos_i][v->pos_j - d + 2] == EMPTY)
-	    {
-	      v->pos_j -= (d - 2);
-	    }
-
-	  if(v->pos_j == 90)
-	    {
-	      v->sur_rp = true;
-	      return;
-	    }
-	}
-
-      if(v->vitesse == 1 && v->pos_j - d >= 94)
-	{
-	  if (board[v->pos_i][v->pos_j - d] == EMPTY)
-	    {
-	      v->pos_j -= d;
-
-	      if(v->pos_j == 94)
-		{
-		  v->sur_rp = true;
-		  return;
-		}
-	    }
-	}
-    }
-  else if(v->from == NORD && (v->pos_j == 66 || v->pos_j == 70))
-    {
-      if(v->vitesse == 2)
-	{
-	  if(v->pos_i + d > 25)
-	    {
-	      if(v->pos_i + d - 3 > 25)
-		return;
-	      else
-		d -= 1;
-	    }
-
-	  if (board[v->pos_i + d][v->pos_j] == EMPTY
-	      && board[v->pos_i + d - 1][v->pos_j] == EMPTY)
-	    {
-	      v->pos_i += d;
-	    }
-	  else if (board[v->pos_i + d][v->pos_j] != EMPTY
-		   && board[v->pos_i + d - 1][v->pos_j] == EMPTY)
-	    {
-	      v->pos_i += (d - 1);
-	    }
-
-	  if(v->pos_i == 27)
-	    {
-	      v->sur_rp = true;
-	      return;
-	    }
-	}
-
-      if(v->vitesse == 1 && v->pos_i + d <= 25)
-	{
-	  if(board[v->pos_i + d][v->pos_j] == EMPTY)
-	    {
-	      v->pos_i += d;
-
-	      if(v->pos_i == 25)
-		{
-		  v->sur_rp = true;
-		  return;
-		}
-	    }
-	}
-    }
-
-  if(v->to == SUD && v->pos_i >= 48 && (v->pos_j == 66 || v->pos_j == 70))
-    {
-      if(v->vitesse == 1 && board[v->pos_i + 1][v->pos_j] == EMPTY)
-	v->pos_i += 1;
-      else if(v->vitesse == 2 && board[v->pos_i + 1][v->pos_j] == EMPTY)
-	{
-	  if(board[v->pos_i + 2][v->pos_j] == EMPTY)
-	    v->pos_i += 2;
-	  else if(board[v->pos_i + 2][v->pos_j] != EMPTY)
-	    v->pos_i += 1;
-	}
-
-      if(v->pos_i >= 74)
-	{
-	  v->is_out = true;
-	  return;
-	}
-    }
-  else if(v->to == OUEST && v->pos_j <= 94 && (v->pos_i == 34 || v->pos_i == 36))
-    {
-      if(v->vitesse == 1 && board[v->pos_i][v->pos_j - 2] == EMPTY)
-	v->pos_j -= 2;
-      else if(v->vitesse == 2 && board[v->pos_i][v->pos_j - 2] == EMPTY)
-	{
-	  if(board[v->pos_i][v->pos_j - 4] == EMPTY)
-	    v->pos_j -= 4;
-	  else if(board[v->pos_i][v->pos_j - 4] != EMPTY)
-	    v->pos_j -= 2;
-	}
-
-      if(v->pos_j <= 0)
-	{
-	  v->is_out = true;
-	  return;
-	}
-    }
-  else if(v->to == NORD && v->pos_i <= 26 && (v->pos_j == 74 || v->pos_j == 78))
-    {
-      if(v->vitesse == 1 && board[v->pos_i - 1][v->pos_j] == EMPTY)
-	v->pos_i -= 1;
-      else if(v->vitesse == 2 && board[v->pos_i - 1][v->pos_j] == EMPTY)
-	{
-	  if(board[v->pos_i - 2][v->pos_j] == EMPTY)
-	    v->pos_i -= 2;
-	  else if(board[v->pos_i - 2][v->pos_j] != EMPTY)
-	    v->pos_i -= 1;
-	}
-
-      if(v->pos_i <= 0)
-	{
-	  v->is_out = true;
-	  return;
-	}
-    }
-  else if(v->to == EST && v->pos_j >= 50 && (v->pos_i == 38 || v->pos_i == 40))
-    {
-      if(v->vitesse == 1 && board[v->pos_i][v->pos_j + 2] == EMPTY)
-	v->pos_j += 2;
-      else if(v->vitesse == 2 && board[v->pos_i][v->pos_j + 2] == EMPTY)
-	{
-	  if(board[v->pos_i][v->pos_j + 4] == EMPTY)
-	    v->pos_j += 4;
-	  else if(board[v->pos_i][v->pos_j + 4] != EMPTY)
-	    v->pos_j += 2;
-	}
-
-      if(v->pos_j >= 146)
-	{
-	  v->is_out = true;
-	  return;
-	}
-    }
 }
+
+void down(voiture *v) {
+	if(v->posy < 61) {
+		v->posy = v->posy+1;
+	}
+}
+
+void left(voiture *v) {
+	if(v->posx > 0) {
+		v->posy = v->posy-1;
+	}
+}
+
+void right(voiture *v) {
+	if(v->posx < 175) {
+		v->posy = v->posy+1;
+	}
+}
+
 
 
 //Fait bouger les voitures, gère les pannes
