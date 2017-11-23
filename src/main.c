@@ -6,8 +6,8 @@
 //printf("\033[]60,10H🚘\n");
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/couleur.h"
-#include "display.c"
+#include "../headers/couleur.h"
+#include "../headers/display.h"
 
 //taille du tableau
 #define NBLIN 61
@@ -16,6 +16,9 @@
 
 int main() 
 {
-  affichage_map();
+  v_list* l = malloc (sizeof (v_list));
+  l = append (l, create_voiture ());
+  affichage_map(l);
+
   return 0;
 }

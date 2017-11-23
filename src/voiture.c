@@ -9,20 +9,27 @@ static int id = 0;
 
 voiture* check_pos (v_list* l, int x, int y)
 {
+  /*
+   * Verifie s'il existe une voiture dans la liste à la position x y 
+   * et la renvoie si elle existe.
+   */
   if (l == NULL)
     return NULL;
-  
-  v_list* tmp = l;
 
+  v_list* tmp = l;
   do
     {
-      if (tmp->value->posx == x && tmp->value->posy == y)
-        break;
-      else
+      if (tmp->value != NULL)
+	{
+	  if (tmp->value->posx == x && tmp->value->posy == y)
+	    {
+	      break;
+	    }
+	}
+	else
 	tmp = tmp->nxt;
     }
   while (tmp->nxt != NULL);
-
   return tmp->value;
 }
 
@@ -51,6 +58,7 @@ v_list* append (v_list* l, voiture* v)
       while (tmp->nxt != NULL)
 	tmp = tmp->nxt;
 
+      tmp->nxt = malloc (sizeof (v_list));
       tmp->nxt->value = v;
     }
   

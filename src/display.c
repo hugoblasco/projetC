@@ -86,10 +86,10 @@ void affichage_map(v_list* l)
   FILE* fd = NULL;
   int x = 0; int y = 0;
   int caractere_actuel = 0;
-  fd = fopen("./plan.txt", "r");
+  fd = fopen("./doc/plan.txt", "r");
   if (fd == NULL)
     {
-      perror (" Error : ");
+      perror ("Erreur lors de l'ouverture du fichier ");
       exit (-1);
     }
   else
