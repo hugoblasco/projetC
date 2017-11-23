@@ -16,9 +16,13 @@
 
 int main() 
 {
+	printf("salut");
   v_list* l = malloc (sizeof (v_list));
-  l = append (l, create_voiture ());
+  printf("salut 2");
+  l = append (l, create_voiture());
+  printf("salut 3");
   affichage_map(l);
+  printf("salut 4");
 
   return 0;
 }
