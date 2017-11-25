@@ -18,8 +18,6 @@ int main()
 {
   v_list* l = NULL;
   voiture* v = create_voiture ();
-  printf("x : %d, y : %d\n", v->posx, v->posy);
-  printf("from : %c, dir : %c\n", v->from, v->direction);
   l = append (l, v);
   affichage_map(l);
 
