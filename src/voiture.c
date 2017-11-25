@@ -15,22 +15,18 @@ voiture* check_pos (v_list* l, int x, int y)
    */
   if (l == NULL)
     return NULL;
+  
 
   v_list* tmp = l;
-  do
+  while (tmp != NULL)
     {
-      if (tmp->value != NULL)
+      if(tmp->value->posx == x && tmp->value->posy == y)
 	{
-	  if (tmp->value->posx == x && tmp->value->posy == y)
-	    {
-	      break;
-	    }
+	  return tmp->value;
 	}
-	else
-	tmp = tmp->nxt;
+      else tmp = tmp->nxt;
     }
-  while (tmp->nxt != NULL);
-  return tmp->value;
+  return NULL;
 }
 
 int random_number(int upper)
