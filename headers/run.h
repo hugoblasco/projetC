@@ -3,10 +3,14 @@
 
 #include "../headers/couleur.h"
 #include "../headers/voiture.h"
+#include "../headers/display.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void bonjour ();
 
-void run (uint, uint, char, int, int, int);
+void run (int bool, char[][61]);
 
 void up (voiture*);
 
@@ -16,6 +20,6 @@ void left (voiture*);
 
 void right (voiture*);
 
-void update_board (v_list*, uint, uint, char, int, int);
+void update (v_list*, char[][61]);
 
 #endif

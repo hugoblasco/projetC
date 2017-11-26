@@ -4,8 +4,6 @@
 
 #include "../headers/run.h"
 
-const int DELAY = 1000; 
-
 void bonjour()
 {
   /*
@@ -38,71 +36,63 @@ void right(voiture *v) {
   }
 }
 
-void run(int nb_lin, int nb_col, char board[nb_lin][nb_col],
-	 int trafic_mode, int panne_mode, int exit_panne)
+void run(int bool, char map[][61])
 {
-  v_list* l = NULL; //liste des véhicules
-
-  while(1)
+  //int compteur = 0;
+  v_list* l = NULL;
+  voiture* v = NULL;
+  
+  srand (time (NULL));
+  if (! bool)
     {
-      /*if(! random_number(trafic_mode))
-	{
-	voiture *v = spawn_vehicule(); //Création d'un véhicule
-	l = append(l, v); //Ajout de v dans la liste
-	}*/
-
-      system("cls");  //Nettoie le terminal
-      update_board(l, nb_lin, nb_col, board, panne_mode, exit_panne); //Fait bouger les voitures
-      sleep(DELAY); //Délai avant de boucler de nouveau
+      if ( rand()%4 == 0)
+	spawn_voiture (l, v);
     }
+  else
+    {
+      spawn_voiture (l, v);
+    }
+  affichage_map (map);
+  /*while(1)
+    {
+      affichage_map (map);
+      //while (compteur <= 1000000000) compteur++;
+      //compteur = 0;
+      sleep (1);
+      update (l, map);
+      system("clear");  //Nettoie le terminal
+      }*/
 }
 
 //Fait bouger les voitures, gère les pannes
-void update_board(v_list* l, int nb_lin, int nb_col,
-		  char board[nb_lin][nb_col], int panne_mode, int exit_panne)
+void update(v_list* l, char map[][61])
 {
   v_list* tmp = l;
 
-  while(tmp) //On parcourt la liste des voitures
+  for (int i = 0; i < length (l); i++)
     {
-      board[tmp->pos_i][tmp->pos_j] = EMPTY;
+      map[tmp->value->posx][tmp->value->posy] = 'v';
+      tmp = tmp->nxt;
+    }
 
-      if(!tmp->panne) //Si pas de panne
+  tmp = l;
+  for (int i = 0; i < length (l); i++)
+    {
+      switch (tmp->value->direction)
 	{
-	  if(!random_number(panne_mode)) //On creer une panne
-	    {
-	      tmp->panne = !tmp->panne;
-	      board[tmp->pos_i][tmp->pos_j] = PANNE;
-	      tmp = tmp->nxt;
-	      continue;
-	    }
-	  else //Si on ne crée pas de panne
-	    {
-	      if(!tmp->sur_rp) //Si pas sur le RP
-		move_vehicule(tmp, nb_lin, nb_col, board);
-	      else //Si sur le RP
-		turn_around(tmp, nb_lin, nb_col, board);
-	    }
+	case 'N':
+	  up (tmp->value);
+	  break;
+	case 'S':
+	  down (tmp->value);
+	  break;
+	case 'E':
+	  right (tmp->value);
+	  break;
+	case 'O':
+	  left (tmp->value);
+	  break;
 	}
-      else //Si panne
-	{
-	  if(!random_number(exit_panne)) //On enleve la panne
-	    tmp->panne = !tmp->panne;
-	  else
-	    {
-	      board[tmp->pos_i][tmp->pos_j] = PANNE;
-	      tmp = tmp->nxt;
-	      continue;
-	    }
-	}
-
-      if(tmp->is_out) //Si dehors inutile de bouger
-	{
-	  tmp = tmp->nxt;
-	  continue;
-	}
-
-      board[tmp->pos_i][tmp->pos_j] = tmp->to;
       tmp = tmp->nxt;
     }
 }

@@ -15,8 +15,7 @@ voiture* check_pos (v_list* l, int x, int y)
    */
   if (l == NULL)
     return NULL;
-  
-
+ 
   v_list* tmp = l;
   while (tmp != NULL)
     {
@@ -119,6 +118,13 @@ int length (v_list* l)
     }
   return i;
 }
+
+void spawn_voiture (v_list* l, voiture* v)
+{
+  v = create_voiture ();
+  l = append (l, v);
+}
+
 
 voiture* create_voiture()
 {

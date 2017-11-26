@@ -1,9 +1,9 @@
 /** 
-* Toutes les fonctions d'affichage (menu de lancement, map)
-*/
+ * Toutes les fonctions d'affichage (menu de lancement, map)
+ */
 #include "../headers/display.h"
 
-void menu() 
+char menu() 
 {
   /* 
    * Fonction d'affichage du menu et de sélection du mode de jeu.
@@ -64,83 +64,98 @@ void menu()
   switch (buffer)
     {
     case 'q':
-      break;
+      return 'q';
     case 'f': //mode fluide
-      //LANCER FONCTION MODE FLUIDE
-      break;
+      return 'f';
     case 'd': //mode danger
-      //LANCER FONCTION MODE DANGER
-      break;
+      return 'd';
     default:
       printf ("Entrée invalide\n");
       menu ();
     }
+  system ("clear");
+  return '1';
+  
 }
 
-void affichage_map(v_list* l) 
+int map_loading (char map[][61])
+{
+  FILE* fp = NULL;
+  char actual_char; int x = 0, y = 0;
+  fp = fopen ("./doc/plan.txt", "r");
+  if (fp == NULL)
+    {
+      perror ("Erreur lors de l'ouverture du fichier : ");
+      return -1;
+    }
+  else {
+    do
+      {
+	actual_char = fgetc(fp); /* On lit le caractère */
+	if (actual_char != EOF)
+	  map[x][y] = actual_char;
+	x++;
+	if (x > 175)
+	  {
+	    x = 0;
+	    y++;
+	  }
+      }
+    while (actual_char != EOF);
+  }
+  if (fclose (fp) == EOF)
+    {
+      perror ("Erreur lors de la fermeture du fichier : ");
+      return -1;
+    }
+  return 0;
+}
+
+void affichage_map(char map[][61]) 
 {
   /*
    * Fonction d'affichage de la map
    */
-  FILE* fp = NULL;
-  int x = 0; int y = 0;
-  int caractere_actuel = 0;
-  fp = fopen("./doc/plan.txt", "r");
-  if (fp == NULL)
+  for (int j = 0; j < 61; j++)
     {
-      perror ("Erreur lors de l'ouverture du fichier ");
-      exit (-1);
-    }
-  else
-    {
-      do
-        {
-	  if (check_pos(l, x, y) != NULL)
-	    {
-	      afficher_v();
-	      fseek (fp, 1, SEEK_CUR);
-	    } 
-	  caractere_actuel = fgetc(fp); /* On lit le caractère */
-	  if (caractere_actuel == 'T') /* Arbre */
+      for (int i = 0; i < 175; i++)
+	{
+	  if (map[i][j] == 'T') // Arbre
             {
 	      printf("🌴");
             }
-	  else if (caractere_actuel == 'B') /* Boite aux lettes */
+	  else if (map[i][j] == 'B') // Boite aux lettes
             {
 	      printf("📪");
             }
-	  else if (caractere_actuel == 'e') /* Caddy */
+	  else if (map[i][j] == 'e') // Caddie
             {
 	      printf("🛒");
 	    }
-	    else if (caractere_actuel == 'p') /* Parabole */
+	  else if (map[i][j] == 'p') // Parabole
             {
 	      printf("📡");
             }
-	    else if (caractere_actuel == 'w') /* Eau */
+	  else if (map[i][j] == 'w') // Eau
             {
 	      couleur("46");
 	      printf(" ");
 	      couleur("0");
             }
-	  else if (caractere_actuel == 'q')
+	  else if (map[i][j] == 'q')
             {
 	      couleur("4");
 	      printf(" ");
 	      couleur("0");
             }
-	  else 
-            {
-	      printf("%c", caractere_actuel); // On l'affiche
-            }
-
-	  x++;
-	  if (x > 174)
+	  else if (map[i][j] == 'v')
 	    {
-	      x = 0;
-	      y++;
+	      afficher_v();
 	    }
-        } while (caractere_actuel != EOF); // On continue tant que fgetc n'a pas retourné EOF (fin de fichier)
-      fclose(fp); // On ferme le fichier qui a été ouvert
+	  else
+	    {
+	      printf ("%c", map[i][j]);
+	    }
+	}
     }
 }

@@ -1,25 +1,23 @@
 /** 
 * Point d'entré du programme
 */
-
-
 //printf("\033[]60,10H🚘\n");
-#include <stdio.h>
-#include <stdlib.h>
-#include "../headers/couleur.h"
-#include "../headers/display.h"
-
-//taille du tableau
-#define NBLIN 61
-#define NBCOL 175
 
 
-int main() 
+#include "../headers/main.h"
+
+
+int main()
 {
-  v_list* l = NULL;
-  voiture* v = create_voiture ();
-  l = append (l, v);
-  affichage_map(l);
-
-  return 0;
+  char map[NBCOL][NBLIN];
+  if (map_loading (map) < 0)
+    exit (-1);
+  
+  char c = menu ();
+  if (c == 'f')
+    run (0, map);
+  else if (c == 'd')
+    run (1, map);  
+  
+  exit (1);
 }

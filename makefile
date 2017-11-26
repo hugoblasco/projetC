@@ -6,20 +6,25 @@ EXEC=main
 
 all: $(EXEC)
 
-main: voiture.o display.o main.o
-	@echo "début edition des liens : display, voiture et main"
-	$(CC) -o main voiture.o display.o main.o
+main: voiture.o display.o run.o main.o
+	@echo "début edition des liens : display, voiture, run et main"
+	$(CC) -o main voiture.o display.o run.o main.o
 	@echo "fin edition des liens"
 
-main.o: ./src/main.c
+main.o: ./src/main.c ./headers/main.h
 	@echo "début compilation main"
 	$(CC) -c ./src/main.c
-	@echo "début compilation main"
+	@echo "fin compilation main"
 
-display.o: ./src/display.c ./headers/voiture.h
+run.o: ./src/run.c ./headers/run.h
+	@echo "début compilation run"
+	$(CC) -c ./src/run.c
+	@echo "fin compilation run"
+
+display.o: ./src/display.c ./headers/display.h
 	@echo "début compilation display"
 	$(CC) -c ./src/display.c
-	@echo "début compilation display"	
+	@echo "fin compilation display"	
 
 voiture.o: ./src/voiture.c ./headers/voiture.h
 	@echo "début compilation voiture"
