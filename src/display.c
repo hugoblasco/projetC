@@ -95,11 +95,11 @@ void affichage_map(v_list* l)
     {
       do
         {
-	  if (check_pos(l, x, y) != NULL)
+	  /*if (check_pos(l, x, y) != NULL)
 	    {
 	      afficher_v();
 	      fseek (fp, 1, SEEK_CUR);
-	    } 
+	    } */
 	  caractere_actuel = fgetc(fp); /* On lit le caractère */
 	  if (caractere_actuel == 'T') /* Arbre */
             {
