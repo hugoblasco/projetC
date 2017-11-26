@@ -21,6 +21,7 @@ typedef struct voiture
   int vitesse; /* vitesse de la voiture : 1 (normale), 2 (rapide) */
   char type; /* type du vehicule : 'v' (voiture), 'c' (camion) */ 
   char custom[30]; /* contient le véhicule customisé */
+  int is_out; /* 0 si la voiture est sur la carte, 1 si elle sort de la carte
   char etat; /* actif ou inactif */
 } voiture;
 
