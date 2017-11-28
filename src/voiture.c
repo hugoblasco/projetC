@@ -15,7 +15,7 @@ voiture* check_pos (v_list* l, int x, int y)
    */
   if (l == NULL)
     return NULL;
- 
+  
   v_list* tmp = l;
   while (tmp != NULL)
     {
@@ -33,8 +33,8 @@ int random_number(int upper)
   /*
    * Retourne un entier aléatoire entre 0 et upper
    */
-  srand(time(NULL));
-  return (rand () % upper);
+  /*srand(time(NULL));
+  return (rand () % upper);*/
 }
 
 v_list* append (v_list* l, voiture* v)
@@ -100,7 +100,8 @@ v_list* remove_v (v_list* l, voiture* v)
 
 void afficher_v ()
 {
-  printf("🚘");
+  /*printf("🚘");*/
+  printf ("V");
 }
 
 int length (v_list* l)
@@ -111,7 +112,7 @@ int length (v_list* l)
   int i = 0;
   v_list *tmp = l;
 
-  while (tmp->nxt != NULL)
+  while (tmp != NULL)
     {
       tmp = tmp->nxt;
       i++;
@@ -125,16 +126,15 @@ void spawn_voiture (v_list* l, voiture* v)
   l = append (l, v);
 }
 
-
 voiture* create_voiture()
 {
   /*
    * Créé une struct voiture et la renvoie
    */
   voiture* v = malloc (sizeof (voiture));
-
+  srand(time(NULL));
   v->id = ++id;
-  v->from = set_voiture (random_number (4)); /*Assignation aléatoire de la provenance de la voiture*/
+  v->from = set_voiture (rand ()%4); /*Assignation aléatoire de la provenance de la voiture*/
   switch (v->from)
     {
     case 'N':
@@ -172,23 +172,35 @@ void init_position (voiture *v)
    */
   if(v->from == 'N')
     {
-      v->posx = 130;
-      v->posy = 1;
+      v->posx = 0;
+      v->posy = 0;
     }
   else if(v->from == 'E')
     {
-      v->posx = 175;
-      v->posy = 14;
+      v->posx = 1;
+      v->posy = 0;
     }
   else if(v->from == 'S')
     {
-      v->posx = 1;
-      v->posy = 15;
+      v->posx = 2;
+      v->posy = 0;
     }
   else if(v->from == 'O')
     {
-      v->posx = 10;
-      v->posy = 61;
+      v->posx = 3;
+      v->posy = 0;
     }
 }
+
+void destroy (v_list* l, voiture* x, voiture* y)
+{
+  l = remove_v (l, x);
+  l = remove_v (l, y);
+}
+/*
+void spawn_tram (int i)
+{ 
+   * TO DO : SPAWN TRAM + MOVEMENT
+   
+}*/
 

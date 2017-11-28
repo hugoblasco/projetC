@@ -10,7 +10,7 @@
 
 void bonjour ();
 
-void run (int bool, char[][61]);
+void run (int bool);
 
 void up (voiture*);
 
@@ -20,6 +20,6 @@ void left (voiture*);
 
 void right (voiture*);
 
-void update (v_list*, char[][61]);
+void update (v_list*);
 
 #endif

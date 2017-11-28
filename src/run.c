@@ -36,63 +36,98 @@ void right(voiture *v) {
   }
 }
 
-void run(int bool, char map[][61])
+void run(int bool)
 {
   //int compteur = 0;
   v_list* l = NULL;
   voiture* v = NULL;
+  //int timer = 0;
+  v = create_voiture();
+  l = append (l, v);
+  v = create_voiture();
+  l = append (l, v);
+  v = create_voiture();
+  l = append (l, v);
+  v = create_voiture();
+  l = append (l, v);
+
+  v_list* tmp = l;
+  for (int i = 0; i < length (l); i++)
+    {
+      printf ("id : %d -> pos : (%d,%d)\n", tmp->value->id, tmp->value->posx, tmp->value->posy);
+      tmp = tmp->nxt;
+    }
   
-  srand (time (NULL));
-  if (! bool)
-    {
-      if ( rand()%4 == 0)
-	spawn_voiture (l, v);
-    }
-  else
-    {
-      spawn_voiture (l, v);
-    }
-  affichage_map (map);
-  /*while(1)
-    {
-      affichage_map (map);
-      //while (compteur <= 1000000000) compteur++;
-      //compteur = 0;
-      sleep (1);
-      update (l, map);
-      system("clear");  //Nettoie le terminal
-      }*/
+  map_loading (l);
+	  
+  
+  /*
+     if (! bool)
+     {
+     if (rand ()%4 == 0)
+     spawn_voiture (l, v);
+     }
+     else
+     {
+     spawn_voiture (l, v);
+     }
+
+     while(1)
+     {
+     if (timer == 10)
+     spawn_tram(0);
+     if (timer == 20){
+     spawn_tram(1);
+     timer = 0;
+     map_loading (l);
+     //while (compteur <= 1000000000) compteur++;
+     //compteur = 0;
+     sleep (1);
+     update (l);
+     system("clear");
+     timer++;
+      
+     }*/
 }
 
 //Fait bouger les voitures, gère les pannes
-void update(v_list* l, char map[][61])
+void update(v_list* l)
 {
-  v_list* tmp = l;
+  v_list* buf = l;
+  voiture* tmp[length (l)];
 
   for (int i = 0; i < length (l); i++)
     {
-      map[tmp->value->posx][tmp->value->posy] = 'v';
-      tmp = tmp->nxt;
+      tmp[i] = buf->value;
+      buf = buf->nxt;
     }
 
-  tmp = l;
   for (int i = 0; i < length (l); i++)
     {
-      switch (tmp->value->direction)
+      switch (buf->value->direction)
 	{
 	case 'N':
-	  up (tmp->value);
+	  up (buf->value);
 	  break;
 	case 'S':
-	  down (tmp->value);
+	  down (buf->value);
 	  break;
 	case 'E':
-	  right (tmp->value);
+	  right (buf->value);
 	  break;
 	case 'O':
-	  left (tmp->value);
+	  left (buf->value);
 	  break;
 	}
-      tmp = tmp->nxt;
+      buf = buf->nxt;
+    }
+
+  for (int i = 0; i < length (l); i++)
+    {
+      for (int j = i; j < length (l); j++)
+	{
+	  if (tmp[i]->posx == tmp[j]->posy && tmp[i]->posy == tmp[j]->posy)
+	    destroy (l, tmp[i], tmp[j]);
+	}
     }
 }

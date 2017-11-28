@@ -50,6 +50,8 @@ char set_voiture (int);
 
 void init_position (voiture*);
 
+void destroy (v_list*, voiture*, voiture*);
+
 
 #endif
 

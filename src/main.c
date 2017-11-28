@@ -8,16 +8,14 @@
 
 
 int main()
-{
-  char map[NBCOL][NBLIN];
-  if (map_loading (map) < 0)
-    exit (-1);
-  
-  char c = menu ();
+{  
+  /*char c = menu ();
   if (c == 'f')
-    run (0, map);
+    run (0);
   else if (c == 'd')
-    run (1, map);  
+    run (1);*/
+
+   run (0);
   
   exit (1);
 }

@@ -3,6 +3,7 @@
  */
 #include "../headers/display.h"
 
+
 char menu() 
 {
   /* 
@@ -78,10 +79,10 @@ char menu()
   
 }
 
-int map_loading (char map[][61])
+int map_loading (v_list* l)
 {
   FILE* fp = NULL;
-  char actual_char; int x = 0, y = 0;
+  int actual_char; int x = 0; int y = 0;
   fp = fopen ("./doc/plan.txt", "r");
   if (fp == NULL)
     {
@@ -89,73 +90,64 @@ int map_loading (char map[][61])
       return -1;
     }
   else {
-    do
+    while (actual_char != EOF)
       {
-	actual_char = fgetc(fp); /* On lit le caractère */
-	if (actual_char != EOF)
-	  map[x][y] = actual_char;
+	if (check_pos (l, x, y) != NULL)
+	  {
+	    afficher_v();
+	    fseek (fp, 1, SEEK_CUR);
+	  }
+	else
+	  {
+	    actual_char = fgetc (fp);
+	    if (actual_char == EOF) break;
+	    /*if (actual_char == 'T') // Arbre
+	      {
+	      printf("🌴");
+	      }
+	      else if (actual_char == 'B') // Boite aux lettes
+	      {
+	      printf("📪");
+	      }
+	      else if (actual_char == 'e') // Caddie
+	      {
+	      printf("🛒");
+	      }
+	      else if (actual_char == 'p') // Parabole
+	      {
+	      printf("📡");
+	      }*/
+	    if (actual_char == 'w') // Eau
+	      {
+		couleur("46");
+		printf(" ");
+		couleur("0");
+	      }
+	    else if (actual_char == 'q')
+	      {
+		couleur("4");
+		printf(" ");
+		couleur("0");
+	      }
+	    else
+	      {
+		printf ("%c", actual_char);
+	      }
+	    /* On lit le caractère */
+	  }
 	x++;
-	if (x > 175)
+	if (x > 182)
 	  {
 	    x = 0;
 	    y++;
 	  }
+	
       }
-    while (actual_char != EOF);
   }
-  if (fclose (fp) == EOF)
+  if (fclose (fp) < 0)
     {
       perror ("Erreur lors de la fermeture du fichier : ");
       return -1;
     }
   return 0;
-}
-
-void affichage_map(char map[][61]) 
-{
-  /*
-   * Fonction d'affichage de la map
-   */
-  for (int j = 0; j < 61; j++)
-    {
-      for (int i = 0; i < 175; i++)
-	{
-	  if (map[i][j] == 'T') // Arbre
-            {
-	      printf("🌴");
-            }
-	  else if (map[i][j] == 'B') // Boite aux lettes
-            {
-	      printf("📪");
-            }
-	  else if (map[i][j] == 'e') // Caddie
-            {
-	      printf("🛒");
-	    }
-	  else if (map[i][j] == 'p') // Parabole
-            {
-	      printf("📡");
-            }
-	  else if (map[i][j] == 'w') // Eau
-            {
-	      couleur("46");
-	      printf(" ");
-	      couleur("0");
-            }
-	  else if (map[i][j] == 'q')
-            {
-	      couleur("4");
-	      printf(" ");
-	      couleur("0");
-            }
-	  else if (map[i][j] == 'v')
-	    {
-	      afficher_v();
-	    }
-	  else
-	    {
-	      printf ("%c", map[i][j]);
-	    }
-	}
-    }
 }
