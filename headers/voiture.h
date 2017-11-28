@@ -42,7 +42,7 @@ void afficher_v ();
 
 int length (v_list*);
 
-void spawn_voiture (v_list*, voiture*);
+v_list* spawn_voiture (v_list*);
 
 voiture* create_voiture ();
 

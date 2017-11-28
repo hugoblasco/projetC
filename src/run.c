@@ -40,16 +40,10 @@ void run(int bool)
 {
   //int compteur = 0;
   v_list* l = NULL;
-  voiture* v = NULL;
   //int timer = 0;
-  v = create_voiture();
-  l = append (l, v);
-  v = create_voiture();
-  l = append (l, v);
-  v = create_voiture();
-  l = append (l, v);
-  v = create_voiture();
-  l = append (l, v);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
 
   v_list* tmp = l;
   for (int i = 0; i < length (l); i++)

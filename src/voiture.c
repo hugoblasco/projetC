@@ -33,8 +33,8 @@ int random_number(int upper)
   /*
    * Retourne un entier aléatoire entre 0 et upper
    */
-  /*srand(time(NULL));
-  return (rand () % upper);*/
+  srand(time(NULL));
+  return (rand () % upper);
 }
 
 v_list* append (v_list* l, voiture* v)
@@ -120,10 +120,10 @@ int length (v_list* l)
   return i;
 }
 
-void spawn_voiture (v_list* l, voiture* v)
+v_list* spawn_voiture (v_list* l)
 {
-  v = create_voiture ();
-  l = append (l, v);
+  l = append (l, create_voiture());
+  return l;
 }
 
 voiture* create_voiture()
@@ -132,9 +132,8 @@ voiture* create_voiture()
    * Créé une struct voiture et la renvoie
    */
   voiture* v = malloc (sizeof (voiture));
-  srand(time(NULL));
   v->id = ++id;
-  v->from = set_voiture (rand ()%4); /*Assignation aléatoire de la provenance de la voiture*/
+  v->from = set_voiture (random_number (4)); /*Assignation aléatoire de la provenance de la voiture*/
   switch (v->from)
     {
     case 'N':
@@ -172,23 +171,23 @@ void init_position (voiture *v)
    */
   if(v->from == 'N')
     {
-      v->posx = 0;
+      v->posx = 137;
       v->posy = 0;
     }
   else if(v->from == 'E')
     {
-      v->posx = 1;
-      v->posy = 0;
+      v->posx = 174;
+      v->posy = 12;
     }
   else if(v->from == 'S')
     {
-      v->posx = 2;
-      v->posy = 0;
+      v->posx = 12;
+      v->posy = 60;
     }
   else if(v->from == 'O')
     {
-      v->posx = 3;
-      v->posy = 0;
+      v->posx = 1;
+      v->posy = 14;
     }
 }
 

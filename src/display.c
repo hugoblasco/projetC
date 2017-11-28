@@ -82,7 +82,8 @@ char menu()
 int map_loading (v_list* l)
 {
   FILE* fp = NULL;
-  int actual_char; int x = 0; int y = 0;
+  int* n;
+  int actual_char = 0, x = 0, y = 0, compteur = 0, a = 0, b = 0;
   fp = fopen ("./doc/plan.txt", "r");
   if (fp == NULL)
     {
@@ -90,7 +91,37 @@ int map_loading (v_list* l)
       return -1;
     }
   else {
-    while (actual_char != EOF)
+    
+    do /*Compte le nombre de retour chariot*/
+      {
+	actual_char = fgetc (fp);
+	if (actual_char == '\n')
+	  {
+	    compteur++;
+	  }
+      } while (actual_char != EOF);
+
+    actual_char = 0;
+    fseek (fp, 0, SEEK_SET);
+
+    n = malloc (compteur * sizeof(int)); /*alloue le tableau de la position des \n */
+ 
+    do /* case i -> taille la ligne i*/
+      {
+	actual_char = fgetc (fp);
+	if (actual_char == '\n')
+	  {
+	    n[b] = a -1;
+	    a = 0;
+	    b++;
+	  }
+	a++;
+      } while (actual_char != EOF); 
+
+    actual_char = 0;
+    fseek (fp, 0, SEEK_SET);
+    
+    do 
       {
 	if (check_pos (l, x, y) != NULL)
 	  {
@@ -99,24 +130,7 @@ int map_loading (v_list* l)
 	  }
 	else
 	  {
-	    actual_char = fgetc (fp);
-	    if (actual_char == EOF) break;
-	    /*if (actual_char == 'T') // Arbre
-	      {
-	      printf("🌴");
-	      }
-	      else if (actual_char == 'B') // Boite aux lettes
-	      {
-	      printf("📪");
-	      }
-	      else if (actual_char == 'e') // Caddie
-	      {
-	      printf("🛒");
-	      }
-	      else if (actual_char == 'p') // Parabole
-	      {
-	      printf("📡");
-	      }*/
+	    actual_char = fgetc (fp); 	    /* On lit le caractère */
 	    if (actual_char == 'w') // Eau
 	      {
 		couleur("46");
@@ -133,16 +147,14 @@ int map_loading (v_list* l)
 	      {
 		printf ("%c", actual_char);
 	      }
-	    /* On lit le caractère */
 	  }
 	x++;
-	if (x > 182)
+	if (x > n[y])
 	  {
 	    x = 0;
 	    y++;
 	  }
-	
-      }
+      } while (actual_char != EOF);
   }
   if (fclose (fp) < 0)
     {
