@@ -33,6 +33,7 @@ int random_number(int upper)
   /*
    * Retourne un entier aléatoire entre 0 et upper
    */
+  srand(time(NULL));
   return (rand () % upper);
 }
 

@@ -8,8 +8,7 @@
 
 
 int main()
-{
-  srand(time(NULL));
+{  
   /*char c = menu ();
   if (c == 'f')
     run (0);
