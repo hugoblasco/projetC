@@ -3,6 +3,8 @@
  */
 #include "../headers/display.h"
 
+ //essayer d'afficher l'emoji suivi d'un espace pour egler les problemes de décallages
+
 
 char menu() 
 {
@@ -148,6 +150,87 @@ int map_loading (v_list* l)
 		printf(" ");
 		couleur("0");
 	      }
+      else if (actual_char == 'i') 
+      {
+        printf("═");
+      }
+      else if (actual_char == 'F') 
+      {
+        printf("║");
+      }
+      else if (actual_char == 'l') 
+      {
+        printf("─");
+      }
+      else if (actual_char == 't') 
+      {
+        printf("╝");
+      }
+      else if (actual_char == 'R') 
+      {
+        printf("╦");
+      }
+      else if (actual_char == 'g') 
+      {
+        printf("╩");
+      }
+      else if (actual_char == 'K') 
+      {
+        printf("╔");
+      }
+      else if (actual_char == 'k') 
+      {
+        printf("╚");
+      }
+      else if (actual_char == 'u') 
+      {
+        printf("╝");
+      }
+      else if (actual_char == 'y') 
+      {
+        printf("╗");
+      }
+      else if (actual_char == 'j') 
+      {
+        printf("│");
+      }
+      else if (actual_char == 'X') 
+      {
+        printf("┼");
+      }
+      else if (actual_char == 'Y') 
+      {
+        printf("┤");
+      }
+      else if (actual_char == 'Z') 
+      {
+        printf("├");
+      }
+      else if (actual_char == 'z') 
+      {
+        printf("┐");
+      }
+      else if (actual_char == 'L') 
+      {
+        printf("└");
+      }
+      else if (actual_char == 'W') 
+      {
+        printf("┘");
+      }
+      else if (actual_char == 'Q') 
+      {
+        printf("┌");
+      }
+      else if (actual_char == 'h') 
+      {
+        printf("┴");
+      }
+      else if (actual_char == 'H') 
+      {
+        printf("┬");
+      }
+
 	    else
 	      {
 		printf ("%c", actual_char);

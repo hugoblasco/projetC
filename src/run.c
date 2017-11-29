@@ -39,19 +39,20 @@ void right(voiture *v) {
 void run(int bool)
 {
   v_list* l = NULL;
-  v_list* tmp = NULL;
-  int timer = 0;
+  printf("coucou");
+  //int timer = 0;
   l = spawn_voiture (l);
-  /*l = spawn_voiture (l);
-    l = spawn_voiture (l);*/
-
-  tmp = l;
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  printf("coucou");
+  /*v_list* tmp = l;
+  
   for (int i = 0; i < length (l); i++)
     {
       printf ("id : %d -> pos : (%d,%d)\n", tmp->value->id, tmp->value->posx, tmp->value->posy);
       tmp = tmp->nxt;
     }
-  
+  */
   map_loading (l);
 	  
   /*while(1)
