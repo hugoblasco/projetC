@@ -124,7 +124,7 @@ int length_v (v_list* l)
 v_list* spawn_voiture (v_list* l)
 {
   /*
-   * Crée une voiture aléatoirement et l'ajoute a la liste de voiture l
+   * Créé une voiture aléatoirement et l'ajoute a la liste de voiture l
    */
   l = append (l, create_voiture());
   return l;
@@ -224,7 +224,7 @@ feu* init_feuTri ()
 	case 1:
 	  tabf[i].posx = 135;
 	  tabf[i].posy = 9;
-	  tabf[i].etat = true;
+	  tabf[i].etat = false;
 	  break;
 	case 2:
 	  tabf[i].posx = 127;
@@ -239,7 +239,7 @@ feu* init_feuTri ()
 	case 4:
 	  tabf[i].posx = 105;
 	  tabf[i].posy = 16;
-	  tabf[i].etat = false;
+	  tabf[i].etat = true;
 	  break;
 	case 5:
 	  tabf[i].posx = 127;
@@ -254,12 +254,12 @@ feu* init_feuTri ()
 	case 7:
 	  tabf[i].posx = 97;
 	  tabf[i].posy = 35;
-	  tabf[i].etat = true;
+	  tabf[i].etat = false;
 	  break;
 	case 8:
 	  tabf[i].posx = 127;
 	  tabf[i].posy = 35;
-	  tabf[i].etat = false;
+	  tabf[i].etat = true;
 	  break;
 	}
     }
@@ -291,6 +291,14 @@ void afficher_f (feu* f)
       couleur("31");
       printf("■");
       couleur("0");
+    }
+}
+
+void change_etat_f (feu* f)
+{
+  for (int i = 0; i < 9; i++)
+    {
+      f[i].etat = ! f[i].etat;
     }
 }
 /*

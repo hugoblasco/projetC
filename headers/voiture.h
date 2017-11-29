@@ -67,6 +67,8 @@ void check_feu (feu*, int, int);
 
 void afficher_f (feu*);
 
+void change_etat_f (feu*);
+
 #endif
 
   

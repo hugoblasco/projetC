@@ -46,7 +46,7 @@ void run(bool danger, char map[][NBLIN])
   l = spawn_voiture (l);
   l = spawn_voiture (l);
   f = init_feuTri();
-
+  
   display_map (l, map, f);
   /*while(1)
     {
@@ -81,6 +81,9 @@ void update(v_list* l, int timer, feu* f)
       tmp[i] = buf->value;
       buf = buf->nxt;
     }
+
+  if (timer > 5)
+    change_etat_f (f);
 
   for (int i = 0; i < length_v (l); i++) /* On fait avancer les differentes voitures */
     {
