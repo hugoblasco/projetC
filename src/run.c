@@ -87,36 +87,12 @@ void update(v_list* l, int timer)
       switch (v->direction)
 	{
 	case 'N':
-	  up (v);
 	  break;
 	case 'S':
-	  a = rand ()%2;
-	  if (v->posx == 138 && v->posy == 1 && timer >= 5) //si la voiture est au feu vert
-	    down (v); // la voiture passe au feu vert
-	  else if (v->posx == 138 && v->posy == 1 && timer < 5) //si la voiture est au feu rouge
-	    {} //la voiture attend au feu
-	  else if (v->posx == 138 && v->posy == 10 && timer < 5) //si la voiture est au feu vert
-	    down (v); // la voiture passe au feu vert
-	  else if (v->posx == 138 && v->posy == 10 && timer >= 5) //si la voiture est au feu rouge
-	    {}  //la voiture attend au feu
-	  else if (v->posx == 148 && v->posy == 33 && timer >= 5) //si la voiture est au feu vert
-	    down (v); // la voiture passe au feu vert
-	  else if (v->posx == 148 && v->posy == 33 && timer < 5) //si la voiture est au feu rouge
-	    {} //la voiture attend au feu
-	  else if (v->posx == 130 && v->posy == 12 && a == 0)
-	    left (v);
-	  else if (v->posx == 130 && v->posy == 12 && a == 1) 
-	    down (v);
-	  else if (v->posx < 130 && v->posy == 12)
-	    left (v);
-	  else if (v->posx >= 130 && v->posy == 12) 
-	    down (v);
 	  break;
 	case 'E':
-	  right (v);
 	  break;
 	case 'O':
-	  left (v);
 	  break;
 	}
     }
