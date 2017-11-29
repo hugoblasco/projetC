@@ -40,18 +40,20 @@ void run(int bool)
 {
   //int compteur = 0;
   v_list* l = NULL;
+  printf("coucou");
   //int timer = 0;
   l = spawn_voiture (l);
   l = spawn_voiture (l);
   l = spawn_voiture (l);
-
+  printf("coucou");
   v_list* tmp = l;
+  /*
   for (int i = 0; i < length (l); i++)
     {
       printf ("id : %d -> pos : (%d,%d)\n", tmp->value->id, tmp->value->posx, tmp->value->posy);
       tmp = tmp->nxt;
     }
-  
+  */
   map_loading (l);
 	  
   
