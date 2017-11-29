@@ -83,6 +83,9 @@ char menu()
 
 int map_loading (char map[][NBLIN])
 {
+  /*
+   * Charge le plan dans le tableau map
+   */
   FILE* fp = NULL;
   int actual_char = 0, i = 0, j = 0;
   fp = fopen ("./doc/plan.txt", "r");
@@ -92,7 +95,6 @@ int map_loading (char map[][NBLIN])
       return -1;
     }
   else {
-    fseek (fp, 0, SEEK_SET);
     do 
       {
 	do{
@@ -129,101 +131,84 @@ void display_map (v_list* l, char map[][NBLIN])
 	    {
 	      afficher_v();
 	    }
-	  else if (map[i][j] == 'w') // Eau
-	    {
-	      couleur("46");
-	      printf(" ");
-	      couleur("0");
-	    }
-	  else if (map[i][j] == 'q')
-	    {
-	      couleur("4");
-	      printf(" ");
-	      couleur("0");
-	    }
-	  else if (map[i][j] == 'i') 
-	    {
-	      printf("═");
-	    }
-	  else if (map[i][j] == 'F') 
-	    {
-	      printf("║");
-	    }
-	  else if (map[i][j] == 'l') 
-	    {
-	      printf("─");
-	    }
-	  else if (map[i][j] == 't') 
-	    {
-	      printf("╝");
-	    }
-	  else if (map[i][j] == 'R') 
-	    {
-	      printf("╦");
-	    }
-	  else if (map[i][j] == 'g') 
-	    {
-	      printf("╩");
-	    }
-	  else if (map[i][j] == 'K') 
-	    {
-	      printf("╔");
-	    }
-	  else if (map[i][j] == 'k') 
-	    {
-	      printf("╚");
-	    }
-	  else if (map[i][j] == 'u') 
-	    {
-	      printf("╝");
-	    }
-	  else if (map[i][j] == 'y') 
-	    {
-	      printf("╗");
-	    }
-	  else if (map[i][j] == 'j') 
-	    {
-	      printf("│");
-	    }
-	  else if (map[i][j] == 'X') 
-	    {
-	      printf("┼");
-	    }
-	  else if (map[i][j] == 'Y') 
-	    {
-	      printf("┤");
-	    }
-	  else if (map[i][j] == 'Z') 
-	    {
-	      printf("├");
-	    }
-	  else if (map[i][j] == 'z') 
-	    {
-	      printf("┐");
-	    }
-	  else if (map[i][j] == 'L') 
-	    {
-	      printf("└");
-	    }
-	  else if (map[i][j] == 'W') 
-	    {
-	      printf("┘");
-	    }
-	  else if (map[i][j] == 'Q') 
-	    {
-	      printf("┌");
-	    }
-	  else if (map[i][j] == 'h') 
-	    {
-	      printf("┴");
-	    }
-	  else if (map[i][j] == 'H') 
-	    {
-	      printf("┬");
-	    }
 	  else
 	    {
-	      printf ("%c", map[i][j]);
+	      switch (map[i][j])
+		{
+		case 'w': // Eau
+		  couleur("46");
+		  printf(" ");
+		  couleur("0");
+		  break;
+		case 'q':
+		  couleur("4");
+		  printf(" ");
+		  couleur("0");
+		  break;
+		case 'i': 
+		  printf("═");
+		  break;
+		case 'F': 
+		  printf("║");
+		  break;
+		case 'l': 
+		  printf("─");
+		  break;
+		case 't': 
+		  printf("╝");
+		  break;
+		case 'R': 
+		  printf("╦");
+		  break;
+		case 'g': 
+		  printf("╩");
+		  break;
+		case 'K': 
+		  printf("╔");
+		  break;
+		case 'k': 
+		  printf("╚");
+		  break;
+		case 'u': 
+		  printf("╝");
+		  break;
+		case 'y': 
+		  printf("╗");
+		  break;
+		case 'j': 
+		  printf("│");
+		  break;
+		case 'X': 
+		  printf("┼");
+		  break;
+		case 'Y': 
+		  printf("┤");
+		  break;
+		case 'Z': 
+		  printf("├");
+		  break;
+		case 'z': 
+		  printf("┐");
+		  break;
+		case 'L': 
+		  printf("└");
+		  break;
+		case 'W': 
+		  printf("┘");
+		  break;
+		case 'Q': 
+		  printf("┌");
+		  break;
+		case 'h': 
+		  printf("┴");
+		  break;
+		case 'H':
+		  printf("┬");
+		  break;
+		default:
+		  printf ("%c", map[i][j]);
+		  break;
+		}
 	    }
 	}
     }
