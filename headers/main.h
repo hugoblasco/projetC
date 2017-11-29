@@ -4,7 +4,7 @@
 #include "../headers/run.h"
 
 //taille du tableau
-#define NBLIN 61
+#define NBLIN 62
 #define NBCOL 175
 
 #endif

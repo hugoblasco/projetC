@@ -102,7 +102,7 @@ int map_loading (char map[][NBLIN])
 	} while (i < NBCOL);
 	j++;
 	i = 0;
-      } while (actual_char != EOF);
+      } while (j < NBLIN);
   }
  
   if (fclose (fp) < 0)
@@ -122,112 +122,110 @@ void display_map (v_list* l, char map[][NBLIN])
 
   for (int j = 0; j < NBLIN; j++)
     {
-      if (j >= 1){
-	for (int i = 0; i < NBCOL; i++)
-	  {
-	  
-	    if (check_pos (l, i, j) != NULL)
-	      {
-		afficher_v();
-	      }
-	    if (map[i][j] == 'w') // Eau
-	      {
-		couleur("46");
-		printf(" ");
-		couleur("0");
-	      }
-	    else if (map[i][j] == 'q')
-	      {
-		couleur("4");
-		printf(" ");
-		couleur("0");
-	      }
-	    else if (map[i][j] == 'i') 
-	      {
-		printf("═");
-	      }
-	    else if (map[i][j] == 'F') 
-	      {
-		printf("║");
-	      }
-	    else if (map[i][j] == 'l') 
-	      {
-		printf("─");
-	      }
-	    else if (map[i][j] == 't') 
-	      {
-		printf("╝");
-	      }
-	    else if (map[i][j] == 'R') 
-	      {
-		printf("╦");
-	      }
-	    else if (map[i][j] == 'g') 
-	      {
-		printf("╩");
-	      }
-	    else if (map[i][j] == 'K') 
-	      {
-		printf("╔");
-	      }
-	    else if (map[i][j] == 'k') 
-	      {
-		printf("╚");
-	      }
-	    else if (map[i][j] == 'u') 
-	      {
-		printf("╝");
-	      }
-	    else if (map[i][j] == 'y') 
-	      {
-		printf("╗");
-	      }
-	    else if (map[i][j] == 'j') 
-	      {
-		printf("│");
-	      }
-	    else if (map[i][j] == 'X') 
-	      {
-		printf("┼");
-	      }
-	    else if (map[i][j] == 'Y') 
-	      {
-		printf("┤");
-	      }
-	    else if (map[i][j] == 'Z') 
-	      {
-		printf("├");
-	      }
-	    else if (map[i][j] == 'z') 
-	      {
-		printf("┐");
-	      }
-	    else if (map[i][j] == 'L') 
-	      {
-		printf("└");
-	      }
-	    else if (map[i][j] == 'W') 
-	      {
-		printf("┘");
-	      }
-	    else if (map[i][j] == 'Q') 
-	      {
-		printf("┌");
-	      }
-	    else if (map[i][j] == 'h') 
-	      {
-		printf("┴");
-	      }
-	    else if (map[i][j] == 'H') 
-	      {
-		printf("┬");
-	      }
-	    else
-	      {
-		printf ("%c", map[i][j]);
-	      }
-	  }
-      }
+      for (int i = 0; i < NBCOL; i++)
+	{
+	  if (map[i][j] == EOF){}
+	  else if (check_pos (l, i, j) != NULL)
+	    {
+	      afficher_v();
+	    }
+	  else if (map[i][j] == 'w') // Eau
+	    {
+	      couleur("46");
+	      printf(" ");
+	      couleur("0");
+	    }
+	  else if (map[i][j] == 'q')
+	    {
+	      couleur("4");
+	      printf(" ");
+	      couleur("0");
+	    }
+	  else if (map[i][j] == 'i') 
+	    {
+	      printf("═");
+	    }
+	  else if (map[i][j] == 'F') 
+	    {
+	      printf("║");
+	    }
+	  else if (map[i][j] == 'l') 
+	    {
+	      printf("─");
+	    }
+	  else if (map[i][j] == 't') 
+	    {
+	      printf("╝");
+	    }
+	  else if (map[i][j] == 'R') 
+	    {
+	      printf("╦");
+	    }
+	  else if (map[i][j] == 'g') 
+	    {
+	      printf("╩");
+	    }
+	  else if (map[i][j] == 'K') 
+	    {
+	      printf("╔");
+	    }
+	  else if (map[i][j] == 'k') 
+	    {
+	      printf("╚");
+	    }
+	  else if (map[i][j] == 'u') 
+	    {
+	      printf("╝");
+	    }
+	  else if (map[i][j] == 'y') 
+	    {
+	      printf("╗");
+	    }
+	  else if (map[i][j] == 'j') 
+	    {
+	      printf("│");
+	    }
+	  else if (map[i][j] == 'X') 
+	    {
+	      printf("┼");
+	    }
+	  else if (map[i][j] == 'Y') 
+	    {
+	      printf("┤");
+	    }
+	  else if (map[i][j] == 'Z') 
+	    {
+	      printf("├");
+	    }
+	  else if (map[i][j] == 'z') 
+	    {
+	      printf("┐");
+	    }
+	  else if (map[i][j] == 'L') 
+	    {
+	      printf("└");
+	    }
+	  else if (map[i][j] == 'W') 
+	    {
+	      printf("┘");
+	    }
+	  else if (map[i][j] == 'Q') 
+	    {
+	      printf("┌");
+	    }
+	  else if (map[i][j] == 'h') 
+	    {
+	      printf("┴");
+	    }
+	  else if (map[i][j] == 'H') 
+	    {
+	      printf("┬");
+	    }
+	  else
+	    {
+	      printf ("%c", map[i][j]);
+	    }
+	}
     }
   printf("\n");
 }

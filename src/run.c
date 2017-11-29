@@ -39,23 +39,14 @@ void right(voiture *v) {
 void run(int bool, char map[][NBLIN])
 {
   v_list* l = NULL;
-  map_loading (map);
-  display_map (l, map);
+  int timer = 0;
   
-  // printf("coucou");
-  //int timer = 0;
-  /*l = spawn_voiture (l);
   l = spawn_voiture (l);
-  l = spawn_voiture (l);*/
-  //printf("coucou");
-  /*v_list* tmp = l;
-  
-  for (int i = 0; i < length (l); i++)
-    {
-      printf ("id : %d -> pos : (%d,%d)\n", tmp->value->id, tmp->value->posx, tmp->value->posy);
-      tmp = tmp->nxt;
-    }
-  */	  
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+
+
+  display_map (l, map);
   /*while(1)
     {
       if (! bool)
@@ -67,13 +58,13 @@ void run(int bool, char map[][NBLIN])
 	{
 	  spawn_voiture (l);
 	}
-      map_loading (l);
+      display_map (l, map);
       sleep (1);
-      update (l);
+      update (l, timer);
       system("clear");
       timer++;
       
-    }*/
+      }*/
 }
 
 //Fait bouger les voitures, gère les pannes

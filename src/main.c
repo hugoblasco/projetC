@@ -12,6 +12,7 @@ int main()
 
   char map[NBCOL][NBLIN];
   srand(time(NULL));
+  map_loading (map);
   /*char c = menu ();
   if (c == 'f')
     run (0, map);

@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NBLIN 61
+#define NBLIN 62
 #define NBCOL 175
 
 void bonjour ();
