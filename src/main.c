@@ -9,7 +9,6 @@
 
 int main()
 {
-
   char map[NBCOL][NBLIN];
   srand(time(NULL));
   map_loading (map);

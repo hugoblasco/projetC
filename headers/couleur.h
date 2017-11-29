@@ -5,9 +5,6 @@
 #ifndef COULEUR_H
 #define COULEUR_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
 // Sélection de couleurs
 #define couleur(param) printf("\033[%sm",param)
 /*   param devant être un const char *, vide (identique à "0") ou formé

@@ -6,7 +6,7 @@
 
 #include "../headers/voiture.h"
 
-static int id = 0;
+static int ident = 1;
 
 voiture* check_pos (v_list* l, int x, int y)
 {
@@ -14,8 +14,6 @@ voiture* check_pos (v_list* l, int x, int y)
    * Verifie s'il existe une voiture dans la liste à la position x y 
    * et la renvoie si elle existe.
    */
-  if (l == NULL)
-    return NULL;
   
   v_list* tmp = l;
   while (tmp != NULL)
@@ -27,6 +25,17 @@ voiture* check_pos (v_list* l, int x, int y)
       else tmp = tmp->nxt;
     }
   return NULL;
+}
+
+void print (v_list* l)
+{
+  v_list* tmp = l;
+  while (tmp != NULL)
+    {
+      printf(" %d -> \n", tmp->value->id);
+      tmp = tmp->nxt;
+    }
+  printf("\n");
 }
 
 void up(voiture *v) {
@@ -77,6 +86,7 @@ v_list* append (v_list* l, voiture* v)
       while (tmp->nxt != NULL)
 	tmp = tmp->nxt;
 
+      
       tmp->nxt = malloc (sizeof (v_list));
       tmp->nxt->value = v;
     }
@@ -160,7 +170,8 @@ voiture* create_voiture()
    * Créé une struct voiture et la renvoie
    */
   voiture* v = malloc (sizeof (voiture));
-  v->id = ++id;
+  v->id = ident;
+  ident++;
   v->from = set_voiture (random_number (4)); /*Assignation aléatoire de la provenance de la voiture*/
   switch (v->from)
     {
@@ -217,6 +228,22 @@ void init_position (voiture *v)
       v->posx = 0;
       v->posy = 15;
     }
+}
+
+void free_all (v_list* l, feu* f)
+{
+  v_list* tmp = l;
+
+  while (l != NULL)
+    {
+      tmp = l->nxt;
+      free (l->value);
+      free (l);
+      l = tmp;
+    }
+
+  free (f);
+  
 }
 
 void destroy (v_list* l, voiture* x, voiture* y)

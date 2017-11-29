@@ -19,20 +19,29 @@ void run(bool danger, char map[][NBLIN])
   int timer = 0;
   
   l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
   f = init_feuTri();
+
+  print (l);
   
-  display_map (l, map, f);
-  while(1)
+  //display_map (l, map, f);
+
+  /*while(1)
     {
-      /*if (danger)
+      if (danger)
 	{
-	spawn_voiture (l);
+	  l = spawn_voiture (l);
 	}
-	else
+      else
 	{
-	if (rand ()%4 == 0)
-	spawn_voiture (l);
-	}*/
+	  if (rand ()%4 == 0)
+	    l = spawn_voiture (l);
+	}
+      printf("SALUT");
       display_map (l, map, f);
       sleep (1);
       update (l, timer, f);
@@ -41,7 +50,8 @@ void run(bool danger, char map[][NBLIN])
       if (timer > 5)
 	timer = 0;
       
-    }
+	}*/
+  free_all(l, f);
 }
 
 //Fait bouger les voitures, gère les pannes

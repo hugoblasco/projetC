@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <fcntl.h>
 
 typedef struct voiture
 {
@@ -41,6 +42,8 @@ typedef struct feuTri
 
 voiture* check_pos (v_list*, int, int);
 
+void print (v_list*);
+
 void up (voiture*);
 
 void down (voiture*);
@@ -66,6 +69,8 @@ voiture* create_voiture ();
 char set_voiture (int);
 
 void init_position (voiture*);
+
+void free_all (v_list*, feu*);
 
 void destroy (v_list*, voiture*, voiture*);
 
