@@ -22,6 +22,7 @@ typedef struct voiture
   char type; /* type du vehicule : 'v' (voiture), 'c' (camion) */ 
   char custom[30]; /* contient le véhicule customisé */
   char etat; /* actif ou inactif */
+  int is_out; /* 0 quand la voiture est sur la map, 1 quand elle sort de la map */
 } voiture;
 
 typedef struct v_list
