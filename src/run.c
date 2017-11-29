@@ -12,50 +12,7 @@ void bonjour()
   printf("coucou");
 }
 
-<<<<<<< HEAD
-void up(voiture *v) {
-  if(v->posy > 0) {
-    v->posy = v->posy-1;
-  }
-  else {
-    //on passe la variable is_out à 1 pour indiquer que la voiture sort de la map
-    v->is_out = 1;
-  }
-}
-
-void down(voiture *v) {
-  if(v->posy < 61) {
-    v->posy = v->posy+1;
-  }
-  else {
-    //on passe la variable is_out à 1 pour indiquer que la voiture sort de la map
-    v->is_out = 1;
-  }
-}
-
-void left(voiture *v) {
-  if(v->posx > 0) {
-    v->posy = v->posy-1;
-  }
-  else {
-    //on passe la variable is_out à 1 pour indiquer que la voiture sort de la map
-    v->is_out = 1;
-  }
-}
-
-void right(voiture *v) {
-  if(v->posx < 174) {
-    v->posy = v->posy+1;
-  }
-  else {
-    //on passe la variable is_out à 1 pour indiquer que la voiture sort de la map
-    v->is_out = 1;
-  }
-}
-
-
 void run(bool danger, char map[][NBLIN])
-
 {
   v_list* l = NULL;
   feu* f = NULL;
@@ -75,27 +32,27 @@ void run(bool danger, char map[][NBLIN])
 
   /*display_map (l, map, f);
 
-  while(1)
+    while(1)
     {
-      if (danger)
-	{
-	  l = spawn_voiture (l);
-	}
-      else
-	{
-	  if (rand ()%4 == 0)
-	    l = spawn_voiture (l);
-	}
-      printf("SALUT");
-      display_map (l, map, f);
-      sleep (1);
-      update (l, timer, f);
-      system("clear");
-      timer++;
-      if (timer > 5)
-	timer = 0;
+    if (danger)
+    {
+    l = spawn_voiture (l);
+    }
+    else
+    {
+    if (rand ()%4 == 0)
+    l = spawn_voiture (l);
+    }
+    printf("SALUT");
+    display_map (l, map, f);
+    sleep (1);
+    update (l, timer, f);
+    system("clear");
+    timer++;
+    if (timer > 5)
+    timer = 0;
       
-	}*/
+    }*/
   free_all(l, f);
 }
 
