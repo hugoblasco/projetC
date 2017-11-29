@@ -12,30 +12,6 @@ void bonjour()
   printf("coucou");
 }
 
-void up(voiture *v) {
-  if(v->posy > 0) {
-    v->posy = v->posy-1;
-  }
-}
-
-void down(voiture *v) {
-  if(v->posy < 61) {
-    v->posy = v->posy+1;
-  }
-}
-
-void left(voiture *v) {
-  if(v->posx > 0) {
-    v->posy = v->posy-1;
-  }
-}
-
-void right(voiture *v) {
-  if(v->posx < 175) {
-    v->posy = v->posy+1;
-  }
-}
-
 void run(bool danger, char map[][NBLIN])
 {
   v_list* l = NULL;
@@ -43,29 +19,29 @@ void run(bool danger, char map[][NBLIN])
   int timer = 0;
   
   l = spawn_voiture (l);
-  l = spawn_voiture (l);
-  l = spawn_voiture (l);
   f = init_feuTri();
   
   display_map (l, map, f);
-  /*while(1)
+  while(1)
     {
-      if (! bool)
+      /*if (danger)
 	{
-	  if (rand ()%4 == 0)
-	    spawn_voiture (l);
+	spawn_voiture (l);
 	}
-      else
+	else
 	{
-	  spawn_voiture (l);
-	}
-      display_map (l, map);
+	if (rand ()%4 == 0)
+	spawn_voiture (l);
+	}*/
+      display_map (l, map, f);
       sleep (1);
       update (l, timer, f);
       system("clear");
       timer++;
+      if (timer > 5)
+	timer = 0;
       
-      }*/
+    }
 }
 
 //Fait bouger les voitures, gère les pannes
@@ -82,7 +58,7 @@ void update(v_list* l, int timer, feu* f)
       buf = buf->nxt;
     }
 
-  if (timer > 5)
+  if (timer == 5)
     change_etat_f (f);
 
   for (int i = 0; i < length_v (l); i++) /* On fait avancer les differentes voitures */

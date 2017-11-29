@@ -29,6 +29,30 @@ voiture* check_pos (v_list* l, int x, int y)
   return NULL;
 }
 
+void up(voiture *v) {
+  if(v->posy > 0) {
+    v->posy = v->posy-1;
+  }
+}
+
+void down(voiture *v) {
+  if(v->posy < 61) {
+    v->posy = v->posy+1;
+  }
+}
+
+void left(voiture *v) {
+  if(v->posx > 0) {
+    v->posy = v->posy-1;
+  }
+}
+
+void right(voiture *v) {
+  if(v->posx < 175) {
+    v->posy = v->posy+1;
+  }
+}
+
 int random_number(int upper)
 {
   /*
@@ -175,23 +199,23 @@ void init_position (voiture *v)
    */
   if(v->from == 'N')
     {
-      v->posx = 131;
-      v->posy = 0;
+      v->posx = 129;
+      v->posy = 1;
     }
   else if(v->from == 'E')
     {
-      v->posx = 174;
-      v->posy = 12;
+      v->posx = 173;
+      v->posy = 13;
     }
   else if(v->from == 'S')
     {
-      v->posx = 12;
-      v->posy = 60;
+      v->posx = 9;
+      v->posy = 61;
     }
   else if(v->from == 'O')
     {
-      v->posx = 1;
-      v->posy = 14;
+      v->posx = 0;
+      v->posy = 15;
     }
 }
 

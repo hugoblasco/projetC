@@ -41,6 +41,14 @@ typedef struct feuTri
 
 voiture* check_pos (v_list*, int, int);
 
+void up (voiture*);
+
+void down (voiture*);
+
+void left (voiture*);
+
+void right (voiture*);
+
 int random_number (int);
 
 v_list* append (v_list*, voiture*);
