@@ -2,7 +2,7 @@
 #define DISPLAY_H
 
 #define NBLIN 62
-#define NBCOL 176
+#define NBCOL 175
 
 #include <stdio.h>
 #include <stdlib.h>

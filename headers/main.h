@@ -5,6 +5,6 @@
 
 //taille du tableau
 #define NBLIN 62
-#define NBCOL 176
+#define NBCOL 175
 
 #endif
