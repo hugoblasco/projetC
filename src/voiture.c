@@ -1,6 +1,7 @@
 /** 
  * Gestion des véhicules
- * une liste doublement chainée qui contient tous les véhicules (méthode ajoutliste, retirerliste...)
+ * une liste chainée qui contient tous les véhicules (méthode ajoutliste, 
+ *  retirerliste...)
  */
 
 #include "../headers/voiture.h"
@@ -58,7 +59,6 @@ v_list* append (v_list* l, voiture* v)
   
   return l;
 }
-
 
 v_list* remove_v (v_list* l, voiture* v)
 {
@@ -170,7 +170,7 @@ void init_position (voiture *v)
    */
   if(v->from == 'N')
     {
-      v->posx = 137;
+      v->posx = 131;
       v->posy = 0;
     }
   else if(v->from == 'E')

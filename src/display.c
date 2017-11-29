@@ -87,7 +87,7 @@ int map_loading (char map[][NBLIN])
    * Charge le plan dans le tableau map
    */
   FILE* fp = NULL;
-  int actual_char = 0, i = 0, j = 0;
+  int actual_char = 0;
   fp = fopen ("./doc/plan.txt", "r");
   if (fp == NULL)
     {
@@ -95,18 +95,15 @@ int map_loading (char map[][NBLIN])
       return -1;
     }
   else {
-    do 
+    for (int j = 1; j < NBLIN; j++)
       {
-	do{
-	  actual_char = fgetc (fp); 	    /* On lit le caractère */
-	  map[i][j] = actual_char;
-	  i++;
-	} while (i < NBCOL);
-	j++;
-	i = 0;
-      } while (j < NBLIN);
+	for (int i = 0; i < NBCOL; i++)
+	  {
+	    actual_char = fgetc(fp);
+	    map[i][j] = actual_char;
+	  }
+      }
   }
- 
   if (fclose (fp) < 0)
     {
       perror ("Erreur lors de la fermeture du fichier : ");
@@ -122,14 +119,13 @@ void display_map (v_list* l, char map[][NBLIN])
    * Affiche la carte stockée dans le tableau map
    */
 
-  for (int j = 0; j < NBLIN; j++)
+  for (int j = 1; j < NBLIN; j++)
     {
       for (int i = 0; i < NBCOL; i++)
 	{
-	  if (map[i][j] == EOF){}
-	  else if (check_pos (l, i, j) != NULL)
+	  if (check_pos (l, i, j) != NULL)
 	    {
-	      afficher_v();
+	      afficher_v ();
 	    }
 	  else
 	    {
