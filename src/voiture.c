@@ -99,11 +99,13 @@ v_list* remove_v (v_list* l, voiture* v)
 
 void afficher_v ()
 {
-  /*printf("🚘");*/
+  /*
+   * Affiche le caractère "V" représentant une voiture dans l'entrée standard
+   */
   printf ("V");
 }
 
-int length (v_list* l)
+int length_v (v_list* l)
 {
   /*
    * Retourne la taille de la liste l en entier
@@ -121,6 +123,9 @@ int length (v_list* l)
 
 v_list* spawn_voiture (v_list* l)
 {
+  /*
+   * Crée une voiture aléatoirement et l'ajoute a la liste de voiture l
+   */
   l = append (l, create_voiture());
   return l;
 }
@@ -192,8 +197,101 @@ void init_position (voiture *v)
 
 void destroy (v_list* l, voiture* x, voiture* y)
 {
+  /*
+   * Supprime de la liste l les voitures ayant participé à un accident
+   */
   l = remove_v (l, x);
   l = remove_v (l, y);
+}
+
+feu* init_feuTri ()
+{
+  /*
+   * Initialise la liste f de feu tricolore
+   */
+  int n = 9; /* nombre de feu tricolore sur la carte */
+  feu* tabf = malloc (n * sizeof (feu));
+
+  for (int i = 0; i < n; i++)
+    {
+      switch (i)
+	{
+	case 0:
+	  tabf[i].posx = 127;
+	  tabf[i].posy = 3;
+	  tabf[i].etat = false;
+	  break;
+	case 1:
+	  tabf[i].posx = 135;
+	  tabf[i].posy = 9;
+	  tabf[i].etat = true;
+	  break;
+	case 2:
+	  tabf[i].posx = 127;
+	  tabf[i].posy = 12;
+	  tabf[i].etat = false;
+	  break;
+	case 3:
+	  tabf[i].posx = 135;
+	  tabf[i].posy = 12;
+	  tabf[i].etat = true;
+	  break;
+	case 4:
+	  tabf[i].posx = 105;
+	  tabf[i].posy = 16;
+	  tabf[i].etat = false;
+	  break;
+	case 5:
+	  tabf[i].posx = 127;
+	  tabf[i].posy = 16;
+	  tabf[i].etat = true;
+	  break;
+	case 6:
+	  tabf[i].posx = 135;
+	  tabf[i].posy = 16;
+	  tabf[i].etat = false;
+	  break;
+	case 7:
+	  tabf[i].posx = 97;
+	  tabf[i].posy = 35;
+	  tabf[i].etat = true;
+	  break;
+	case 8:
+	  tabf[i].posx = 127;
+	  tabf[i].posy = 35;
+	  tabf[i].etat = false;
+	  break;
+	}
+    }
+
+  return tabf;
+}
+
+void check_feu (feu* f, int x, int y)
+{
+  for (int i = 0; i < 9; i++)
+    {
+      if (f[i].posx == x && f[i].posy == y)
+	{
+	  afficher_f(&f[i]);
+	}
+    }
+}
+
+void afficher_f (feu* f)
+{
+  if (f->etat)
+    {
+      couleur("32");
+      printf("■");
+      couleur("0");
+    }
+  else
+    {
+      couleur("31");
+      printf("■");
+      couleur("0");
+    }
 }
 /*
 void spawn_tram (int i)

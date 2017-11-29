@@ -113,7 +113,7 @@ int map_loading (char map[][NBLIN])
 }
 
 
-void display_map (v_list* l, char map[][NBLIN])
+void display_map (v_list* l, char map[][NBLIN], feu* f)
 {
   /*
    * Affiche la carte stockée dans le tableau map
@@ -200,6 +200,9 @@ void display_map (v_list* l, char map[][NBLIN])
 		  break;
 		case 'H':
 		  printf("┬");
+		  break;
+		case 'f':
+		  check_feu (f, i, j);
 		  break;
 		default:
 		  printf ("%c", map[i][j]);

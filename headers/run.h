@@ -14,7 +14,7 @@
 
 void bonjour ();
 
-void run (int bool, char[][NBLIN]);
+void run (bool, char[][NBLIN]);
 
 void up (voiture*);
 
@@ -24,6 +24,6 @@ void left (voiture*);
 
 void right (voiture*);
 
-void update (v_list*, int);
+void update (v_list*, int, feu*);
 
 #endif

@@ -36,17 +36,18 @@ void right(voiture *v) {
   }
 }
 
-void run(int bool, char map[][NBLIN])
+void run(bool danger, char map[][NBLIN])
 {
   v_list* l = NULL;
+  feu* f = NULL;
   int timer = 0;
   
   l = spawn_voiture (l);
   l = spawn_voiture (l);
   l = spawn_voiture (l);
+  f = init_feuTri();
 
-
-  display_map (l, map);
+  display_map (l, map, f);
   /*while(1)
     {
       if (! bool)
@@ -60,7 +61,7 @@ void run(int bool, char map[][NBLIN])
 	}
       display_map (l, map);
       sleep (1);
-      update (l, timer);
+      update (l, timer, f);
       system("clear");
       timer++;
       
@@ -68,20 +69,20 @@ void run(int bool, char map[][NBLIN])
 }
 
 //Fait bouger les voitures, gère les pannes
-void update(v_list* l, int timer)
+void update(v_list* l, int timer, feu* f)
 {
   v_list* buf = l; /* liste des voitures*/
-  voiture* tmp[length (l)]; /* tableau de toutes les voitures*/
+  voiture* tmp[length_v (l)]; /* tableau de toutes les voitures*/
   voiture* v = NULL;
   int a = 0;
 
-  for (int i = 0; i < length (l); i++) /* Remplit le tableau de voiture */
+  for (int i = 0; i < length_v (l); i++) /* Remplit le tableau de voiture */
     {
       tmp[i] = buf->value;
       buf = buf->nxt;
     }
 
-  for (int i = 0; i < length (l); i++) /* On fait avancer les differentes voitures */
+  for (int i = 0; i < length_v (l); i++) /* On fait avancer les differentes voitures */
     {
       v = tmp[i];
       switch (v->direction)
