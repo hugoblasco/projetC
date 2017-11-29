@@ -20,6 +20,6 @@ void left (voiture*);
 
 void right (voiture*);
 
-void update (v_list*);
+void update (v_list*, int);
 
 #endif

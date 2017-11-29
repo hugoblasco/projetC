@@ -38,14 +38,14 @@ void right(voiture *v) {
 
 void run(int bool)
 {
-  //int compteur = 0;
   v_list* l = NULL;
-  //int timer = 0;
+  v_list* tmp = NULL;
+  int timer = 0;
   l = spawn_voiture (l);
-  l = spawn_voiture (l);
-  l = spawn_voiture (l);
+  /*l = spawn_voiture (l);
+    l = spawn_voiture (l);*/
 
-  v_list* tmp = l;
+  tmp = l;
   for (int i = 0; i < length (l); i++)
     {
       printf ("id : %d -> pos : (%d,%d)\n", tmp->value->id, tmp->value->posx, tmp->value->posy);
@@ -54,74 +54,77 @@ void run(int bool)
   
   map_loading (l);
 	  
-  
-  /*
-     if (! bool)
-     {
-     if (rand ()%4 == 0)
-     spawn_voiture (l, v);
-     }
-     else
-     {
-     spawn_voiture (l, v);
-     }
-
-     while(1)
-     {
-     if (timer == 10)
-     spawn_tram(0);
-     if (timer == 20){
-     spawn_tram(1);
-     timer = 0;
-     map_loading (l);
-     //while (compteur <= 1000000000) compteur++;
-     //compteur = 0;
-     sleep (1);
-     update (l);
-     system("clear");
-     timer++;
+  /*while(1)
+    {
+      /*if (! bool)
+	{
+	  if (rand ()%4 == 0)
+	    spawn_voiture (l);
+	}
+      else
+	{
+	  spawn_voiture (l);
+	}
+      map_loading (l);
+      sleep (1);
+      update (l);
+      system("clear");
+      timer++;
       
-     }*/
+    }*/
 }
 
 //Fait bouger les voitures, gère les pannes
-void update(v_list* l)
+void update(v_list* l, int timer)
 {
-  v_list* buf = l;
-  voiture* tmp[length (l)];
+  v_list* buf = l; /* liste des voitures*/
+  voiture* tmp[length (l)]; /* tableau de toutes les voitures*/
+  voiture* v = NULL;
+  int a = 0;
 
-  for (int i = 0; i < length (l); i++)
+  for (int i = 0; i < length (l); i++) /* Remplit le tableau de voiture */
     {
       tmp[i] = buf->value;
       buf = buf->nxt;
     }
 
-  for (int i = 0; i < length (l); i++)
+  for (int i = 0; i < length (l); i++) /* On fait avancer les differentes voitures */
     {
-      switch (buf->value->direction)
+      v = tmp[i];
+      switch (v->direction)
 	{
 	case 'N':
-	  up (buf->value);
+	  up (v);
 	  break;
 	case 'S':
-	  down (buf->value);
+	  a = rand ()%2;
+	  if (v->posx == 138 && v->posy == 1 && timer >= 5) //si la voiture est au feu vert
+	    down (v); // la voiture passe au feu vert
+	  else if (v->posx == 138 && v->posy == 1 && timer < 5) //si la voiture est au feu rouge
+	    {} //la voiture attend au feu
+	  else if (v->posx == 138 && v->posy == 10 && timer < 5) //si la voiture est au feu vert
+	    down (v); // la voiture passe au feu vert
+	  else if (v->posx == 138 && v->posy == 10 && timer >= 5) //si la voiture est au feu rouge
+	    {}  //la voiture attend au feu
+	  else if (v->posx == 148 && v->posy == 33 && timer >= 5) //si la voiture est au feu vert
+	    down (v); // la voiture passe au feu vert
+	  else if (v->posx == 148 && v->posy == 33 && timer < 5) //si la voiture est au feu rouge
+	    {} //la voiture attend au feu
+	  else if (v->posx == 130 && v->posy == 12 && a == 0)
+	    left (v);
+	  else if (v->posx == 130 && v->posy == 12 && a == 1) 
+	    down (v);
+	  else if (v->posx < 130 && v->posy == 12)
+	    left (v);
+	  else if (v->posx >= 130 && v->posy == 12) 
+	    down (v);
 	  break;
 	case 'E':
-	  right (buf->value);
+	  right (v);
 	  break;
 	case 'O':
-	  left (buf->value);
+	  left (v);
 	  break;
-	}
-      buf = buf->nxt;
-    }
-
-  for (int i = 0; i < length (l); i++)
-    {
-      for (int j = i; j < length (l); j++)
-	{
-	  if (tmp[i]->posx == tmp[j]->posy && tmp[i]->posy == tmp[j]->posy)
-	    destroy (l, tmp[i], tmp[j]);
 	}
     }
 }

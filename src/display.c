@@ -123,7 +123,12 @@ int map_loading (v_list* l)
     
     do 
       {
-	if (check_pos (l, x, y) != NULL)
+	/*if (check_pos (l, x, y) != NULL)
+	  {
+	    afficher_v();
+	    fseek (fp, 1, SEEK_CUR);
+	    }*/
+	if (x == 7  && y == 12)
 	  {
 	    afficher_v();
 	    fseek (fp, 1, SEEK_CUR);
