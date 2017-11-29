@@ -12,6 +12,8 @@
 
 char menu ();
 
-int map_loading (v_list* l);
+int map_loading (char[][NBLIN]);
+
+void display_map (v_list*, char[][NBLIN]);
 
 #endif

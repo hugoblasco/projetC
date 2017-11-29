@@ -8,9 +8,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define NBLIN 61
+#define NBCOL 175
+
 void bonjour ();
 
-void run (int bool);
+void run (int bool, char[][NBLIN]);
 
 void up (voiture*);
 

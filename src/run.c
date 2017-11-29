@@ -36,15 +36,18 @@ void right(voiture *v) {
   }
 }
 
-void run(int bool)
+void run(int bool, char map[][NBLIN])
 {
   v_list* l = NULL;
-  printf("coucou");
+  map_loading (map);
+  display_map (l, map);
+  
+  // printf("coucou");
   //int timer = 0;
+  /*l = spawn_voiture (l);
   l = spawn_voiture (l);
-  l = spawn_voiture (l);
-  l = spawn_voiture (l);
-  printf("coucou");
+  l = spawn_voiture (l);*/
+  //printf("coucou");
   /*v_list* tmp = l;
   
   for (int i = 0; i < length (l); i++)
@@ -52,12 +55,10 @@ void run(int bool)
       printf ("id : %d -> pos : (%d,%d)\n", tmp->value->id, tmp->value->posx, tmp->value->posy);
       tmp = tmp->nxt;
     }
-  */
-  map_loading (l);
-	  
+  */	  
   /*while(1)
     {
-      /*if (! bool)
+      if (! bool)
 	{
 	  if (rand ()%4 == 0)
 	    spawn_voiture (l);

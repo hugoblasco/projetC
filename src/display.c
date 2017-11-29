@@ -3,7 +3,7 @@
  */
 #include "../headers/display.h"
 
- //essayer d'afficher l'emoji suivi d'un espace pour egler les problemes de décallages
+//essayer d'afficher l'emoji suivi d'un espace pour egler les problemes de décallages
 
 
 char menu() 
@@ -81,11 +81,10 @@ char menu()
   
 }
 
-int map_loading (v_list* l)
+int map_loading (char map[][NBLIN])
 {
   FILE* fp = NULL;
-  int* n;
-  int actual_char = 0, x = 0, y = 0, compteur = 0, a = 0, b = 0;
+  int actual_char = 0, i = 0, j = 0;
   fp = fopen ("./doc/plan.txt", "r");
   if (fp == NULL)
     {
@@ -93,161 +92,142 @@ int map_loading (v_list* l)
       return -1;
     }
   else {
-    
-    do /*Compte le nombre de retour chariot*/
-      {
-	actual_char = fgetc (fp);
-	if (actual_char == '\n')
-	  {
-	    compteur++;
-	  }
-      } while (actual_char != EOF);
-
-    actual_char = 0;
     fseek (fp, 0, SEEK_SET);
-
-    n = malloc (compteur * sizeof(int)); /*alloue le tableau de la position des \n */
- 
-    do /* case i -> taille la ligne i*/
-      {
-	actual_char = fgetc (fp);
-	if (actual_char == '\n')
-	  {
-	    n[b] = a -1;
-	    a = 0;
-	    b++;
-	  }
-	a++;
-      } while (actual_char != EOF); 
-
-    actual_char = 0;
-    fseek (fp, 0, SEEK_SET);
-    
     do 
       {
-	/*if (check_pos (l, x, y) != NULL)
-	  {
-	    afficher_v();
-	    fseek (fp, 1, SEEK_CUR);
-	    }*/
-	if (x == 7  && y == 12)
-	  {
-	    afficher_v();
-	    fseek (fp, 1, SEEK_CUR);
-	  }
-	else
-	  {
-	    actual_char = fgetc (fp); 	    /* On lit le caractère */
-	    if (actual_char == 'w') // Eau
-	      {
-		couleur("46");
-		printf(" ");
-		couleur("0");
-	      }
-	    else if (actual_char == 'q')
-	      {
-		couleur("4");
-		printf(" ");
-		couleur("0");
-	      }
-      else if (actual_char == 'i') 
-      {
-        printf("═");
-      }
-      else if (actual_char == 'F') 
-      {
-        printf("║");
-      }
-      else if (actual_char == 'l') 
-      {
-        printf("─");
-      }
-      else if (actual_char == 't') 
-      {
-        printf("╝");
-      }
-      else if (actual_char == 'R') 
-      {
-        printf("╦");
-      }
-      else if (actual_char == 'g') 
-      {
-        printf("╩");
-      }
-      else if (actual_char == 'K') 
-      {
-        printf("╔");
-      }
-      else if (actual_char == 'k') 
-      {
-        printf("╚");
-      }
-      else if (actual_char == 'u') 
-      {
-        printf("╝");
-      }
-      else if (actual_char == 'y') 
-      {
-        printf("╗");
-      }
-      else if (actual_char == 'j') 
-      {
-        printf("│");
-      }
-      else if (actual_char == 'X') 
-      {
-        printf("┼");
-      }
-      else if (actual_char == 'Y') 
-      {
-        printf("┤");
-      }
-      else if (actual_char == 'Z') 
-      {
-        printf("├");
-      }
-      else if (actual_char == 'z') 
-      {
-        printf("┐");
-      }
-      else if (actual_char == 'L') 
-      {
-        printf("└");
-      }
-      else if (actual_char == 'W') 
-      {
-        printf("┘");
-      }
-      else if (actual_char == 'Q') 
-      {
-        printf("┌");
-      }
-      else if (actual_char == 'h') 
-      {
-        printf("┴");
-      }
-      else if (actual_char == 'H') 
-      {
-        printf("┬");
-      }
-
-	    else
-	      {
-		printf ("%c", actual_char);
-	      }
-	  }
-	x++;
-	if (x > n[y])
-	  {
-	    x = 0;
-	    y++;
-	  }
+	do{
+	  actual_char = fgetc (fp); 	    /* On lit le caractère */
+	  map[i][j] = actual_char;
+	  i++;
+	} while (i < NBCOL);
+	j++;
+	i = 0;
       } while (actual_char != EOF);
   }
+ 
   if (fclose (fp) < 0)
     {
       perror ("Erreur lors de la fermeture du fichier : ");
       return -1;
     }
   return 0;
+}
+
+
+void display_map (v_list* l, char map[][NBLIN])
+{
+  /*
+   * Affiche la carte stockée dans le tableau map
+   */
+
+  for (int j = 0; j < NBLIN; j++)
+    {
+      if (j >= 1){
+	for (int i = 0; i < NBCOL; i++)
+	  {
+	  
+	    if (check_pos (l, i, j) != NULL)
+	      {
+		afficher_v();
+	      }
+	    if (map[i][j] == 'w') // Eau
+	      {
+		couleur("46");
+		printf(" ");
+		couleur("0");
+	      }
+	    else if (map[i][j] == 'q')
+	      {
+		couleur("4");
+		printf(" ");
+		couleur("0");
+	      }
+	    else if (map[i][j] == 'i') 
+	      {
+		printf("═");
+	      }
+	    else if (map[i][j] == 'F') 
+	      {
+		printf("║");
+	      }
+	    else if (map[i][j] == 'l') 
+	      {
+		printf("─");
+	      }
+	    else if (map[i][j] == 't') 
+	      {
+		printf("╝");
+	      }
+	    else if (map[i][j] == 'R') 
+	      {
+		printf("╦");
+	      }
+	    else if (map[i][j] == 'g') 
+	      {
+		printf("╩");
+	      }
+	    else if (map[i][j] == 'K') 
+	      {
+		printf("╔");
+	      }
+	    else if (map[i][j] == 'k') 
+	      {
+		printf("╚");
+	      }
+	    else if (map[i][j] == 'u') 
+	      {
+		printf("╝");
+	      }
+	    else if (map[i][j] == 'y') 
+	      {
+		printf("╗");
+	      }
+	    else if (map[i][j] == 'j') 
+	      {
+		printf("│");
+	      }
+	    else if (map[i][j] == 'X') 
+	      {
+		printf("┼");
+	      }
+	    else if (map[i][j] == 'Y') 
+	      {
+		printf("┤");
+	      }
+	    else if (map[i][j] == 'Z') 
+	      {
+		printf("├");
+	      }
+	    else if (map[i][j] == 'z') 
+	      {
+		printf("┐");
+	      }
+	    else if (map[i][j] == 'L') 
+	      {
+		printf("└");
+	      }
+	    else if (map[i][j] == 'W') 
+	      {
+		printf("┘");
+	      }
+	    else if (map[i][j] == 'Q') 
+	      {
+		printf("┌");
+	      }
+	    else if (map[i][j] == 'h') 
+	      {
+		printf("┴");
+	      }
+	    else if (map[i][j] == 'H') 
+	      {
+		printf("┬");
+	      }
+	    else
+	      {
+		printf ("%c", map[i][j]);
+	      }
+	  }
+      }
+    }
+  printf("\n");
 }
