@@ -12,6 +12,7 @@ void bonjour()
   printf("coucou");
 }
 
+<<<<<<< HEAD
 void up(voiture *v) {
   if(v->posy > 0) {
     v->posy = v->posy-1;
@@ -52,12 +53,16 @@ void right(voiture *v) {
   }
 }
 
-void run(int bool, char map[][NBLIN])
+
+void run(bool danger, char map[][NBLIN])
+
 {
   v_list* l = NULL;
+  feu* f = NULL;
   int timer = 0;
   
   l = spawn_voiture (l);
+<<<<<<< HEAD
   l = spawn_voiture (l);
   l = spawn_voiture (l);
   l = spawn_voiture (l);
@@ -79,40 +84,51 @@ void run(int bool, char map[][NBLIN])
  printf("%d\n", length_v (l));
   //display_map (l, map);
   /*while(1)
+=======
+  f = init_feuTri();
+  
+  display_map (l, map, f);
+  while(1)
+>>>>>>> f3a6f198d8bea96c37b3385e50b8403b0de4b11e
     {
-      if (! bool)
+      /*if (danger)
 	{
-	  if (rand ()%4 == 0)
-	    spawn_voiture (l);
+	spawn_voiture (l);
 	}
-      else
+	else
 	{
-	  spawn_voiture (l);
-	}
-      display_map (l, map);
+	if (rand ()%4 == 0)
+	spawn_voiture (l);
+	}*/
+      display_map (l, map, f);
       sleep (1);
-      update (l, timer);
+      update (l, timer, f);
       system("clear");
       timer++;
+      if (timer > 5)
+	timer = 0;
       
-      }*/
+    }
 }
 
 //Fait bouger les voitures, gère les pannes
-void update(v_list* l, int timer)
+void update(v_list* l, int timer, feu* f)
 {
   v_list* buf = l; /* liste des voitures*/
-  voiture* tmp[length (l)]; /* tableau de toutes les voitures*/
+  voiture* tmp[length_v (l)]; /* tableau de toutes les voitures*/
   voiture* v = NULL;
   int a = 0;
 
-  for (int i = 0; i < length (l); i++) /* Remplit le tableau de voiture */
+  for (int i = 0; i < length_v (l); i++) /* Remplit le tableau de voiture */
     {
       tmp[i] = buf->value;
       buf = buf->nxt;
     }
 
-  for (int i = 0; i < length (l); i++) /* On fait avancer les differentes voitures */
+  if (timer == 5)
+    change_etat_f (f);
+
+  for (int i = 0; i < length_v (l); i++) /* On fait avancer les differentes voitures */
     {
       v = tmp[i];
       if(v->is_out==1) {

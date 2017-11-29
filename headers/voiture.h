@@ -6,10 +6,12 @@
 #ifndef VOITURE_H
 #define VOITURE_H
 
+#include "../headers/couleur.h"
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 typedef struct voiture
 {
@@ -21,8 +23,9 @@ typedef struct voiture
   int vitesse; /* vitesse de la voiture : 1 (normale), 2 (rapide) */
   char type; /* type du vehicule : 'v' (voiture), 'c' (camion) */ 
   char custom[30]; /* contient le véhicule customisé */
-  char etat; /* actif ou inactif */
+
   int is_out; /* 0 quand la voiture est sur la map, 1 quand elle sort de la map */
+  bool etat; /* actif ou inactif */
 } voiture;
 
 typedef struct v_list
@@ -31,7 +34,22 @@ typedef struct v_list
   struct v_list* nxt;
 } v_list;
 
+typedef struct feuTri
+{
+  int posx;
+  int posy;
+  bool etat; /* rouge = false, vert = true */
+} feu;
+
 voiture* check_pos (v_list*, int, int);
+
+void up (voiture*);
+
+void down (voiture*);
+
+void left (voiture*);
+
+void right (voiture*);
 
 int random_number (int);
 
@@ -41,7 +59,7 @@ v_list* remove_v (v_list*, voiture*);
 
 void afficher_v ();
 
-int length (v_list*);
+int length_v (v_list*);
 
 v_list* spawn_voiture (v_list*);
 
@@ -53,6 +71,13 @@ void init_position (voiture*);
 
 void destroy (v_list*, voiture*, voiture*);
 
+feu* init_feuTri();
+
+void check_feu (feu*, int, int);
+
+void afficher_f (feu*);
+
+void change_etat_f (feu*);
 
 #endif
 

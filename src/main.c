@@ -19,7 +19,7 @@ int main()
   else if (c == 'd')
     run (1, map);*/
 
-  run (0, map);
+  run (false, map);
   
   exit (1);
 }
