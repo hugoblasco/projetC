@@ -4,103 +4,122 @@
 
 #include "../headers/tram.h"
 
-void afficher_t ()
+void afficher_t (int i)
 {
-  couleur ("34");
-  printf("■■■■■■■■■■■■");
-  couleur ("0");
+  /*
+   * Affiche le tram
+   */
+  switch (i){
+    
+  case 1:
+    couleur ("33");
+    printf("■■■■■■■■■■■■");
+    couleur ("0");
+    break;
+  case 2:
+    couleur ("33");
+    printf("■■■■■■■■■■■");
+    couleur ("0");
+    break;
+  case 3:
+    couleur ("33");
+    printf("■■■■■■■■■■");
+    couleur ("0");
+    break;
+  case 4:
+    couleur ("33");
+    printf("■■■■■■■■■");
+    couleur ("0");
+    break;
+  case 5:
+    couleur ("33");
+    printf("■■■■■■■■");
+    couleur ("0");
+    break;
+  case 6:
+    couleur ("33");
+    printf("■■■■■■■");
+    couleur ("0");
+    break;
+  case 7:
+    couleur ("33");
+    printf("■■■■■■");
+    couleur ("0");
+    break;
+  case 8:
+    couleur ("33");
+    printf("■■■■■");
+    couleur ("0");
+    break;
+  case 9:
+    couleur ("33");
+    printf("■■■■");
+    couleur ("0");
+    break;
+  case 10:
+    couleur ("33");
+    printf("■■■");
+    couleur ("0");
+    break;
+  case 11:
+    couleur ("33");
+    printf("■■");
+    couleur ("0");
+    break;
+  case 12:
+    couleur ("33");
+    printf("■");
+    couleur ("0");
+    break;
+  }
 }
 
 bool check_tram (tram* t, int x, int y)
 {
   /*
-   * Verifie s'il existe un tram dans la liste t ayant les coordonnées
+   * Verifie s'il existe un tram dans le tableau t ayant les coordonnées
    * x et y
    */
-  tram* tmp = t;
-  while (tmp != NULL)
+  for (int i = 0; i < 2; i++)
     {
-      if (tmp->posx == x && tmp->posy == y)
-	{
-	  afficher_t ();
-	  return true;
-	}
-      tmp = tmp->nxt;
+      if (x > 171)
+	return false;
+      if (t[i].posx == x && t[i].posy == y)
+	return true;
     }
   return false;
 }
 
+void move (tram* t)
+{
+  /*
+   * Fait bouger les trams en fonction de leurs directions
+   */
+  for (int i = 0; i < 2; i++)
+    {
+      if (t[i].direction)
+	t[i].posx++;
+      else
+	t[i].posx--;
+    }
+}
+
 tram* init_tram (tram* t)
 {
-  tram* new = malloc (sizeof (tram));
-  tram* new2 = malloc (sizeof (tram));
-  new->posx = 0;
-  new->posy = 7;
-  new->direction = true;
-  new->moving = true;
-  new->is_out = false;
-  
-  new2->posx = 172;
-  new2->posy = 5;
-  new2->direction = false;
-  new2->moving = true;
-  new2->is_out = false;
-
-  t = append_t (t, new);
-  t = append_t (t, new2);
-  
-  return t;
-}
-
-tram* append_t (tram* t, tram* u)
-{
-  tram* tmp = t;
-  while (tmp->nxt != NULL) /* Ajout à la liste */
-    tmp = tmp->nxt;
-  
-  tmp->nxt = u;
-  return t;
-}
-
-tram* append_new (tram* t)
-{
   /*
-   * Créé un nouvel objet tram et l'ajoute à la liste
+   * Initialise le tableau t
    */
-  tram* new = malloc (sizeof (tram));
-
-  if (rand ()%1) /* Initialisation du nouveau tram */
-    {
-      new->posx = 0;
-      new->posy = 7;
-      new->direction = true;
-    }
-  else
-    {
-      new->posx = 172;
-      new->posy = 5;
-      new->direction = false;
-    }
-  new->moving = true;
-  new->is_out = false;
-
-  return append_t (t, new);
- 
-}
-
-tram* clear_t (tram* t)
-{
-  /*
-   * Supprime les tram dont les valeurs out sont à true
-   */
-  tram* tmp = t;
-  while (tmp->nxt != NULL)
-    {
-      if (tmp->nxt->is_out)
-	tmp->nxt = tmp->nxt->nxt;
-      tmp = tmp->nxt;
-    }
+  t = malloc (2 * sizeof (tram));
+  
+  t[0].posx = 0;
+  t[0].posy = 7;
+  t[0].direction = true;
+  t[0].moving = true;
+  
+  t[1].posx = 172;
+  t[1].posy = 5;
+  t[1].direction = false;
+  t[1].moving = true;
+  
   return t;
 }
-
-

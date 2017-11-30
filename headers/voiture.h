@@ -53,6 +53,8 @@ v_list* append (v_list*, voiture*);
 
 v_list* remove_v (v_list*, voiture*);
 
+v_list* clear_v (v_list*);
+
 void afficher_v ();
 
 int length_v (v_list*);

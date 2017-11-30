@@ -6,14 +6,14 @@
 
 void bonjour()
 {
-  /*
+  /*x
    * Ecrit la chaine de caractère coucou dans la sortie standard
    */ 
   printf("coucou");
 }
 
 void attendre(int x) {
-  int i =0;
+  int i = 0;
   while (i < x) {
     i++;
   }
@@ -42,8 +42,7 @@ void run(bool danger, char map[][NBLIN])
   int timer = 0;
   int random_petit = 0; /* variable pour les très petites probabilités*/
   
-  //t = init_tram (t);
-
+  t = init_tram (t);
   f = init_feuTri();
   
   l = spawn_voiture (l);
@@ -55,17 +54,17 @@ void run(bool danger, char map[][NBLIN])
     random_petit = rand () % 10;
       /*if (danger)
 	{
-	l = spawn_voiture (l);
+	  l = spawn_voiture (l);
 	}
-	else
+      else
 	{
-	if (rand ()%4 == 0)
-	l = spawn_voiture (l);
+	  if (rand ()%4 == 0)
+	    l = spawn_voiture (l);
 	}*/
 
       display_map (l, map, f, t);
       attendre(100000000);
-      update (l, timer, f);
+      update (l, timer, f, t);
       system("clear");
       timer++;
       if (random_petit == 0) {
@@ -81,7 +80,7 @@ void run(bool danger, char map[][NBLIN])
 }
 
 //Fait bouger les voitures, gère les pannes
-void update(v_list* l, int timer, feu* f)
+void update(v_list* l, int timer, feu* f, tram* t)
 {
   v_list* buf = l; /* liste des voitures*/
   voiture* tmp[length_v (l)]; /* tableau de toutes les voitures*/
@@ -98,6 +97,8 @@ void update(v_list* l, int timer, feu* f)
   if (timer == 5)
     change_etat_f (f);
 
+  move (t);
+
   for (int i = 0; i < length_v (l); i++) /* On fait avancer les differentes voitures */
     {
       v = tmp[i];
@@ -110,10 +111,7 @@ void update(v_list* l, int timer, feu* f)
       switch (v->direction)
   	{
   	case 'N':
-  		if(v->posx == 70 && v->posy == 47) {
-  			attendre(400000000);
-  		}
-  			up(v);
+  		up(v);
   		
 	  if (v->posx == 143 && v->posy == 36) {
 	    v->direction = 'O';

@@ -3,9 +3,6 @@
  */
 #include "../headers/display.h"
 
-//essayer d'afficher l'emoji suivi d'un espace pour egler les problemes de décallages
-
-
 char menu() 
 {
   /* 
@@ -129,7 +126,113 @@ void display_map (v_list* l, char map[][NBLIN], feu* f, tram* t)
 	    }
 	  else if (check_tram (t, i, j))
 	    {
-	      i+=12;
+	      if (j == 7){
+		switch (i)
+		  {		    
+		  case 161 :
+		    afficher_t(2);
+		    i+=11;
+		    break;
+		  case 162 :
+		    afficher_t(3);
+		    i+=10;
+		    break;
+		  case 163 :
+		    afficher_t(4);
+		    i+=9;
+		    break;
+		  case 164 :
+		    afficher_t(5);
+		    i+=8;
+		    break;
+		  case 165 :
+		    afficher_t(6);
+		    i+=7;
+		    break;
+		  case 166 :
+		    afficher_t(7);
+		    i+=6;
+		    break;
+		  case 167 :
+		    afficher_t(8);
+		    i+=5;
+		    break;
+		  case 168 :
+		    afficher_t(9);
+		    i+=4;
+		    break;
+		  case 169 :
+		    afficher_t(10);
+		    i+=3;
+		    break;
+		  case 170 :
+		    afficher_t(11);
+		    i+=2;
+		    break;
+		  case 171 :
+		    afficher_t(12);
+		    i+=1;
+		    break;
+		  default:
+		    afficher_t(1);
+		    i+=12;
+		    break;
+		  }
+	      }
+	      else if (j == 5)
+		{
+		  switch (i)
+		    {		    
+		    case 161 :
+		      afficher_t(2);
+		      i+=11;
+		      break;
+		    case 162 :
+		      afficher_t(3);
+		      i+=10;
+		      break;
+		    case 163 :
+		      afficher_t(4);
+		      i+=9;
+		      break;
+		    case 164 :
+		      afficher_t(5);
+		      i+=8;
+		      break;
+		    case 165 :
+		      afficher_t(6);
+		      i+=7;
+		      break;
+		    case 166 :
+		      afficher_t(7);
+		      i+=6;
+		      break;
+		    case 167 :
+		      afficher_t(8);
+		      i+=5;
+		      break;
+		    case 168 :
+		      afficher_t(9);
+		      i+=4;
+		      break;
+		    case 169 :
+		      afficher_t(10);
+		      i+=3;
+		      break;
+		    case 170 :
+		      afficher_t(11);
+		      i+=2;
+		      break;
+		    case 171 :
+		      afficher_t(12);
+		      i+=1;
+		      break;
+		    default:
+		      afficher_t(1);
+		      i+=12;
+		      break;
+		    }
+		}
 	    }
 	  else
 	    {

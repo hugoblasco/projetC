@@ -9,20 +9,14 @@ typedef struct tram
   int posy;
   bool direction; /* true = vers la droite, false = vers la gauche*/
   bool moving;
-  bool is_out;
-  struct tram* nxt;
 } tram;
 
-void afficher ();
+void afficher_t ();
 
 bool check_tram (tram*, int, int);
 
+void move (tram*);
+
 tram* init_tram (tram*);
-
-tram* append_t (tram*, tram*);
-
-tram* append_new (tram*);
-
-tram* clear_t (tram*);
 
 #endif
