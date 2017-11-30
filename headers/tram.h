@@ -7,6 +7,7 @@ typedef struct tram
 {
   int posx;
   int posy;
+  int tmpStop;
   bool direction; /* true = vers la droite, false = vers la gauche*/
   bool moving;
 } tram;

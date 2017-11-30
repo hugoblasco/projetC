@@ -97,10 +97,25 @@ void move (tram* t)
    */
   for (int i = 0; i < 2; i++)
     {
-      if (t[i].direction)
-	t[i].posx++;
-      else
-	t[i].posx--;
+      if (! t[i].moving)
+	{
+	  t[i].tmpStop++;
+	  if (t[i].tmpStop > 5)
+	    {
+	      t[i].moving = true;
+	      t[i].tmpStop = 0;
+	    }
+	}
+      if (t[i].direction && t[i].moving)
+	{
+	  t[i].posx++;
+	}
+      else if (! t[i].direction && t[i].moving)
+	{
+	  t[i].posx--;
+	}
+      if (t[i].posx == 24 || t[i].posx == 146)
+	t[i].moving = false;
     }
 }
 
@@ -115,11 +130,13 @@ tram* init_tram (tram* t)
   t[0].posy = 7;
   t[0].direction = true;
   t[0].moving = true;
+  t[0].tmpStop = 0;
   
   t[1].posx = 172;
   t[1].posy = 5;
   t[1].direction = false;
   t[1].moving = true;
+  t[1].tmpStop = 0;
   
   return t;
 }

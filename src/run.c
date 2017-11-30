@@ -82,7 +82,7 @@ void update(v_list* l, int timer, feu* f, tram* t)
   voiture* tmp[length_v (l)]; /* tableau de toutes les voitures*/
   voiture* v = NULL;
   int random = 0; /* variable qui va contenir le resultat des fonctions rand() */
-
+  
   for (int i = 0; i < length_v (l); i++) /* Remplit le tableau de voiture */
     {
       tmp[i] = buf->value;
@@ -91,7 +91,7 @@ void update(v_list* l, int timer, feu* f, tram* t)
 
   if (timer == 5)
     change_etat_f (f);
-
+  
   move (t);
 
   for (int i = 0; i < length_v (l); i++) /* On fait avancer les differentes voitures */
