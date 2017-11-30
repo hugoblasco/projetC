@@ -57,7 +57,7 @@ void left(voiture *v) {
 }
 
 void right(voiture *v) {
-  if(v->posx < 175) {
+  if(v->posx < 173) {
     v->posx = v->posx+1;
   }
 }

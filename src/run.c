@@ -40,6 +40,7 @@ void run(bool danger, char map[][NBLIN])
   feu* f = NULL;
   tram* t = NULL;
   int timer = 0;
+  int random_petit = 0; /* variable pour les très petites probabilités*/
   
   //t = init_tram (t);
 
@@ -51,6 +52,7 @@ void run(bool danger, char map[][NBLIN])
   
   while(1)
     {
+    random_petit = rand () % 10;
       /*if (danger)
 	{
 	l = spawn_voiture (l);
@@ -66,9 +68,12 @@ void run(bool danger, char map[][NBLIN])
       update (l, timer, f);
       system("clear");
       timer++;
+      if (random_petit == 0) {
+      	l = spawn_voiture (l);
+  		}
       if (timer > 10)
 	{
-	  t = append_new (t);
+	  //t = append_new (t);
 	  timer = 0;
 	}      
     }
@@ -82,6 +87,7 @@ void update(v_list* l, int timer, feu* f)
   voiture* tmp[length_v (l)]; /* tableau de toutes les voitures*/
   voiture* v = NULL;
   int random = 0; /* variable qui va contenir le resultat des fonctions rand() */
+  int random_petit = 0; /* variable pour les très petites probabilités*/
 
   for (int i = 0; i < length_v (l); i++) /* Remplit le tableau de voiture */
     {
@@ -99,10 +105,16 @@ void update(v_list* l, int timer, feu* f)
         //on enlève la voiture de la liste
       }
       random = rand () % 2;
+      random_petit = rand () % 10;
+      if (getFeu(f, v->posx, v->posy)) {
       switch (v->direction)
   	{
   	case 'N':
-	  up(v);
+  		if(v->posx == 70 && v->posy == 47) {
+  			attendre(400000000);
+  		}
+  			up(v);
+  		
 	  if (v->posx == 143 && v->posy == 36) {
 	    v->direction = 'O';
 	  }
@@ -152,7 +164,9 @@ void update(v_list* l, int timer, feu* f)
 	    break;
 	    
 	  case 'S':
+	  
 	    down(v);
+	  
 	    if (v->posx == 129 && v->posy == 13) {
 	      //continue ou O
 	      if (random == 0) {
@@ -165,12 +179,10 @@ void update(v_list* l, int timer, feu* f)
 			v->direction = 'O';
 	      }
 	     }
-	    if (v->posx == 63 && v->posy == 36) {
-	      //vers le magasin
-	      if (random == 0) {
-		v->direction = 'N';
+	     if (v->posx == 129 && v->posy == 38) {
+			v->direction = 'E';
 	      }
-	    }
+	     
 	    if (v->posx == 99 && v->posy == 36) {
 	  	if (random == 0) {
 	      v->direction = 'E';
@@ -183,25 +195,20 @@ void update(v_list* l, int timer, feu* f)
 	  }
 	    if (v->posx == 129 && v->posy == 15) {
 	      //continue ou E
-	      if (random == 0) {
+	      if (random_petit == 0) {
 		v->direction = 'E';
 	      }
 	    }
-	    if (v->posx == 139 && v->posy == 56) {
-	      //vers l'immeuble
-	      //continue ou E
-	      if (random == 0) {
-		v->direction = 'O';
-	      }
-	    }
 	    if (v->posx == 5 && v->posy == 38) {
-	  	if (random == 0) {
+	  	if (random_petit == 0) {
 	      v->direction = 'E';
 	  	}
 	  }
 	    break;
 	  case 'E':
+	  
 	    right(v);
+		
 	    if (v->posx == 139 && v->posy == 38) {
 	      v->direction = 'S';
 	    }
@@ -227,7 +234,9 @@ void update(v_list* l, int timer, feu* f)
 	  }
 	    break;
 	  case 'O':
+	  
 	    left(v);
+		
 	    if (v->posx == 9 && v->posy == 36) {
 	    	if (random == 0) {
 			v->direction = 'N';
@@ -244,7 +253,7 @@ void update(v_list* l, int timer, feu* f)
 	      
 	    }
 	    if (v->posx == 5 && v->posy == 13) {
-	  	if (random == 0) {
+	  	if (random_petit == 0) {
 	      v->direction = 'S';
 	  	}
 	  }
@@ -263,5 +272,6 @@ void update(v_list* l, int timer, feu* f)
 	    break;
 	  }
 	}
+}
 }
 
