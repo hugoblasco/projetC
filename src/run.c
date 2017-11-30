@@ -23,16 +23,15 @@ void run(bool danger, char map[][NBLIN])
   l = spawn_voiture (l);
   l = spawn_voiture (l);
   l = spawn_voiture (l);
-  l = spawn_voiture (l);
-
+  
   f = init_feuTri();
 
   print (l);
   
 
-  /*display_map (l, map, f);
+  display_map (l, map, f);
 
-    while(1)
+  /*while(1)
     {
     if (danger)
     {

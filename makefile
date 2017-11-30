@@ -1,6 +1,6 @@
 
 CC=gcc
-CFLAGS=-Wall -Wextra
+CFLAGS=-Wall -Wextra -Werror -ansi -std=c11
 LDFLAGS=
 EXEC=main
 
@@ -13,22 +13,22 @@ main: voiture.o display.o run.o main.o
 
 main.o: ./src/main.c ./headers/main.h
 	@echo "début compilation main"
-	$(CC) -c ./src/main.c
+	$(CC) -g -c ./src/main.c
 	@echo "fin compilation main"
 
 run.o: ./src/run.c ./headers/run.h
 	@echo "début compilation run"
-	$(CC) -c ./src/run.c
+	$(CC) -g -c ./src/run.c
 	@echo "fin compilation run"
 
 display.o: ./src/display.c ./headers/display.h
 	@echo "début compilation display"
-	$(CC) -c ./src/display.c
+	$(CC) -g -c ./src/display.c
 	@echo "fin compilation display"	
 
 voiture.o: ./src/voiture.c ./headers/voiture.h
 	@echo "début compilation voiture"
-	$(CC) -c ./src/voiture.c
+	$(CC) -g -c ./src/voiture.c
 	@echo "fin compilation voiture"	
 
 clean:

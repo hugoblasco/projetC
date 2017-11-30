@@ -5,7 +5,6 @@
 
 //essayer d'afficher l'emoji suivi d'un espace pour egler les problemes de décallages
 
-
 char menu() 
 {
   /* 
@@ -77,8 +76,7 @@ char menu()
       menu ();
     }
   system ("clear");
-  return '1';
-  
+  return '1'; 
 }
 
 int map_loading (char map[][NBLIN])
@@ -111,7 +109,6 @@ int map_loading (char map[][NBLIN])
     }
   return 0;
 }
-
 
 void display_map (v_list* l, char map[][NBLIN], feu* f)
 {
