@@ -52,13 +52,13 @@ void down(voiture *v) {
 
 void left(voiture *v) {
   if(v->posx > 0) {
-    v->posy = v->posy-1;
+    v->posx = v->posx-1;
   }
 }
 
 void right(voiture *v) {
   if(v->posx < 175) {
-    v->posy = v->posy+1;
+    v->posx = v->posx+1;
   }
 }
 
