@@ -6,6 +6,8 @@
 
 #include "../headers/couleur.h"
 #include "../headers/voiture.h"
+#include "../headers/feu.h"
+#include "../headers/tram.h"
 
 char menu ();
 

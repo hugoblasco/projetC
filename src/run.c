@@ -12,6 +12,22 @@ void bonjour()
   printf("coucou");
 }
 
+
+void free_all (v_list* l, feu* f)
+{
+  v_list* tmp = l;
+
+  while (l != NULL)
+    {
+      tmp = l->nxt;
+      free (l->value);
+      free (l);
+      l = tmp;
+    }
+
+  free (f);
+}
+
 void run(bool danger, char map[][NBLIN])
 {
   v_list* l = NULL;
@@ -30,13 +46,13 @@ void run(bool danger, char map[][NBLIN])
     {
       /*if (danger)
 	{
-	  l = spawn_voiture (l);
+	l = spawn_voiture (l);
 	}
-      else
+	else
 	{
-	  if (rand ()%4 == 0)
-	    l = spawn_voiture (l);
-	    }*/
+	if (rand ()%4 == 0)
+	l = spawn_voiture (l);
+	}*/
       display_map (l, map, f);
       sleep (1);
       update (l, timer, f);
@@ -70,7 +86,7 @@ void update(v_list* l, int timer, feu* f)
   for (int i = 0; i < length_v (l); i++) /* On fait avancer les differentes voitures */
     {
       v = tmp[i];
-      if(v->is_out==1) {
+      if(v->is_out) {
         //on enlève la voiture de la liste
       }
       random = rand () % 2;
@@ -120,6 +136,7 @@ void update(v_list* l, int timer, feu* f)
 	      }
 	    }
 	    break;
+	    
 	  case 'S':
 	    down(v);
 	    if (v->posx == 129 && v->posy == 13) {
