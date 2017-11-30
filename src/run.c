@@ -21,7 +21,7 @@ void run(bool danger, char map[][NBLIN])
   l = spawn_voiture (l);
   l = spawn_voiture (l);
 
-  //f = init_feuTri();
+  f = init_feuTri();
 
   //print (l);
   
