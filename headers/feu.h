@@ -22,8 +22,6 @@ void afficher_f (feu*);
 
 void change_etat_f (feu*);
 
-void free_all (v_list*, feu*);
-
-
+void feu_tram_stop (feu*, bool);
 
 #endif

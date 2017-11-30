@@ -11,7 +11,7 @@ void bonjour ();
 
 void attendre (int);
 
-void free_all (v_list*, feu*);
+void free_all (v_list*, feu*, tram*);
 
 void run (bool, char[][NBLIN]);
 

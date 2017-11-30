@@ -19,12 +19,12 @@ feu* init_feuTri ()
 	case 0:
 	  tabf[i].posx = 127;
 	  tabf[i].posy = 3;
-	  tabf[i].etat = false;
+	  tabf[i].etat = true;
 	  break;
 	case 1:
 	  tabf[i].posx = 135;
 	  tabf[i].posy = 9;
-	  tabf[i].etat = false;
+	  tabf[i].etat = true;
 	  break;
 	case 2:
 	  tabf[i].posx = 127;
@@ -145,8 +145,16 @@ void change_etat_f (feu* f)
   /*
    * Inverse l'état de tous les feux dans la liste
    */
-  for (int i = 0; i < 9; i++)
+  for (int i = 2; i < 9; i++)
     {
       f[i].etat = ! f[i].etat;
+    }
+}
+
+void feu_tram_stop (feu* f, bool b)
+{
+  for (int i = 0; i < 2; i++)
+    {
+      f[i].etat = b;
     }
 }

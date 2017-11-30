@@ -6,7 +6,7 @@
 
 void bonjour()
 {
-  /*x
+  /*
    * Ecrit la chaine de caractère coucou dans la sortie standard
    */ 
   printf("coucou");
@@ -19,7 +19,7 @@ void attendre(int x) {
   }
 }
 
-void free_all (v_list* l, feu* f)
+void free_all (v_list* l, feu* f, tram* t)
 {
   v_list* tmp = l;
 
@@ -31,6 +31,7 @@ void free_all (v_list* l, feu* f)
       l = tmp;
     }
 
+  free (t);
   free (f);
 }
 
@@ -40,7 +41,7 @@ void run(bool danger, char map[][NBLIN])
   feu* f = NULL;
   tram* t = NULL;
   int timer = 0;
-  int random_petit = 0; /* variable pour les très petites probabilités*/
+  //int random_petit = 0; /* variable pour les très petites probabilités*/
   
   t = init_tram (t);
   f = init_feuTri();
@@ -58,16 +59,22 @@ void run(bool danger, char map[][NBLIN])
   
   while(1)
     {
-    random_petit = rand () % 10;
-      /*if (danger)
+    int random_petit = rand () % 25;
+      /*random_petit = rand () % 25;
+      if (danger)
 	{
-	  l = spawn_voiture (l);
+	l = spawn_voiture (l);
 	}
-      else
+	else
 	{
-	  if (rand ()%4 == 0)
-	    l = spawn_voiture (l);
+	if (rand ()%4 == 0)
+	l = spawn_voiture (l);
 	}*/
+
+      if (timer > 190)
+	{
+	  t = reset_t (t);
+	}
 
       display_map (l, map, f, t);
       attendre(100000000);
@@ -77,13 +84,15 @@ void run(bool danger, char map[][NBLIN])
       if (random_petit == 0) {
       	//l = spawn_voiture (l);
   		}
-      if (timer > 10)
+      /*if (random_petit == 0) {
+	l = spawn_voiture (l);
+	}*/
+      if (timer > 200)
 	{
-	  //t = append_new (t);
 	  timer = 0;
-	}      
+	}   
     }
-  free_all(l, f); 
+  free_all(l, f, t); 
 }
 
 //Fait bouger les voitures, gère les pannes
@@ -101,9 +110,14 @@ void update(v_list* l, int timer, feu* f, tram* t)
       buf = buf->nxt;
     }
 
-  if (timer == 5)
+  if (tram_feu_sync (t))
+    feu_tram_stop(f, false);
+  else
+    feu_tram_stop (f, true);
+  
+  if (timer%20 == 0)
     change_etat_f (f);
-
+  
   move (t);
 
   for (int i = 0; i < length_v (l); i++) /* On fait avancer les differentes voitures */
@@ -120,54 +134,54 @@ void update(v_list* l, int timer, feu* f, tram* t)
   	case 'N':
   		if (check_pos(l,v->posx,v->posy-1) == NULL) {
   		up(v);
-  		
-	  if (v->posx == 143 && v->posy == 36) {
-	    v->direction = 'O';
-	  }
-	  if (v->posx == 9 && v->posy == 57) {
-	    v->direction = 'E';
-	  }
-	  if (v->posx == 70 && v->posy == 38) {
-	  	if (random == 0) {
-	      v->direction = 'E';
-	  	}
-	  }
-	  if (v->posx == 70 && v->posy == 36) {
+  		}
+	    if (v->posx == 143 && v->posy == 36) {
 	      v->direction = 'O';
-	  }
+	    }
+	    if (v->posx == 9 && v->posy == 57) {
+	      v->direction = 'E';
+	    }
+	    if (v->posx == 70 && v->posy == 38) {
+	      if (random == 0) {
+		v->direction = 'E';
+	      }
+	    }
+	    if (v->posx == 70 && v->posy == 36) {
+	      v->direction = 'O';
+	    }
 	  
-	  if (v->posx == 103 && v->posy == 13) {
+	    if (v->posx == 103 && v->posy == 13) {
 	      v->direction = 'O';
-	  }
-	  if (v->posx == 133 && v->posy == 15) {
-	    //continue ou E
-	    // rand () % n pour avoir des nombres entre 0 et n-1
-	    if (random == 0) {
-	      v->direction = 'E';
-	  	}
-	  }
-	  if (v->posx == 133 && v->posy == 13) {
-	    //continue ou O
-	    if (random == 0) {
+	    }
+	    if (v->posx == 133 && v->posy == 15) {
+	      //continue ou E
+	      // rand () % n pour avoir des nombres entre 0 et n-1
+	      if (random == 0) {
+		v->direction = 'E';
+	      }
+	    }
+	    if (v->posx == 133 && v->posy == 13) {
+	      //continue ou O
+	      if (random == 0) {
 	    	v->direction = 'O';
-	  	}
-	  }
-	  if (v->posx == 9 && v->posy == 15) {
-	    v->direction = 'E';
-	  }
-	  if (v->posx == 9 && v->posy == 38) {
-	    //continue ou E
-	    if (random == 0) {
-			v->direction = 'E';
+	      }
 	    }
-	  }
-	  if (v->posx == 129 && v->posy == 15) {
-	    //continue ou O
-	    if (random == 0) {
-			v->direction = 'O';
+	    if (v->posx == 9 && v->posy == 15) {
+	      v->direction = 'E';
 	    }
-	  }
-	}
+	    if (v->posx == 9 && v->posy == 38) {
+	      //continue ou E
+	      if (random == 0) {
+		v->direction = 'E';
+	      }
+	    }
+	    if (v->posx == 129 && v->posy == 15) {
+	      //continue ou O
+	      if (random == 0) {
+		v->direction = 'O';
+	      }
+	    }
+	  
 	    break;
 	    
 	  case 'S':
@@ -177,29 +191,29 @@ void update(v_list* l, int timer, feu* f, tram* t)
 	    if (v->posx == 129 && v->posy == 13) {
 	      //continue ou O
 	      if (random == 0) {
-			v->direction = 'O';
+		v->direction = 'O';
 	      }
 	    }
 	    if (v->posx == 129 && v->posy == 36) {
 	      //continue ou O
 	      if (random == 0) {
-			v->direction = 'O';
+		v->direction = 'O';
 	      }
-	     }
-	     if (v->posx == 129 && v->posy == 38) {
-			v->direction = 'E';
-	      }
+	    }
+	    if (v->posx == 129 && v->posy == 38) {
+	      v->direction = 'E';
+	    }
 	     
 	    if (v->posx == 99 && v->posy == 36) {
-	  	if (random == 0) {
-	      v->direction = 'E';
-	  	}
-	  }
-	  if (v->posx == 99 && v->posy == 36) {
+	      if (random == 0) {
+		v->direction = 'E';
+	      }
+	    }
+	    if (v->posx == 99 && v->posy == 36) {
 	  	
 	      v->direction = 'O';
 	  	
-	  }
+	    }
 	    if (v->posx == 129 && v->posy == 15) {
 	      //continue ou E
 	      if (random_petit == 0) {
@@ -247,25 +261,25 @@ void update(v_list* l, int timer, feu* f, tram* t)
 	    left(v);
 		
 	    if (v->posx == 9 && v->posy == 36) {
-	    	if (random == 0) {
-			v->direction = 'N';
+	      if (random == 0) {
+		v->direction = 'N';
 	      }
 	    }
 	    if (v->posx == 9 && v->posy == 36) {
-	    	if (random == 0) {
-			v->direction = 'N';
+	      if (random == 0) {
+		v->direction = 'N';
 	      }
 	    }
 	    if (v->posx == 5 && v->posy == 36) {
 	      //continue ou N
-			v->direction = 'S';
+	      v->direction = 'S';
 	      
 	    }
 	    if (v->posx == 5 && v->posy == 13) {
-	  	if (random_petit == 0) {
-	      v->direction = 'S';
-	  	}
-	  }
+	      if (random_petit == 0) {
+		v->direction = 'S';
+	      }
+	    }
 	    if (v->posx == 99 && v->posy == 13) {
 	      //continue ou N
 	      if (random == 0) {
@@ -281,7 +295,7 @@ void update(v_list* l, int timer, feu* f, tram* t)
 	}
 	    break;
 	  }
-	}
-}
+      }
+    }
 }
 
