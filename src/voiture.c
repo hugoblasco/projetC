@@ -42,24 +42,32 @@ void up(voiture *v) {
   if(v->posy > 0) {
     v->posy = v->posy-1;
   }
+  else
+    v->is_out = true;
 }
 
 void down(voiture *v) {
   if(v->posy < 61) {
     v->posy = v->posy+1;
   }
+  else
+    v->is_out = true;
 }
 
 void left(voiture *v) {
   if(v->posx > 0) {
     v->posx = v->posx-1;
   }
+  else
+    v->is_out = true;
 }
 
 void right(voiture *v) {
   if(v->posx < 175) {
     v->posx = v->posx+1;
   }
+  else
+    v->is_out = true;
 }
 
 int random_number(int upper)
@@ -129,6 +137,24 @@ v_list* remove_v (v_list* l, voiture* v)
 	}
     }
   return l;
+}
+
+
+v_list* clear_v (v_list* v)
+{
+  /*
+   * Supprime les voitures dont les valeurs out sont à true
+   */
+  v_list* tmp = v;
+  while (tmp->nxt != NULL)
+    {
+      if (tmp->nxt->value->is_out)
+	{
+	  tmp = remove_v(v, tmp->nxt->value);
+	}
+      tmp = tmp->nxt;
+    }
+  return v;
 }
 
 void afficher_v ()

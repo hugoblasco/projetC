@@ -15,6 +15,6 @@ void free_all (v_list*, feu*);
 
 void run (bool, char[][NBLIN]);
 
-void update (v_list*, int, feu*);
+void update (v_list*, int, feu*, tram*);
 
 #endif
