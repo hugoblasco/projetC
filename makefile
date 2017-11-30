@@ -6,9 +6,9 @@ EXEC=main
 
 all: $(EXEC)
 
-main: voiture.o display.o run.o main.o
+main: tram.o feu.o voiture.o display.o run.o main.o
 	@echo "début edition des liens : display, voiture, run et main"
-	$(CC) -o main voiture.o display.o run.o main.o
+	$(CC) -o main tram.o feu.o voiture.o display.o run.o main.o 
 	@echo "fin edition des liens"
 
 main.o: ./src/main.c ./headers/main.h
@@ -29,7 +29,17 @@ display.o: ./src/display.c ./headers/display.h
 voiture.o: ./src/voiture.c ./headers/voiture.h
 	@echo "début compilation voiture"
 	$(CC) -c ./src/voiture.c
-	@echo "fin compilation voiture"	
+	@echo "fin compilation voiture"
+
+feu.o: ./src/feu.c ./headers/feu.h
+	@echo "début compilation feu"
+	$(CC) -c ./src/feu.c
+	@echo "fin compilation feu"
+
+tram.o: ./src/tram.c ./headers/tram.h
+	@echo "début compilation tram"
+	$(CC) -c ./src/tram.c
+	@echo "fin compilation tram"
 
 clean:
 	rm -rf *.o

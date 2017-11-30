@@ -25,7 +25,7 @@ typedef struct voiture
   char type; /* type du vehicule : 'v' (voiture), 'c' (camion) */ 
   char custom[30]; /* contient le véhicule customisé */
 
-  int is_out; /* 0 quand la voiture est sur la map, 1 quand elle sort de la map */
+  bool is_out; /* 0 quand la voiture est sur la map, 1 quand elle sort de la map */
   bool etat; /* actif ou inactif */
 } voiture;
 
@@ -34,13 +34,6 @@ typedef struct v_list
   voiture* value;
   struct v_list* nxt;
 } v_list;
-
-typedef struct feuTri
-{
-  int posx;
-  int posy;
-  bool etat; /* rouge = false, vert = true */
-} feu;
 
 voiture* check_pos (v_list*, int, int);
 
@@ -72,17 +65,7 @@ char set_voiture (int);
 
 void init_position (voiture*);
 
-void free_all (v_list*, feu*);
-
 void destroy (v_list*, voiture*, voiture*);
-
-feu* init_feuTri();
-
-void check_feu (feu*, int, int);
-
-void afficher_f (feu*);
-
-void change_etat_f (feu*);
 
 #endif
 
