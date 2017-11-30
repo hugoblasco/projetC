@@ -16,8 +16,12 @@ void afficher_t ();
 
 bool check_tram (tram*, int, int);
 
+bool tram_feu_sync (tram*);
+
 void move (tram*);
 
 tram* init_tram (tram*);
+
+tram* reset_t (tram*);
 
 #endif
