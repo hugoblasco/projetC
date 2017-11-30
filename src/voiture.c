@@ -320,6 +320,8 @@ feu* init_feuTri ()
 
 void check_feu (feu* f, int x, int y)
 {
+  if (f == NULL)
+    printf ("ESPECE DE RETARD T'AS PAS INITIALISE F\n");
   for (int i = 0; i < 9; i++)
     {
       if (f[i].posx == x && f[i].posy == y)
