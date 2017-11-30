@@ -1,8 +1,8 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-#define NBLIN 62
-#define NBCOL 175
+#define NBLIN 61
+#define NBCOL 176
 
 #include "../headers/couleur.h"
 #include "../headers/voiture.h"
