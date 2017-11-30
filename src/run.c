@@ -17,37 +17,35 @@ void run(bool danger, char map[][NBLIN])
   v_list* l = NULL;
   feu* f = NULL;
   int timer = 0;
-  /*
-    l = spawn_voiture (l);
-    l = spawn_voiture (l);
-  */
-  //f = init_feuTri();
+  
+  l = spawn_voiture (l);
+  
+  f = init_feuTri();
 
   //print (l);
   
   display_map (l, map, f);
-  /*
-    while(1)
+  
+  while(1)
     {
-    if (danger)
-    {
-    l = spawn_voiture (l);
-    }
-    else
-    {
-    if (rand ()%4 == 0)
-    l = spawn_voiture (l);
-    }
-    printf("SALUT");
-    display_map (l, map, f);
-    sleep (1);
-    update (l, timer, f);
-    system("clear");
-    timer++;
-    if (timer > 5)
-    timer = 0;
+      /*if (danger)
+	{
+	  l = spawn_voiture (l);
+	}
+      else
+	{
+	  if (rand ()%4 == 0)
+	    l = spawn_voiture (l);
+	    }*/
+      display_map (l, map, f);
+      sleep (1);
+      update (l, timer, f);
+      system("clear");
+      timer++;
+      if (timer > 5)
+	timer = 0;
       
-    }*/
+    }
   free_all(l, f); 
 }
 
