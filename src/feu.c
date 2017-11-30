@@ -86,6 +86,40 @@ void check_feu (feu* f, int x, int y)
     }
 }
 
+feu* get_feu_pos (feu* f, int x, int y)
+{
+  for (int i = 0; i < 9; i++)
+    {
+      if (f[i].posx == x && f[i].posy == y)
+	return &f[i];
+    }
+  return NULL;
+}
+
+bool getFeu (feu* f, int x, int y)
+{
+  if (x == 129 && y == 2)
+    return get_feu_pos (f, 127, 3)->etat;
+  else if (x == 133 && y == 10)
+    return get_feu_pos (f, 135, 9)->etat;
+  else if (x == 129 && y == 11)
+    return get_feu_pos (f, 127, 12)->etat;
+  else if (x == 125 && y == 15)
+    return get_feu_pos (f, 127, 16)->etat;
+  else if (x == 133 && y == 17)
+    return get_feu_pos (f, 135, 16)->etat;
+  else if (x == 137 && y == 13)
+    return get_feu_pos (f, 135, 12)->etat;
+  else if (x == 103 && y == 17)
+    return get_feu_pos (f, 105, 16)->etat;
+  else if (x == 99 && y == 34)
+    return get_feu_pos (f, 97, 35)->etat;
+  else if (x == 129 && y == 34)
+    return get_feu_pos (f, 127, 35)->etat;
+  
+  return true;
+}
+
 void afficher_f (feu* f)
 {
   /* 

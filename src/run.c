@@ -32,15 +32,15 @@ void run(bool danger, char map[][NBLIN])
 {
   v_list* l = NULL;
   feu* f = NULL;
+  tram* t = NULL;
   int timer = 0;
+  
+  //t = init_tram (t);
+  f = init_feuTri();
   
   l = spawn_voiture (l);
   
-  f = init_feuTri();
-
-  //print (l);
-  
-  display_map (l, map, f);
+  display_map (l, map, f, t);
   
   while(1)
     {
@@ -53,14 +53,16 @@ void run(bool danger, char map[][NBLIN])
 	if (rand ()%4 == 0)
 	l = spawn_voiture (l);
 	}*/
-      display_map (l, map, f);
+      display_map (l, map, f, t);
       sleep (1);
       update (l, timer, f);
       system("clear");
       timer++;
-      if (timer > 5)
-	timer = 0;
-      
+      if (timer > 10)
+	{
+	  t = append_new (t);
+	  timer = 0;
+	}      
     }
   free_all(l, f); 
 }
@@ -71,8 +73,7 @@ void update(v_list* l, int timer, feu* f)
   v_list* buf = l; /* liste des voitures*/
   voiture* tmp[length_v (l)]; /* tableau de toutes les voitures*/
   voiture* v = NULL;
-  int a = 0;
-  int random =0; /* variable qui va contenir le resultat des fonctions rand() */
+  int random = 0; /* variable qui va contenir le resultat des fonctions rand() */
 
   for (int i = 0; i < length_v (l); i++) /* Remplit le tableau de voiture */
     {

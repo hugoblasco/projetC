@@ -113,7 +113,7 @@ int map_loading (char map[][NBLIN])
 }
 
 
-void display_map (v_list* l, char map[][NBLIN], feu* f)
+void display_map (v_list* l, char map[][NBLIN], feu* f, tram* t)
 {
   /*
    * Affiche la carte stockée dans le tableau map
@@ -126,6 +126,10 @@ void display_map (v_list* l, char map[][NBLIN], feu* f)
 	  if (check_pos (l, i, j) != NULL)
 	    {
 	      afficher_v ();
+	    }
+	  else if (check_tram (t, i, j))
+	    {
+	      i+=12;
 	    }
 	  else
 	    {

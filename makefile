@@ -1,6 +1,6 @@
 
 CC=gcc
-CFLAGS=-Wall -Wextra
+CFLAGS=-Wall -Wextra -ansi -std=c11
 LDFLAGS=
 EXEC=main
 
@@ -13,32 +13,32 @@ main: tram.o feu.o voiture.o display.o run.o main.o
 
 main.o: ./src/main.c ./headers/main.h
 	@echo "début compilation main"
-	$(CC) -c ./src/main.c
+	$(CC) -c -g ./src/main.c $(CFLAGS)
 	@echo "fin compilation main"
 
 run.o: ./src/run.c ./headers/run.h
 	@echo "début compilation run"
-	$(CC) -c ./src/run.c
+	$(CC) -c -g ./src/run.c $(CFLAGS)
 	@echo "fin compilation run"
 
 display.o: ./src/display.c ./headers/display.h
 	@echo "début compilation display"
-	$(CC) -c ./src/display.c
+	$(CC) -c -g ./src/display.c $(CFLAGS)
 	@echo "fin compilation display"	
 
 voiture.o: ./src/voiture.c ./headers/voiture.h
 	@echo "début compilation voiture"
-	$(CC) -c ./src/voiture.c
+	$(CC) -c -g ./src/voiture.c $(CFLAGS)
 	@echo "fin compilation voiture"
 
 feu.o: ./src/feu.c ./headers/feu.h
 	@echo "début compilation feu"
-	$(CC) -c ./src/feu.c
+	$(CC) -c -g ./src/feu.c $(CFLAGS)
 	@echo "fin compilation feu"
 
 tram.o: ./src/tram.c ./headers/tram.h
 	@echo "début compilation tram"
-	$(CC) -c ./src/tram.c
+	$(CC) -c -g ./src/tram.c $(CFLAGS) 
 	@echo "fin compilation tram"
 
 clean:
