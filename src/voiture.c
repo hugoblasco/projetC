@@ -321,9 +321,13 @@ feu* init_feuTri ()
 void check_feu (feu* f, int x, int y)
 {
   if (f == NULL)
-    printf ("ESPECE DE RETARD T'AS PAS INITIALISE F\n");
+    {
+      printf ("ESPECE DE RETARD T'AS PAS INITIALISE F\n");
+      exit(-1);
+    }
   for (int i = 0; i < 9; i++)
     {
+      //printf("%d,%d -> %d, %d\n", f[i].posx, f[i].posy, x, y);
       if (f[i].posx == x && f[i].posy == y)
 	{
 	  afficher_f(&f[i]);
@@ -333,6 +337,7 @@ void check_feu (feu* f, int x, int y)
 
 void afficher_f (feu* f)
 {
+
   if (f->etat)
     {
       couleur("32");
