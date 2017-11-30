@@ -9,6 +9,8 @@
 
 void bonjour ();
 
+void attendre (int);
+
 void free_all (v_list*, feu*);
 
 void run (bool, char[][NBLIN]);
