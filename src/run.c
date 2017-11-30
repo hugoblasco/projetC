@@ -12,6 +12,12 @@ void bonjour()
   printf("coucou");
 }
 
+void attendre(int x) {
+  int i =0;
+  while (i < x) {
+    i++;
+  }
+}
 
 void free_all (v_list* l, feu* f)
 {
@@ -36,6 +42,7 @@ void run(bool danger, char map[][NBLIN])
   int timer = 0;
   
   //t = init_tram (t);
+
   f = init_feuTri();
   
   l = spawn_voiture (l);
@@ -53,8 +60,9 @@ void run(bool danger, char map[][NBLIN])
 	if (rand ()%4 == 0)
 	l = spawn_voiture (l);
 	}*/
+
       display_map (l, map, f, t);
-      sleep (1);
+      attendre(100000000);
       update (l, timer, f);
       system("clear");
       timer++;
@@ -102,40 +110,45 @@ void update(v_list* l, int timer, feu* f)
 	    v->direction = 'E';
 	  }
 	  if (v->posx == 70 && v->posy == 38) {
-	    v->direction = 'E';
+	  	if (random == 0) {
+	      v->direction = 'E';
+	  	}
 	  }
-	  if (v->posx == 103 && v->posy == 15) {
-	    v->direction = 'E';
+	  if (v->posx == 70 && v->posy == 36) {
+	      v->direction = 'O';
+	  }
+	  
+	  if (v->posx == 103 && v->posy == 13) {
+	      v->direction = 'O';
 	  }
 	  if (v->posx == 133 && v->posy == 15) {
 	    //continue ou E
 	    // rand () % n pour avoir des nombres entre 0 et n-1
-	    random = rand () % 2;
 	    if (random == 0) {
 	      v->direction = 'E';
-	    }
+	  	}
 	  }
 	  if (v->posx == 133 && v->posy == 13) {
 	    //continue ou O
-
 	    if (random == 0) {
-	      v->direction = 'E';
+	    	v->direction = 'O';
+	  	}
+	  }
+	  if (v->posx == 9 && v->posy == 15) {
+	    v->direction = 'E';
+	  }
+	  if (v->posx == 9 && v->posy == 38) {
+	    //continue ou E
+	    if (random == 0) {
+			v->direction = 'E';
 	    }
-	    if (v->posx == 9 && v->posy == 15) {
-	      v->direction = 'E';
+	  }
+	  if (v->posx == 129 && v->posy == 15) {
+	    //continue ou O
+	    if (random == 0) {
+			v->direction = 'O';
 	    }
-	    if (v->posx == 9 && v->posy == 38) {
-	      //continue ou E
-	      if (random == 0) {
-		v->direction = 'E';
-	      }
-	    }
-	    if (v->posx == 129 && v->posy == 15) {
-	      //continue ou O
-	      if (random == 0) {
-		v->direction = 'O';
-	      }
-	    }
+	  }
 	    break;
 	    
 	  case 'S':
@@ -143,9 +156,15 @@ void update(v_list* l, int timer, feu* f)
 	    if (v->posx == 129 && v->posy == 13) {
 	      //continue ou O
 	      if (random == 0) {
-		v->direction = 'O';
+			v->direction = 'O';
 	      }
 	    }
+	    if (v->posx == 129 && v->posy == 36) {
+	      //continue ou O
+	      if (random == 0) {
+			v->direction = 'O';
+	      }
+	     }
 	    if (v->posx == 63 && v->posy == 36) {
 	      //vers le magasin
 	      if (random == 0) {
@@ -153,8 +172,15 @@ void update(v_list* l, int timer, feu* f)
 	      }
 	    }
 	    if (v->posx == 99 && v->posy == 36) {
+	  	if (random == 0) {
+	      v->direction = 'E';
+	  	}
+	  }
+	  if (v->posx == 99 && v->posy == 36) {
+	  	
 	      v->direction = 'O';
-	    }
+	  	
+	  }
 	    if (v->posx == 129 && v->posy == 15) {
 	      //continue ou E
 	      if (random == 0) {
@@ -168,11 +194,15 @@ void update(v_list* l, int timer, feu* f)
 		v->direction = 'O';
 	      }
 	    }
-
+	    if (v->posx == 5 && v->posy == 38) {
+	  	if (random == 0) {
+	      v->direction = 'E';
+	  	}
+	  }
 	    break;
 	  case 'E':
 	    right(v);
-	    if (v->posx == 140 && v->posy == 38) {
+	    if (v->posx == 139 && v->posy == 38) {
 	      v->direction = 'S';
 	    }
 	    if (v->posx == 70 && v->posy == 57) {
@@ -190,18 +220,34 @@ void update(v_list* l, int timer, feu* f)
 		v->direction = 'S';
 	      }
 	    }
+	    if (v->posx == 99 && v->posy == 15) {
+	  	if (random == 0) {
+	      v->direction = 'S';
+	  	}
+	  }
 	    break;
 	  case 'O':
 	    left(v);
 	    if (v->posx == 9 && v->posy == 36) {
-	      v->direction = 'N';
-	    }
-	    if (v->posx == 64 && v->posy == 36) {
-	      //continue ou N
-	      if (random == 0) {
-		v->direction = 'N';
+	    	if (random == 0) {
+			v->direction = 'N';
 	      }
 	    }
+	    if (v->posx == 9 && v->posy == 36) {
+	    	if (random == 0) {
+			v->direction = 'N';
+	      }
+	    }
+	    if (v->posx == 5 && v->posy == 36) {
+	      //continue ou N
+			v->direction = 'S';
+	      
+	    }
+	    if (v->posx == 5 && v->posy == 13) {
+	  	if (random == 0) {
+	      v->direction = 'S';
+	  	}
+	  }
 	    if (v->posx == 99 && v->posy == 13) {
 	      //continue ou N
 	      if (random == 0) {
@@ -217,5 +263,5 @@ void update(v_list* l, int timer, feu* f)
 	    break;
 	  }
 	}
-    }
 }
+
