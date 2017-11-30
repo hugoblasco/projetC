@@ -46,6 +46,13 @@ void run(bool danger, char map[][NBLIN])
   f = init_feuTri();
   
   l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
   
   display_map (l, map, f, t);
   
@@ -68,7 +75,7 @@ void run(bool danger, char map[][NBLIN])
       system("clear");
       timer++;
       if (random_petit == 0) {
-      	l = spawn_voiture (l);
+      	//l = spawn_voiture (l);
   		}
       if (timer > 10)
 	{
@@ -111,6 +118,7 @@ void update(v_list* l, int timer, feu* f, tram* t)
       switch (v->direction)
   	{
   	case 'N':
+  		if (check_pos(l,v->posx,v->posy-1) == NULL) {
   		up(v);
   		
 	  if (v->posx == 143 && v->posy == 36) {
@@ -159,10 +167,11 @@ void update(v_list* l, int timer, feu* f, tram* t)
 			v->direction = 'O';
 	    }
 	  }
+	}
 	    break;
 	    
 	  case 'S':
-	  
+	  if (check_pos(l,v->posx,v->posy+1) == NULL) {
 	    down(v);
 	  
 	    if (v->posx == 129 && v->posy == 13) {
@@ -202,9 +211,10 @@ void update(v_list* l, int timer, feu* f, tram* t)
 	      v->direction = 'E';
 	  	}
 	  }
+	}
 	    break;
 	  case 'E':
-	  
+	  if (check_pos(l,v->posx+1,v->posy) == NULL) {
 	    right(v);
 		
 	    if (v->posx == 139 && v->posy == 38) {
@@ -230,9 +240,10 @@ void update(v_list* l, int timer, feu* f, tram* t)
 	      v->direction = 'S';
 	  	}
 	  }
+	}
 	    break;
 	  case 'O':
-	  
+	  if (check_pos(l,v->posx-1,v->posy) == NULL) {
 	    left(v);
 		
 	    if (v->posx == 9 && v->posy == 36) {
@@ -267,6 +278,7 @@ void update(v_list* l, int timer, feu* f, tram* t)
 		v->direction = 'N';
 	      }
 	    }
+	}
 	    break;
 	  }
 	}
