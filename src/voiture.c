@@ -18,7 +18,8 @@ voiture* check_pos (v_list* l, int x, int y)
   v_list* tmp = l;
   while (tmp != NULL)
     {
-      if(tmp->value->posx == x && tmp->value->posy == y)
+      if (tmp->value == NULL) break;
+      if((tmp->value)->posx == x && (tmp->value)->posy == y)
 	{
 	  return tmp->value;
 	}
@@ -32,7 +33,13 @@ void print (v_list* l)
   v_list* tmp = l;
   while (tmp != NULL)
     {
-      printf(" %d -> \n", tmp->value->id);
+      printf(" voiture %d ->", (tmp->value)->id);
+      printf(" %d ->", (tmp->value)->posx);
+      printf(" %d ->", (tmp->value)->posy);
+      if (tmp->nxt == NULL)
+	printf ("NULL\n");
+      else
+	printf(" %d\n", tmp->nxt->value->id);
       tmp = tmp->nxt;
     }
   printf("\n");
@@ -93,12 +100,14 @@ v_list* append (v_list* l, voiture* v)
       v_list *tmp = l;
       while (tmp->nxt != NULL)
 	tmp = tmp->nxt;
-
       
-      tmp->nxt = malloc (sizeof (v_list));
-      tmp->nxt->value = v;
+      if (tmp->nxt == NULL)
+	{
+	  tmp->nxt = malloc (sizeof (v_list));
+	  tmp->nxt->value = v;
+	}
     }
-  
+
   return l;
 }
 
@@ -115,20 +124,25 @@ v_list* remove_v (v_list* l, voiture* v)
     {
       v_list *tmp = l;
       v_list* buf = l;
-      if (tmp->value->id == v->id)
+      if ((tmp->value)->id == v->id)
 	{
 	  if (tmp->nxt != NULL)
 	    {
 	      tmp = tmp->nxt;
-	      free(buf);
+	      if (buf != NULL && buf->value != NULL)
+		{
+		  free(buf->value);
+		  free(buf);
+		}
 	      return tmp;
 	    }
 	  else
 	    return NULL;
+
 	}
       else
 	{
-	  while (tmp->nxt != NULL && tmp->nxt->value->id != v->id)
+	  while (tmp->nxt != NULL && ((tmp->nxt)->value)->id != v->id)
 	    {
 	      tmp = tmp->nxt;
 	    }
@@ -140,11 +154,19 @@ v_list* remove_v (v_list* l, voiture* v)
 	      if (buf->nxt != NULL)
 		{
 		  tmp->nxt = buf->nxt;
-		  free (buf);
+		  if (buf != NULL && buf->value != NULL)
+		    {
+		      free(buf->value);
+		      free(buf);
+		    }
 		}
 	      else
 		{
-		  free (buf);
+		  if (buf != NULL && buf->value != NULL)
+		    {
+		      free(buf->value);
+		      free(buf);
+		    }
 		  tmp->nxt = NULL;
 		}
 	    }
@@ -229,7 +251,7 @@ voiture* create_voiture()
     }
   init_position(v);
   v->vitesse = random_number(2) + 1;
-
+  v->etat = true;
   return v;
 }
 
