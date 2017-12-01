@@ -17,4 +17,6 @@ void run (bool, char[][NBLIN]);
 
 void update (v_list*, int, feu*, tram*);
 
+void update_danger (v_list*, int, feu*, tram*);
+
 #endif
