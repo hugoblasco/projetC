@@ -19,4 +19,6 @@ void update (v_list*, int, feu*, tram*);
 
 void update_danger (v_list*, int, feu*, tram*);
 
+void panne (voiture*);
+
 #endif

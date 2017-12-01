@@ -94,7 +94,7 @@ void run(bool danger, char map[][NBLIN])
 	  timer = 0;
 	}   
     }
-  free_all(l, f, t); 
+  //free_all(l, f, t); 
 }
 
 //Fait bouger les voitures, gère les pannes
@@ -140,7 +140,7 @@ void update(v_list* l, int timer, feu* f, tram* t)
 	switch (v->direction)
 	  {
 	  case 'N':
-	    if (check_pos(l,v->posx,v->posy-1) == NULL) {
+	    if (check_pos(l,v->posx,v->posy-1) == NULL && v->etat==true) {
 	      up(v);
 	    }
 	    if (v->posx == 143 && v->posy == 36) {
@@ -193,7 +193,7 @@ void update(v_list* l, int timer, feu* f, tram* t)
 	    break;
 	    
 	  case 'S':
-	    if (check_pos(l,v->posx,v->posy+1) == NULL) {
+	    if (check_pos(l,v->posx,v->posy+1) == NULL && v->etat==true) {
 	      down(v);
 	  
 	      if (v->posx == 129 && v->posy == 13) {
@@ -236,7 +236,7 @@ void update(v_list* l, int timer, feu* f, tram* t)
 	    }
 	    break;
 	  case 'E':
-	    if (check_pos(l,v->posx+1,v->posy) == NULL) {
+	    if (check_pos(l,v->posx+1,v->posy) == NULL && v->etat==true) {
 	      right(v);
 		
 	      if (v->posx == 139 && v->posy == 38) {
@@ -265,7 +265,7 @@ void update(v_list* l, int timer, feu* f, tram* t)
 	    }
 	    break;
 	  case 'O':
-	    if (check_pos(l,v->posx-1,v->posy) == NULL) {
+	    if (check_pos(l,v->posx-1,v->posy) == NULL && v->etat==true) {
 	      left(v);
 		
 	      if (v->posx == 9 && v->posy == 36) {
@@ -307,6 +307,10 @@ void update(v_list* l, int timer, feu* f, tram* t)
     }
 }
 
+void panne(voiture* v) {
+	v->etat = false;
+}
+
 void update_danger(v_list* l, int timer, feu* f, tram* t)
 //fonctionne de la même manière que update mais les voitures ne respectent plus les feux
 {
@@ -315,6 +319,7 @@ void update_danger(v_list* l, int timer, feu* f, tram* t)
   voiture* v = NULL;
   int random = 0; /* variable qui va contenir le resultat des fonctions rand() */
   int random_petit = 0; /* variable pour les très petites probabilités*/
+  int random_panne = 0; 
 
   for (int i = 0; i < length_v (l); i++) /* Remplit le tableau de voiture */
     {
@@ -340,12 +345,21 @@ void update_danger(v_list* l, int timer, feu* f, tram* t)
       }
       random = rand () % 2;
       random_petit = rand () % 10;
+      random_panne = rand () % 100;
+      if (random_panne == 0) {
+      	panne(v);
+      }
       switch (v->direction)
   	{
   	case 'N':
   		if (check_pos(l,v->posx,v->posy-1) == NULL) {
-  		up(v);
+  			if (v->etat==true) {
+  				up(v);
+  			}
   		}
+  		/*else {
+  			destroy(l,v,check_pos(l,v->posx,v->posy-1));
+  		}*/
 	    if (v->posx == 143 && v->posy == 36) {
 	      v->direction = 'O';
 	    }
@@ -397,8 +411,12 @@ void update_danger(v_list* l, int timer, feu* f, tram* t)
 	    
 	  case 'S':
 	  if (check_pos(l,v->posx,v->posy+1) == NULL) {
-	    down(v);
-	  
+	    if (v->etat==true) {
+  				down(v);
+  			}
+	  	/*else {
+  			destroy(l,v,check_pos(l,v->posx,v->posy+1));
+  		}*/
 	    if (v->posx == 129 && v->posy == 13) {
 	      //continue ou O
 	      if (random == 0) {
@@ -440,8 +458,12 @@ void update_danger(v_list* l, int timer, feu* f, tram* t)
 	    break;
 	  case 'E':
 	  if (check_pos(l,v->posx+1,v->posy) == NULL) {
-	    right(v);
-		
+	    if (v->etat==true) {
+  				right(v);
+  			}
+		/*else {
+  			destroy(l,v,check_pos(l,v->posx+1,v->posy));
+  		}*/
 	    if (v->posx == 139 && v->posy == 38) {
 	      v->direction = 'S';
 	    }
@@ -469,8 +491,12 @@ void update_danger(v_list* l, int timer, feu* f, tram* t)
 	    break;
 	  case 'O':
 	  if (check_pos(l,v->posx-1,v->posy) == NULL) {
-	    left(v);
-		
+	    if (v->etat==true) {
+  				left(v);
+  			}
+		/*else {
+  			destroy(l,v,check_pos(l,v->posx-1,v->posy));
+  		}*/
 	    if (v->posx == 9 && v->posy == 36) {
 	      if (random == 0) {
 		v->direction = 'N';

@@ -224,7 +224,7 @@ voiture* create_voiture()
     }
   init_position(v);
   v->vitesse = random_number(2) + 1;
-
+  v->etat = true;
   return v;
 }
 
