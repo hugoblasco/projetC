@@ -43,35 +43,42 @@ char menu()
   printf("                                                                       \n");
   printf("                                                                       \n");
   printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
-  printf("                                                                       \n");
+  printf("       ____   __  ____  __  __ _     ___   __   _  _  ____  ____             \n");
+  printf("      (  _ \\ /  \\(  _ \\(  )(  ( \\   / __) /  \\ ( \\/ )(  __)(__  )            \n");
+  printf("       )   /(  O )) _ ( )( /    /  ( (_ \\(  O )/ \\/ \\ ) _)  / _/ \n");
+  printf("      (__\\_) \\__/(____/(__)\\_)__)   \\___/ \\__/ \\_)(_/(____)(____) \n");
+  printf("       _  _  _  _   ___   __     ____  __     __   ____   ___  __  \n");
+  printf("      / )( \\/ )( \\ / __) /  \\   (  _ \\(  )   / _\\ / ___) / __)/  \\ \n");
+  printf("      ) __ () \\/ (( (_ \\(  O )   ) _ (/ (_/\\/    \\___ \\( (__(  O )\n");
+  printf("      \\_)(_/\\____/ \\___/ \\__/   (____/\\____/\\_/\\_/(____/ \\___)\\__/ \n");
+  printf("\n");
+  printf("\n");
+
+ 
+  
+ 
+
+
+
+
+  printf("Entrer votre choix du mode : \n");
 
   scanf ("%c\n", &buffer);
   switch (buffer)
     {
     case 'q':
       return 'q';
+      break;
     case 'f': //mode fluide
       return 'f';
+      break;
     case 'd': //mode danger
       return 'd';
+      break;
     default:
       printf ("Entrée invalide\n");
       menu ();
+      break;
     }
   system ("clear");
   return '1';

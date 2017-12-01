@@ -12,13 +12,13 @@ int main()
   char map[NBCOL][NBLIN];
   srand(time(NULL));
   map_loading (map);
-  /*char c = menu ();
+  char c = menu ();
   if (c == 'f')
-    run (0, map);
+    run (false, map);
   else if (c == 'd')
-    run (1, map);*/
+    run (true, map);
 
-  run (false, map);
+  //run (false, map);
   
   exit (1);
 }
