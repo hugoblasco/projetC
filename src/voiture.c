@@ -1,12 +1,12 @@
 /** 
  * Gestion des véhicules
  * une liste chainée qui contient tous les véhicules (méthode ajoutliste, 
- *  retirerliste...)
+ *  retirer liste...)
  */
 
 #include "../headers/voiture.h"
 
-static int ident = 1;
+static int id = 1;
 
 voiture* check_pos (v_list* l, int x, int y)
 {
@@ -109,36 +109,44 @@ v_list* remove_v (v_list* l, voiture* v)
    */
   if (l == NULL)
     {
-      l = malloc (sizeof (v_list));
       return l;
     }
   else
     {
       v_list *tmp = l;
-      
-      while (tmp->nxt->value->id != v->id || tmp->nxt == NULL)
-	tmp = tmp->nxt;
-
-      if (tmp->nxt == NULL)
-	return l;
+      v_list* buf = l;
+      if (tmp->value->id == v->id)
+	{
+	  tmp = tmp->nxt;
+	  free(buf);
+	  return tmp;
+	}
       else
 	{
-	  v_list* buf = tmp->nxt;
-	  if (buf->nxt != NULL)
+	  while (tmp->nxt != NULL && tmp->nxt->value->id != v->id)
 	    {
-	      tmp->nxt = buf->nxt;
-	      free (buf);
+	      tmp = tmp->nxt;
 	    }
+	  if (tmp->nxt == NULL)
+	    return l;
 	  else
 	    {
-	      free (buf);
-	      tmp->nxt = NULL;
+	      buf = tmp->nxt;
+	      if (buf->nxt != NULL)
+		{
+		  tmp->nxt = buf->nxt;
+		  free (buf);
+		}
+	      else
+		{
+		  free (buf);
+		  tmp->nxt = NULL;
+		}
 	    }
 	}
     }
   return l;
 }
-
 
 v_list* clear_v (v_list* v)
 {
@@ -196,8 +204,8 @@ voiture* create_voiture()
    * Créé une struct voiture et la renvoie
    */
   voiture* v = malloc (sizeof (voiture));
-  v->id = ident;
-  ident++;
+  v->id = id;
+  id++;
   v->from = set_voiture (random_number (4)); /*Assignation aléatoire de la provenance de la voiture*/
   switch (v->from)
     {

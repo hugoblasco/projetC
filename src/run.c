@@ -50,26 +50,23 @@ void run(bool danger, char map[][NBLIN])
   l = spawn_voiture (l);
   l = spawn_voiture (l);
   l = spawn_voiture (l);
-  l = spawn_voiture (l);
-  l = spawn_voiture (l);
-  l = spawn_voiture (l);
-  l = spawn_voiture (l);
+
   
   display_map (l, map, f, t);
   
   while(1)
     {
-    int random_petit = rand () % 25;
-      /*random_petit = rand () % 25;
-      if (danger)
-	{
-	l = spawn_voiture (l);
-	}
-	else
-	{
-	if (rand ()%4 == 0)
-	l = spawn_voiture (l);
-	}*/
+      /* int random_petit = rand () % 25;
+	 random_petit = rand () % 25;
+	 if (danger)
+	 {
+	 l = spawn_voiture (l);
+	 }
+	 else
+	 {
+	 if (rand ()%4 == 0)
+	 l = spawn_voiture (l);
+	 }*/
 
       if (timer > 190)
 	{
@@ -86,12 +83,12 @@ void run(bool danger, char map[][NBLIN])
       }
       system("clear");
       timer++;
+      /* if (random_petit == 0) {
+      //l = spawn_voiture (l);
+      }
       if (random_petit == 0) {
-      	//l = spawn_voiture (l);
-  		}
-      /*if (random_petit == 0) {
-	l = spawn_voiture (l);
-	}*/
+      l = spawn_voiture (l);
+      }*/
       if (timer > 200)
 	{
 	  timer = 0;
@@ -129,17 +126,23 @@ void update(v_list* l, int timer, feu* f, tram* t)
     {
       v = tmp[i];
       if(v->is_out) {
-        //on enlève la voiture de la liste
+        l = remove_v (l, v);
+	buf = l;
+	for (int i = 0; i < length_v (l); i++) /* Remplit le tableau de voiture */
+	  {
+	    tmp[i] = buf->value;
+	    buf = buf->nxt;
+	  }
       }
       random = rand () % 2;
       random_petit = rand () % 10;
       if (getFeu(f, v->posx, v->posy)) {
-      switch (v->direction)
-  	{
-  	case 'N':
-  		if (check_pos(l,v->posx,v->posy-1) == NULL) {
-  		up(v);
-  		}
+	switch (v->direction)
+	  {
+	  case 'N':
+	    if (check_pos(l,v->posx,v->posy-1) == NULL) {
+	      up(v);
+	    }
 	    if (v->posx == 143 && v->posy == 36) {
 	      v->direction = 'O';
 	    }
@@ -190,114 +193,114 @@ void update(v_list* l, int timer, feu* f, tram* t)
 	    break;
 	    
 	  case 'S':
-	  if (check_pos(l,v->posx,v->posy+1) == NULL) {
-	    down(v);
+	    if (check_pos(l,v->posx,v->posy+1) == NULL) {
+	      down(v);
 	  
-	    if (v->posx == 129 && v->posy == 13) {
-	      //continue ou O
-	      if (random == 0) {
-		v->direction = 'O';
+	      if (v->posx == 129 && v->posy == 13) {
+		//continue ou O
+		if (random == 0) {
+		  v->direction = 'O';
+		}
 	      }
-	    }
-	    if (v->posx == 129 && v->posy == 36) {
-	      //continue ou O
-	      if (random == 0) {
-		v->direction = 'O';
+	      if (v->posx == 129 && v->posy == 36) {
+		//continue ou O
+		if (random == 0) {
+		  v->direction = 'O';
+		}
 	      }
-	    }
-	    if (v->posx == 129 && v->posy == 38) {
-	      v->direction = 'E';
-	    }
+	      if (v->posx == 129 && v->posy == 38) {
+		v->direction = 'E';
+	      }
 	     
-	    if (v->posx == 99 && v->posy == 36) {
-	      if (random == 0) {
-		v->direction = 'E';
+	      if (v->posx == 99 && v->posy == 36) {
+		if (random == 0) {
+		  v->direction = 'E';
+		}
 	      }
-	    }
-	    if (v->posx == 99 && v->posy == 36) {
+	      if (v->posx == 99 && v->posy == 36) {
 	  	
-	      v->direction = 'O';
+		v->direction = 'O';
 	  	
-	    }
-	    if (v->posx == 129 && v->posy == 15) {
-	      //continue ou E
-	      if (random_petit == 0) {
-		v->direction = 'E';
 	      }
-	    }
-	    if (v->posx == 5 && v->posy == 38) {
+	      if (v->posx == 129 && v->posy == 15) {
+		//continue ou E
+		if (random_petit == 0) {
+		  v->direction = 'E';
+		}
+	      }
+	      if (v->posx == 5 && v->posy == 38) {
 	  	if (random_petit == 0) {
-	      v->direction = 'E';
+		  v->direction = 'E';
 	  	}
-	  }
-	}
+	      }
+	    }
 	    break;
 	  case 'E':
-	  if (check_pos(l,v->posx+1,v->posy) == NULL) {
-	    right(v);
+	    if (check_pos(l,v->posx+1,v->posy) == NULL) {
+	      right(v);
 		
-	    if (v->posx == 139 && v->posy == 38) {
-	      v->direction = 'S';
-	    }
-	    if (v->posx == 70 && v->posy == 57) {
-	      v->direction = 'N';
-	    }
-	    if (v->posx == 133 && v->posy == 36) {
-	      //continue ou N
-	      if (random == 0) {
-		v->direction = 'N';
-	      }
-	    }
-	    if (v->posx == 5 && v->posy == 15) {
-	      //continue ou S
-	      if (random == 0) {
+	      if (v->posx == 139 && v->posy == 38) {
 		v->direction = 'S';
 	      }
-	    }
-	    if (v->posx == 99 && v->posy == 15) {
+	      if (v->posx == 70 && v->posy == 57) {
+		v->direction = 'N';
+	      }
+	      if (v->posx == 133 && v->posy == 36) {
+		//continue ou N
+		if (random == 0) {
+		  v->direction = 'N';
+		}
+	      }
+	      if (v->posx == 5 && v->posy == 15) {
+		//continue ou S
+		if (random == 0) {
+		  v->direction = 'S';
+		}
+	      }
+	      if (v->posx == 99 && v->posy == 15) {
 	  	if (random == 0) {
-	      v->direction = 'S';
+		  v->direction = 'S';
 	  	}
-	  }
-	}
+	      }
+	    }
 	    break;
 	  case 'O':
-	  if (check_pos(l,v->posx-1,v->posy) == NULL) {
-	    left(v);
+	    if (check_pos(l,v->posx-1,v->posy) == NULL) {
+	      left(v);
 		
-	    if (v->posx == 9 && v->posy == 36) {
-	      if (random == 0) {
-		v->direction = 'N';
+	      if (v->posx == 9 && v->posy == 36) {
+		if (random == 0) {
+		  v->direction = 'N';
+		}
 	      }
-	    }
-	    if (v->posx == 9 && v->posy == 36) {
-	      if (random == 0) {
-		v->direction = 'N';
+	      if (v->posx == 9 && v->posy == 36) {
+		if (random == 0) {
+		  v->direction = 'N';
+		}
 	      }
-	    }
-	    if (v->posx == 5 && v->posy == 36) {
-	      //continue ou N
-	      v->direction = 'S';
+	      if (v->posx == 5 && v->posy == 36) {
+		//continue ou N
+		v->direction = 'S';
 	      
-	    }
-	    if (v->posx == 5 && v->posy == 13) {
-	      if (random_petit == 0) {
-		v->direction = 'S';
+	      }
+	      if (v->posx == 5 && v->posy == 13) {
+		if (random_petit == 0) {
+		  v->direction = 'S';
+		}
+	      }
+	      if (v->posx == 99 && v->posy == 13) {
+		//continue ou N
+		if (random == 0) {
+		  v->direction = 'S';
+		}
+	      }
+	      if (v->posx == 103 && v->posy == 36) {
+		//continue ou N
+		if (random == 0) {
+		  v->direction = 'N';
+		}
 	      }
 	    }
-	    if (v->posx == 99 && v->posy == 13) {
-	      //continue ou N
-	      if (random == 0) {
-		v->direction = 'S';
-	      }
-	    }
-	    if (v->posx == 103 && v->posy == 36) {
-	      //continue ou N
-	      if (random == 0) {
-		v->direction = 'N';
-	      }
-	    }
-	}
 	    break;
 	  }
       }
