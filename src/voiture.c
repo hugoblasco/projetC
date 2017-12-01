@@ -18,6 +18,7 @@ voiture* check_pos (v_list* l, int x, int y)
   v_list* tmp = l;
   while (tmp != NULL)
     {
+      if (tmp->value == NULL) break;
       if((tmp->value)->posx == x && (tmp->value)->posy == y)
 	{
 	  return tmp->value;
@@ -125,10 +126,19 @@ v_list* remove_v (v_list* l, voiture* v)
       v_list* buf = l;
       if ((tmp->value)->id == v->id)
 	{
-	  tmp = tmp->nxt;
-	  free(buf->value);
-	  free(buf);
-	  return tmp;
+	  if (tmp->nxt != NULL)
+	    {
+	      tmp = tmp->nxt;
+	      if (buf != NULL && buf->value != NULL)
+		{
+		  free(buf->value);
+		  free(buf);
+		}
+	      return tmp;
+	    }
+	  else
+	    return NULL;
+
 	}
       else
 	{
@@ -144,13 +154,19 @@ v_list* remove_v (v_list* l, voiture* v)
 	      if (buf->nxt != NULL)
 		{
 		  tmp->nxt = buf->nxt;
-		  free(buf->value);
-		  free (buf);
+		  if (buf != NULL && buf->value != NULL)
+		    {
+		      free(buf->value);
+		      free(buf);
+		    }
 		}
 	      else
 		{
-		  free(buf->value);
-		  free (buf);
+		  if (buf != NULL && buf->value != NULL)
+		    {
+		      free(buf->value);
+		      free(buf);
+		    }
 		  tmp->nxt = NULL;
 		}
 	    }

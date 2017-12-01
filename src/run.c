@@ -53,19 +53,14 @@ void run(bool danger, char map[][NBLIN])
   l = spawn_voiture (l);
   l = spawn_voiture (l);
   l = spawn_voiture (l);
-  l = spawn_voiture (l);  
-  /*
-  v_list* buf = l;
-  voiture* tmp[length_v (l)];
-  for (int i = 0; i < length_v (l); i++)
-    {
-      tmp[i] = buf->value;
-      buf = buf->nxt;
-    }
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
+  l = spawn_voiture (l);
 
-  print (l);
-  l = remove_v (l, tmp[4]);
-  print (l);*/
   display_map (l, map, f, t);
   
   while(1)
@@ -81,8 +76,8 @@ void run(bool danger, char map[][NBLIN])
 	 {
 	 if (rand ()%4 == 0)
 	 l = spawn_voiture (l);
-	 }*/
-
+	 }
+      */
       if (timer > 190)
 	{
 	  t = reset_t (t);
@@ -105,9 +100,8 @@ void run(bool danger, char map[][NBLIN])
       if (timer > 200)
 	{
 	  timer = 0;
-	}   
+	}
     }
-  //free_all(l, f, t); 
 }
 
 //Fait bouger les voitures, gère les pannes
@@ -140,7 +134,7 @@ void update(v_list* l, int timer, feu* f, tram* t)
       v = tmp[i];
       
 		
-	  		if(v->is_out == true) 
+	  		if(v->is_out == true && l!=NULL) 
         		l = remove_v (l, v);
 		buf = l;
 	   		tmp[i] = buf->value;
@@ -354,7 +348,7 @@ void update_danger(v_list* l, int timer, feu* f, tram* t)
   for (int i = 0; i < length_v (l); i++) /* On fait avancer les differentes voitures */
     {
       v = tmp[i];
-      if(v->is_out) {
+      if(v->is_out && l != NULL) {
         //on enlève la voiture de la liste
         l = remove_v (l, v);
       }
@@ -373,7 +367,7 @@ void update_danger(v_list* l, int timer, feu* f, tram* t)
   			}
   		}
   		else {
-  			destroy(l,v,check_pos(l,v->posx,v->posy-1));
+  			//destroy(l,v);
   		}
 	    if (v->posx == 143 && v->posy == 36) {
 	      v->direction = 'O';
@@ -427,10 +421,10 @@ void update_danger(v_list* l, int timer, feu* f, tram* t)
 	  case 'S':
 	  if (check_pos(l,v->posx,v->posy+1) == NULL) {
 	    if (v->etat==true) {
-  				down(v);
+  				//down(v);
   			}
 	  	else {
-  			destroy(l,v,check_pos(l,v->posx,v->posy+1));
+  			destroy(l,v);
   		}
 	    if (v->posx == 129 && v->posy == 13) {
 	      //continue ou O
@@ -477,7 +471,7 @@ void update_danger(v_list* l, int timer, feu* f, tram* t)
   				right(v);
   			}
 		else {
-  			destroy(l,v,check_pos(l,v->posx+1,v->posy));
+  			//destroy(l,v);
   		}
 	    if (v->posx == 139 && v->posy == 38) {
 	      v->direction = 'S';
@@ -510,7 +504,7 @@ void update_danger(v_list* l, int timer, feu* f, tram* t)
   				left(v);
   			}
 		else {
-  			destroy(l,v,check_pos(l,v->posx-1,v->posy));
+  			//destroy(l,v);
   		}
 	    if (v->posx == 9 && v->posy == 36) {
 	      if (random == 0) {
