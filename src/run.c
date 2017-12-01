@@ -37,11 +37,12 @@ void free_all (v_list* l, feu* f, tram* t)
 
 void run(bool danger, char map[][NBLIN])
 {
+	int max = 0;
   v_list* l = NULL;
   feu* f = NULL;
   tram* t = NULL;
   int timer = 0;
-  //int random_petit = 0; /* variable pour les très petites probabilités*/
+  int random_petit = 0; /* variable pour les très petites probabilités*/
   
   t = init_tram (t);
   f = init_feuTri();
@@ -56,8 +57,9 @@ void run(bool danger, char map[][NBLIN])
   
   while(1)
     {
+    	random_petit = rand () % 25;
       /* int random_petit = rand () % 25;
-	 random_petit = rand () % 25;
+	 
 	 if (danger)
 	 {
 	 l = spawn_voiture (l);
@@ -83,12 +85,10 @@ void run(bool danger, char map[][NBLIN])
       }
       system("clear");
       timer++;
-      /* if (random_petit == 0) {
-      //l = spawn_voiture (l);
-      }
-      if (random_petit == 0) {
+       if (random_petit == 0 && max<30) {
       l = spawn_voiture (l);
-      }*/
+      max++;
+      }
       if (timer > 200)
 	{
 	  timer = 0;
@@ -125,15 +125,16 @@ void update(v_list* l, int timer, feu* f, tram* t)
   for (int i = 0; i < length_v (l); i++) /* On fait avancer les differentes voitures */
     {
       v = tmp[i];
-      if(v->is_out) {
-        l = remove_v (l, v);
-	buf = l;
-	for (int i = 0; i < length_v (l); i++) /* Remplit le tableau de voiture */
-	  {
-	    tmp[i] = buf->value;
-	    buf = buf->nxt;
-	  }
-      }
+      
+		
+	  		if(v->is_out == true) {
+        		l = remove_v (l, v);
+		buf = l;
+	   		tmp[i] = buf->value;
+	    	buf = buf->nxt;
+
+	  	}
+      
       random = rand () % 2;
       random_petit = rand () % 10;
       if (getFeu(f, v->posx, v->posy)) {

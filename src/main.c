@@ -18,7 +18,7 @@ int main()
   else if (c == 'd')
     run (1, map);*/
 
-  run (true, map);
+  run (false, map);
   
   exit (1);
 }
