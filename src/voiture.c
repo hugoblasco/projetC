@@ -117,9 +117,14 @@ v_list* remove_v (v_list* l, voiture* v)
       v_list* buf = l;
       if (tmp->value->id == v->id)
 	{
-	  tmp = tmp->nxt;
-	  free(buf);
-	  return tmp;
+	  if (tmp->nxt != NULL)
+	    {
+	      tmp = tmp->nxt;
+	      free(buf);
+	      return tmp;
+	    }
+	  else
+	    return NULL;
 	}
       else
 	{

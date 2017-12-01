@@ -89,7 +89,7 @@ void run(bool danger, char map[][NBLIN])
 	  timer = 0;
 	}   
     }
-  free_all(l, f, t); 
+  //free_all(l, f, t);  ELLE FAIT TOUT PLANTER, AUCUNE IDÉE POURQUOI...
 }
 
 //Fait bouger les voitures, gère les pannes
