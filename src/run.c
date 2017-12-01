@@ -50,8 +50,19 @@ void run(bool danger, char map[][NBLIN])
   l = spawn_voiture (l);
   l = spawn_voiture (l);
   l = spawn_voiture (l);
+  l = spawn_voiture (l);  
+  /*
+  v_list* buf = l;
+  voiture* tmp[length_v (l)];
+  for (int i = 0; i < length_v (l); i++)
+    {
+      tmp[i] = buf->value;
+      buf = buf->nxt;
+    }
 
-  
+  print (l);
+  l = remove_v (l, tmp[4]);
+  print (l);*/
   display_map (l, map, f, t);
   
   while(1)
