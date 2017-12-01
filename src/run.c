@@ -138,13 +138,13 @@ void update(v_list* l, int timer, feu* f, tram* t)
       v = tmp[i];
       
 		
-	  		if(v->is_out == true) {
-        		l = remove_v (l, v);
+	  		/*if(v->is_out == true) 
+        		l = remove_v (l, v);*/
 		buf = l;
 	   		tmp[i] = buf->value;
 	    	buf = buf->nxt;
 
-	  	}
+	  	
       
       random = rand () % 2;
       random_petit = rand () % 10;
