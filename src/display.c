@@ -63,7 +63,7 @@ char menu()
 
   printf("Entrer votre choix du mode : \n");
 
-  scanf ("%c\n", &buffer);
+  scanf ("%c", &buffer);
   switch (buffer)
     {
     case 'q':

@@ -275,12 +275,12 @@ void init_position (voiture *v)
     }
 }
 
-void destroy (v_list* l, voiture* x, voiture* y)
+void destroy (v_list* l, voiture* x)
 {
   /*
    * Supprime de la liste l les voitures ayant participé à un accident
    */
   l = remove_v (l, x);
-  l = remove_v (l, y);
+  //l = remove_v (l, y);
 }
 
